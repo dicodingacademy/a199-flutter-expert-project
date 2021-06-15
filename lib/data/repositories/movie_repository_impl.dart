@@ -74,6 +74,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Right(await remoteDataSource.searchMovies(query));
     } on ServerException {
       return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
 }
