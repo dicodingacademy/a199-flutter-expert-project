@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
@@ -64,6 +65,18 @@ void main() {
       // assert
       expect(provider.state, RequestState.Loaded);
       expect(provider.searchResult, tMovieList);
+      expect(listenerCallCount, 2);
+    });
+
+    test('should return error when data is unsuccessful', () async {
+      // arrange
+      when(mockSearchMovies.execute(tQuery))
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      // act
+      await provider.fetchMovieSearch(tQuery);
+      // assert
+      expect(provider.state, RequestState.Error);
+      expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });
   });
