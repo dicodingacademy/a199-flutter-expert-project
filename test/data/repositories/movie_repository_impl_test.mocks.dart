@@ -51,4 +51,10 @@ class MockMovieRemoteDataSource extends _i2.Mock
               returnValue:
                   Future<List<_i6.MovieModel>>.value(<_i6.MovieModel>[]))
           as _i5.Future<List<_i6.MovieModel>>);
+  @override
+  _i5.Future<List<_i6.MovieModel>> searchMovies(String? query) =>
+      (super.noSuchMethod(Invocation.method(#searchMovies, [query]),
+              returnValue:
+                  Future<List<_i6.MovieModel>>.value(<_i6.MovieModel>[]))
+          as _i5.Future<List<_i6.MovieModel>>);
 }

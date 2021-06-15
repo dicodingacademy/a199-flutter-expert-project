@@ -182,7 +182,7 @@ void main() {
         .movieList;
     final tQuery = 'Spiderman';
 
-    test('should return list of movies when response code is 200 ', () async {
+    test('should return list of movies when response code is 200', () async {
       // arrange
       when(mockHttpClient
               .get(Uri.parse('$BASE_URL/search/movie?$API_KEY&query=$tQuery')))
