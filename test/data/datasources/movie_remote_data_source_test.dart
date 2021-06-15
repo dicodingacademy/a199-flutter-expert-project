@@ -193,5 +193,17 @@ void main() {
       // assert
       expect(result, tSearchResult);
     });
+
+    test('should throw ServerException when response code is other than 200',
+        () async {
+      // arrange
+      when(mockHttpClient
+              .get(Uri.parse('$BASE_URL/search/movie?$API_KEY&query=$tQuery')))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
+      // act
+      final call = dataSource.searchMovies(tQuery);
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
+    });
   });
 }
