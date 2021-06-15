@@ -306,5 +306,16 @@ void main() {
       // assert
       expect(result, Right(tMovieList));
     });
+
+    test('should return ServerFailure when call to data source is unsuccessful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.searchMovies(tQuery))
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.searchMovies(tQuery);
+      // assert
+      expect(result, Left(ServerFailure('')));
+    });
   });
 }
