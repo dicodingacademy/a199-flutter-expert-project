@@ -1,0 +1,45 @@
+import 'package:ditonton/presentation/pages/movie_detail_page.dart';
+import 'package:ditonton/presentation/pages/movie_list_page.dart';
+import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
+import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:ditonton/injection.dart' as di;
+
+void main() {
+  di.init();
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => di.locator<MovieListNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<MovieDetailNotifier>(),
+        )
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData.dark().copyWith(
+          textTheme:
+              GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme).apply(
+            bodyColor: Colors.white,
+            displayColor: Colors.white,
+          ),
+        ),
+        home: MovieListPage(),
+        routes: {
+          "/home": (context) => MovieListPage(),
+          "/detail": (context) => MovieDetailPage(
+              id: ModalRoute.of(context)?.settings.arguments as int)
+        },
+      ),
+    );
+  }
+}

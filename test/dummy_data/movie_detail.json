@@ -1,0 +1,65 @@
+{
+  "adult": false,
+  "backdrop_path": "/path.jpg",
+  "belongs_to_collection": {
+    "id": 11,
+    "name": "Collection",
+    "poster_path": null,
+    "backdrop_path": null
+  },
+  "budget": 100,
+  "genres": [
+    {
+      "id": 1,
+      "name": "Action"
+    }
+  ],
+  "homepage": "https://google.com",
+  "id": 1,
+  "imdb_id": "imdb1",
+  "original_language": "en",
+  "original_title": "Original Title",
+  "overview": "Overview",
+  "popularity": 1.0,
+  "poster_path": "/path.jpg",
+  "production_companies": [
+    {
+      "id": 1,
+      "logo_path": null,
+      "name": "Company",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2020-05-05",
+  "revenue": 12000,
+  "runtime": 120,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "German",
+      "iso_639_1": "de",
+      "name": "Deutsch"
+    },
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Status",
+  "tagline": "Tagline",
+  "title": "Title",
+  "video": false,
+  "vote_average": 1.0,
+  "vote_count": 1
+}
