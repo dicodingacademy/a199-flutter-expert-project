@@ -92,7 +92,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     if (response.statusCode == 200) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;
     } else {
-      throw UnimplementedError();
+      throw ServerException();
     }
   }
 }
