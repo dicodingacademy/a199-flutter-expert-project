@@ -19,7 +19,7 @@ void main() {
   setUp(() {
     listenerCallCount = 0;
     mockSearchMovies = MockSearchMovies();
-    provider = MovieSearchNotifier(mockSearchMovies)
+    provider = MovieSearchNotifier(searchMovies: mockSearchMovies)
       ..addListener(() {
         listenerCallCount += 1;
       });

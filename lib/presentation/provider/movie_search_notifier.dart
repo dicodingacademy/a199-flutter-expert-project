@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 class MovieSearchNotifier extends ChangeNotifier {
   final SearchMovies searchMovies;
 
-  MovieSearchNotifier(this.searchMovies);
+  MovieSearchNotifier({required this.searchMovies});
 
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;

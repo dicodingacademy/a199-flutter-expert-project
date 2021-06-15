@@ -38,7 +38,7 @@ class MovieModel extends Movie {
   final String originalTitle;
   final String overview;
   final double popularity;
-  final String posterPath;
+  final String? posterPath;
   final String releaseDate;
   final String title;
   final bool video;
