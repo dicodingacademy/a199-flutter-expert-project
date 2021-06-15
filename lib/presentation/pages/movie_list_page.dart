@@ -29,6 +29,12 @@ class _MovieListPageState extends State<MovieListPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Ditonton'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.search),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
