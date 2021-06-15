@@ -70,6 +70,10 @@ class MovieRepositoryImpl implements MovieRepository {
 
   @override
   Future<Either<Failure, List<Movie>>> searchMovies(String query) async {
-    return Right(await remoteDataSource.searchMovies(query));
+    try {
+      return Right(await remoteDataSource.searchMovies(query));
+    } on ServerException {
+      return Left(ServerFailure(''));
+    }
   }
 }
