@@ -175,4 +175,23 @@ void main() {
       expect(() => call, throwsA(isA<ServerException>()));
     });
   });
+
+  group('search movies', () {
+    final tSearchResult = MovieResponse.fromJson(
+            json.decode(readJson('dummy_data/search_spiderman_movie.json')))
+        .movieList;
+    final tQuery = 'Spiderman';
+
+    test('should return list of movies when response code is 200 ', () async {
+      // arrange
+      when(mockHttpClient
+              .get(Uri.parse('$BASE_URL/search/movie?$API_KEY&query=$tQuery')))
+          .thenAnswer((_) async => http.Response(
+              readJson('dummy_data/search_spiderman_movie.json'), 200));
+      // act
+      final result = await dataSource.searchMovies(tQuery);
+      // assert
+      expect(result, tSearchResult);
+    });
+  });
 }
