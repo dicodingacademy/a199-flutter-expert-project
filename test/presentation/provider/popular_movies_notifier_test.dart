@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
@@ -62,6 +63,18 @@ void main() {
     // assert
     expect(notifier.state, RequestState.Loaded);
     expect(notifier.movies, tMovieList);
+    expect(listenerCallCount, 2);
+  });
+
+  test('should return error when data is unsuccessful', () async {
+    // arrange
+    when(mockGetPopularMovies.execute())
+        .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+    // act
+    await notifier.fetchPopularMovies();
+    // assert
+    expect(notifier.state, RequestState.Error);
+    expect(notifier.message, 'Server Failure');
     expect(listenerCallCount, 2);
   });
 }
