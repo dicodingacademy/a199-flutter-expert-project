@@ -10,12 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-class MovieListPage extends StatefulWidget {
+class HomeMoviePage extends StatefulWidget {
   @override
-  _MovieListPageState createState() => _MovieListPageState();
+  _HomeMoviePageState createState() => _HomeMoviePageState();
 }
 
-class _MovieListPageState extends State<MovieListPage> {
+class _HomeMoviePageState extends State<HomeMoviePage> {
   @override
   void initState() {
     super.initState();
@@ -64,9 +64,26 @@ class _MovieListPageState extends State<MovieListPage> {
                   return Text('Failed');
                 }
               }),
-              Text(
-                'Popular',
-                style: Theme.of(context).textTheme.headline6,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Popular',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text('See More'),
+                          Icon(Icons.arrow_forward_ios)
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.popularMoviesState;
