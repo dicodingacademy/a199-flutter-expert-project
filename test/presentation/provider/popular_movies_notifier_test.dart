@@ -13,10 +13,15 @@ import 'popular_movies_notifier_test.mocks.dart';
 void main() {
   late MockGetPopularMovies mockGetPopularMovies;
   late PopularMoviesNotifier notifier;
+  late int listenerCallCount;
 
   setUp(() {
+    listenerCallCount = 0;
     mockGetPopularMovies = MockGetPopularMovies();
-    notifier = PopularMoviesNotifier(mockGetPopularMovies);
+    notifier = PopularMoviesNotifier(mockGetPopularMovies)
+      ..addListener(() {
+        listenerCallCount++;
+      });
   });
 
   final tMovie = Movie(
@@ -45,5 +50,6 @@ void main() {
     notifier.fetchPopularMovies();
     // assert
     expect(notifier.state, RequestState.Loading);
+    expect(listenerCallCount, 1);
   });
 }
