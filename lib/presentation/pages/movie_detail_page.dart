@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
@@ -76,7 +77,7 @@ class DetailContent extends StatelessWidget {
             builder: (context, scrollController) {
               return Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey[850],
+                  color: kRichBlack,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
                 padding: const EdgeInsets.only(
@@ -98,6 +99,14 @@ class DetailContent extends StatelessWidget {
                               style: Theme.of(context).textTheme.headline5,
                             ),
                             SizedBox(height: 16),
+                            ElevatedButton(
+                              onPressed: () {},
+                              child: Text('Watch Trailer'),
+                              // style: ElevatedButton.styleFrom(
+                              //   primary: kMikadoYellow,
+                              //   onPrimary: Colors.black,
+                              // ),
+                            ),
                             Text(
                               _showGenres(movie.genres),
                               style: Theme.of(context).textTheme.bodyText2,
@@ -113,7 +122,7 @@ class DetailContent extends StatelessWidget {
                                   itemCount: 5,
                                   itemBuilder: (context, index) => Icon(
                                     Icons.star,
-                                    color: Colors.orangeAccent,
+                                    color: kWebGolden,
                                   ),
                                   itemSize: 24,
                                 ),
@@ -214,7 +223,7 @@ class DetailContent extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
-            backgroundColor: Colors.grey,
+            backgroundColor: kRichBlack,
             foregroundColor: Colors.white,
             child: IconButton(
               icon: Icon(Icons.arrow_back),
@@ -232,6 +241,10 @@ class DetailContent extends StatelessWidget {
     String result = '';
     for (var genre in genres) {
       result += genre.name + ', ';
+    }
+
+    if (result.isEmpty) {
+      return result;
     }
 
     return result.substring(0, result.length - 2);

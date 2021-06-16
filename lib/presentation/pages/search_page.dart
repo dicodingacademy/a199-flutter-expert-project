@@ -119,7 +119,9 @@ class SearchPage extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return Expanded(child: Placeholder());
+                  return Expanded(
+                    child: Container(),
+                  );
                 }
               },
             ),

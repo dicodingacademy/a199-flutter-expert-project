@@ -27,7 +27,7 @@ class MovieDetail<T extends Genre> extends Equatable {
   });
 
   final bool adult;
-  final String backdropPath;
+  final String? backdropPath;
   final int budget;
   final List<T> genres;
   final String homepage;
@@ -49,7 +49,7 @@ class MovieDetail<T extends Genre> extends Equatable {
   final int voteCount;
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         adult,
         backdropPath,
         budget,
