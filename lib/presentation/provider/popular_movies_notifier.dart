@@ -14,6 +14,9 @@ class PopularMoviesNotifier extends ChangeNotifier {
   List<Movie> _movies = [];
   List<Movie> get movies => _movies;
 
+  String _message = '';
+  String get message => _message;
+
   Future<void> fetchPopularMovies() async {
     _state = RequestState.Loading;
     notifyListeners();
@@ -21,7 +24,11 @@ class PopularMoviesNotifier extends ChangeNotifier {
     final result = await getPopularMovies.execute();
 
     result.fold(
-      (l) {},
+      (failure) {
+        _message = failure.message;
+        _state = RequestState.Error;
+        notifyListeners();
+      },
       (moviesData) {
         _movies = moviesData;
         _state = RequestState.Loaded;
