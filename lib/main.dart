@@ -1,6 +1,7 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
+import 'package:ditonton/presentation/pages/movie_list_page.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
         home: HomeMoviePage(),
         routes: {
           "/home": (context) => HomeMoviePage(),
+          PopularMoviesPage.ROUTE_NAME: (context) => PopularMoviesPage(),
           "/detail": (context) => MovieDetailPage(
               id: ModalRoute.of(context)?.settings.arguments as int)
         },

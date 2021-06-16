@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
+import 'package:ditonton/presentation/pages/movie_list_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
@@ -72,7 +73,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     style: Theme.of(context).textTheme.headline6,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, PopularMoviesPage.ROUTE_NAME);
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
