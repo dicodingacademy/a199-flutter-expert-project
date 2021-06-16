@@ -52,4 +52,16 @@ void main() {
     expect(notifier.state, RequestState.Loading);
     expect(listenerCallCount, 1);
   });
+
+  test('should change movies data when data is gotten successfully', () async {
+    // arrange
+    when(mockGetPopularMovies.execute())
+        .thenAnswer((_) async => Right(tMovieList));
+    // act
+    await notifier.fetchPopularMovies();
+    // assert
+    expect(notifier.state, RequestState.Loaded);
+    expect(notifier.movies, tMovieList);
+    expect(listenerCallCount, 2);
+  });
 }
