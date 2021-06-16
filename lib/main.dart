@@ -1,3 +1,4 @@
+import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/movie_list_page.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
@@ -30,7 +31,15 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
+        // theme: ThemeData(
+        //   primaryColor: Colors.blueGrey,
+        //   accentColor: Colors.orange,
+        // ),
         theme: ThemeData.dark().copyWith(
+          colorScheme: kColorScheme,
+          primaryColor: kRichBlack,
+          accentColor: kMikadoYellow,
+          scaffoldBackgroundColor: kRichBlack,
           textTheme:
               GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme).apply(
             bodyColor: Colors.white,

@@ -36,7 +36,7 @@ class _MovieListPageState extends State<MovieListPage> {
             onPressed: () {
               // showSearch(context: context, delegate: SearchPage());
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SearchPage()));
+                  CupertinoPageRoute(builder: (context) => SearchPage()));
             },
             icon: Icon(Icons.search),
           )

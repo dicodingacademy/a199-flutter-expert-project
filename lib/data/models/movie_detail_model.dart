@@ -49,7 +49,7 @@ class MovieDetailModel extends MovieDetail<GenreModel> {
         );
 
   final bool adult;
-  final String backdropPath;
+  final String? backdropPath;
   final int budget;
   final List<GenreModel> genres;
   final String homepage;
