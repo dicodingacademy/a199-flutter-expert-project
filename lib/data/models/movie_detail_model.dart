@@ -54,7 +54,7 @@ class MovieDetailModel extends MovieDetail<GenreModel> {
   final List<GenreModel> genres;
   final String homepage;
   final int id;
-  final String imdbId;
+  final String? imdbId;
   final String originalLanguage;
   final String originalTitle;
   final String overview;

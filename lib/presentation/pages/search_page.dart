@@ -1,3 +1,4 @@
+import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatelessWidget {
+  static const ROUTE_NAME = '/search';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +34,7 @@ class SearchPage extends StatelessWidget {
             SizedBox(height: 16),
             Text(
               'Search Result',
-              style: Theme.of(context).textTheme.headline6,
+              style: kHeading6,
             ),
             Consumer<MovieSearchNotifier>(
               builder: (context, data, child) {

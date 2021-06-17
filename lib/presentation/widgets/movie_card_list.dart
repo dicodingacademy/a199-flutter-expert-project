@@ -38,7 +38,7 @@ class MovieCard extends StatelessWidget {
                       movie.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.headline6,
+                      style: kHeading6,
                     ),
                     SizedBox(height: 16),
                     Text(
