@@ -96,7 +96,7 @@ class DetailContent extends StatelessWidget {
                           children: [
                             Text(
                               movie.title,
-                              style: Theme.of(context).textTheme.headline5,
+                              style: kHeading5,
                             ),
                             SizedBox(height: 16),
                             ElevatedButton(
@@ -109,11 +109,9 @@ class DetailContent extends StatelessWidget {
                             ),
                             Text(
                               _showGenres(movie.genres),
-                              style: Theme.of(context).textTheme.bodyText2,
                             ),
                             Text(
                               _showDuration(movie.runtime),
-                              style: Theme.of(context).textTheme.bodyText2,
                             ),
                             Row(
                               children: [
@@ -132,16 +130,15 @@ class DetailContent extends StatelessWidget {
                             SizedBox(height: 16),
                             Text(
                               'Overview',
-                              style: Theme.of(context).textTheme.headline6,
+                              style: kHeading6,
                             ),
                             Text(
                               movie.overview,
-                              style: Theme.of(context).textTheme.bodyText2,
                             ),
                             SizedBox(height: 16),
                             Text(
                               'Recommendations',
-                              style: Theme.of(context).textTheme.headline6,
+                              style: kHeading6,
                             ),
                             Consumer<MovieDetailNotifier>(
                               builder: (context, data, child) {

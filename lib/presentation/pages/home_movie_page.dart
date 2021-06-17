@@ -51,7 +51,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             children: [
               Text(
                 'Now Playing',
-                style: Theme.of(context).textTheme.headline6,
+                style: kHeading6,
               ),
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.nowPlayingState;
@@ -70,7 +70,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 children: [
                   Text(
                     'Popular',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: kHeading6,
                   ),
                   InkWell(
                     onTap: () {
@@ -103,7 +103,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               }),
               Text(
                 'Top Rated',
-                style: Theme.of(context).textTheme.headline6,
+                style: kHeading6,
               ),
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.topRatedMoviesState;

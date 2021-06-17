@@ -6,7 +6,6 @@ import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 
@@ -32,20 +31,12 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
-        // theme: ThemeData(
-        //   primaryColor: Colors.blueGrey,
-        //   accentColor: Colors.orange,
-        // ),
         theme: ThemeData.dark().copyWith(
           colorScheme: kColorScheme,
           primaryColor: kRichBlack,
           accentColor: kMikadoYellow,
           scaffoldBackgroundColor: kRichBlack,
-          textTheme:
-              GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme).apply(
-            bodyColor: Colors.white,
-            displayColor: Colors.white,
-          ),
+          textTheme: kTextTheme,
         ),
         home: HomeMoviePage(),
         routes: {
