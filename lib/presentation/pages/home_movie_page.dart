@@ -35,9 +35,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
         actions: [
           IconButton(
             onPressed: () {
-              // showSearch(context: context, delegate: SearchPage());
-              Navigator.push(context,
-                  CupertinoPageRoute(builder: (context) => SearchPage()));
+              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
             },
             icon: Icon(Icons.search),
           )

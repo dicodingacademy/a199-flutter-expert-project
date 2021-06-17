@@ -2,9 +2,11 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/movie_list_page.dart';
+import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
@@ -39,11 +41,29 @@ class MyApp extends StatelessWidget {
           textTheme: kTextTheme,
         ),
         home: HomeMoviePage(),
-        routes: {
-          "/home": (context) => HomeMoviePage(),
-          PopularMoviesPage.ROUTE_NAME: (context) => PopularMoviesPage(),
-          "/detail": (context) => MovieDetailPage(
-              id: ModalRoute.of(context)?.settings.arguments as int)
+        onGenerateRoute: (RouteSettings settings) {
+          switch (settings.name) {
+            case '/home':
+              return MaterialPageRoute(builder: (_) => HomeMoviePage());
+            case PopularMoviesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
+            case MovieDetailPage.ROUTE_NAME:
+              final id = settings.arguments as int;
+              return MaterialPageRoute(
+                builder: (_) => MovieDetailPage(id: id),
+                settings: settings,
+              );
+            case SearchPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => SearchPage());
+            default:
+              return MaterialPageRoute(builder: (_) {
+                return Scaffold(
+                  body: Center(
+                    child: Text('Page not found :('),
+                  ),
+                );
+              });
+          }
         },
       ),
     );

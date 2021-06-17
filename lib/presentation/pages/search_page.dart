@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatelessWidget {
+  static const ROUTE_NAME = '/search';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
