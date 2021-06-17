@@ -16,16 +16,19 @@ class PopularMoviesPage extends StatelessWidget {
       body: ChangeNotifierProvider<PopularMoviesNotifier>(
         create: (context) =>
             PopularMoviesNotifier(locator())..fetchPopularMovies(),
-        child: Consumer<PopularMoviesNotifier>(
-          builder: (context, data, child) {
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                final movie = data.movies[index];
-                return MovieCard(movie);
-              },
-              itemCount: data.movies.length,
-            );
-          },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Consumer<PopularMoviesNotifier>(
+            builder: (context, data, child) {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  final movie = data.movies[index];
+                  return MovieCard(movie);
+                },
+                itemCount: data.movies.length,
+              );
+            },
+          ),
         ),
       ),
     );
