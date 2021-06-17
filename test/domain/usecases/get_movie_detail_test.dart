@@ -1,15 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
-import 'package:ditonton/domain/repositories/movie_repository.dart';
 import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'get_movie_detail_test.mocks.dart';
+import '../../helpers/test_helper.mocks.dart';
 
-@GenerateMocks([MovieRepository])
 void main() {
   late GetMovieDetail usecase;
   late MockMovieRepository mockMovieRepository;
