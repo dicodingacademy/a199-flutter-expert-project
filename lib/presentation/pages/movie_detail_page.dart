@@ -122,7 +122,7 @@ class DetailContent extends StatelessWidget {
                                   itemCount: 5,
                                   itemBuilder: (context, index) => Icon(
                                     Icons.star,
-                                    color: kWebGolden,
+                                    color: kMikadoYellow,
                                   ),
                                   itemSize: 24,
                                 ),
