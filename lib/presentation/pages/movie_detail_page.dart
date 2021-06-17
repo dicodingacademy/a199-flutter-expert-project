@@ -102,10 +102,6 @@ class DetailContent extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () {},
                               child: Text('Watch Trailer'),
-                              // style: ElevatedButton.styleFrom(
-                              //   primary: kMikadoYellow,
-                              //   onPrimary: Colors.black,
-                              // ),
                             ),
                             Text(
                               _showGenres(movie.genres),
