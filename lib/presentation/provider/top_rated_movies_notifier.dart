@@ -1,13 +1,12 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/usecases/get_popular_movies.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
 import 'package:flutter/foundation.dart';
 
 class TopRatedMoviesNotifier extends ChangeNotifier {
   final GetTopRatedMovies getTopRatedMovies;
 
-  TopRatedMoviesNotifier(this.getTopRatedMovies);
+  TopRatedMoviesNotifier({required this.getTopRatedMovies});
 
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;
