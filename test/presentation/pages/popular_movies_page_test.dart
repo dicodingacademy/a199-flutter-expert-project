@@ -12,57 +12,52 @@ import 'popular_movies_page_test.mocks.dart';
 
 @GenerateMocks([PopularMoviesNotifier])
 void main() {
+  late MockPopularMoviesNotifier mockNotifier;
+
+  setUp(() {
+    mockNotifier = MockPopularMoviesNotifier();
+  });
+
   Widget _makeTestableWidget(Widget body) {
-    return MaterialApp(
-      home: body,
+    return ChangeNotifierProvider<PopularMoviesNotifier>.value(
+      value: mockNotifier,
+      child: MaterialApp(
+        home: body,
+      ),
     );
   }
 
   testWidgets('Page should display progress bar when loading',
       (WidgetTester tester) async {
-    final mockNotifier = MockPopularMoviesNotifier();
     when(mockNotifier.state).thenReturn(RequestState.Loading);
 
     final progressBarFinder = find.byType(CircularProgressIndicator);
 
-    await tester.pumpWidget(
-      ChangeNotifierProvider<PopularMoviesNotifier>.value(
-        value: mockNotifier,
-        child: _makeTestableWidget(PopularMoviesPage()),
-      ),
-    );
+    await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
 
     expect(progressBarFinder, findsOneWidget);
   });
 
   testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
-    final mockNotifier = MockPopularMoviesNotifier();
     when(mockNotifier.state).thenReturn(RequestState.Loaded);
     when(mockNotifier.movies).thenReturn(<Movie>[]);
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(ChangeNotifierProvider<PopularMoviesNotifier>.value(
-      value: mockNotifier,
-      child: _makeTestableWidget(PopularMoviesPage()),
-    ));
+    await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
 
     expect(listViewFinder, findsOneWidget);
   });
 
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
-    final mockNotifier = MockPopularMoviesNotifier();
     when(mockNotifier.state).thenReturn(RequestState.Error);
     when(mockNotifier.message).thenReturn('Error message');
 
     final textFinder = find.byKey(Key('error_message'));
 
-    await tester.pumpWidget(ChangeNotifierProvider<PopularMoviesNotifier>.value(
-      value: mockNotifier,
-      child: _makeTestableWidget(PopularMoviesPage()),
-    ));
+    await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
 
     expect(textFinder, findsOneWidget);
   });
