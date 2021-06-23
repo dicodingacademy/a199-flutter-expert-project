@@ -27,14 +27,16 @@ void main() {
     );
   }
 
-  testWidgets('Page should display progress bar when loading',
+  testWidgets('Page should display center progress bar when loading',
       (WidgetTester tester) async {
     when(mockNotifier.state).thenReturn(RequestState.Loading);
 
     final progressBarFinder = find.byType(CircularProgressIndicator);
+    final centerFinder = find.byType(Center);
 
     await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
 
+    expect(centerFinder, findsOneWidget);
     expect(progressBarFinder, findsOneWidget);
   });
 
