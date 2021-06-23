@@ -5,8 +5,21 @@ import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PopularMoviesPage extends StatelessWidget {
+class PopularMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/popular-movie';
+
+  @override
+  _PopularMoviesPageState createState() => _PopularMoviesPageState();
+}
+
+class _PopularMoviesPageState extends State<PopularMoviesPage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() =>
+        Provider.of<PopularMoviesNotifier>(context, listen: false)
+            .fetchPopularMovies());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +32,9 @@ class PopularMoviesPage extends StatelessWidget {
         child: Consumer<PopularMoviesNotifier>(
           builder: (context, data, child) {
             if (data.state == RequestState.Loading) {
-              return CircularProgressIndicator();
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             } else if (data.state == RequestState.Loaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
