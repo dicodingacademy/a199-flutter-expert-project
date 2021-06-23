@@ -54,4 +54,21 @@ void main() {
 
     expect(listViewFinder, findsOneWidget);
   });
+
+  testWidgets('Page should display text with message when Error',
+      (WidgetTester tester) async {
+    final mockNotifier = MockTopRatedMoviesNotifier();
+    when(mockNotifier.state).thenReturn(RequestState.Error);
+    when(mockNotifier.message).thenReturn('Error message');
+
+    final textFinder = find.byKey(Key('error_message'));
+
+    await tester
+        .pumpWidget(ChangeNotifierProvider<TopRatedMoviesNotifier>.value(
+      value: mockNotifier,
+      child: _makeTestableWidget(TopRatedMoviesPage()),
+    ));
+
+    expect(textFinder, findsOneWidget);
+  });
 }
