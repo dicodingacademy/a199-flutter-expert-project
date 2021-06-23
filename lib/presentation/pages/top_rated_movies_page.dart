@@ -43,7 +43,10 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
                 itemCount: data.movies.length,
               );
             } else {
-              return Container();
+              return Center(
+                key: Key('error_message'),
+                child: Text(data.message),
+              );
             }
           },
         ),

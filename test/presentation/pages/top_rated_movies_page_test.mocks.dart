@@ -26,6 +26,10 @@ class _FakeGetTopRatedMovies extends _i1.Fake implements _i2.GetTopRatedMovies {
 /// See the documentation for Mockito's code generation for more information.
 class MockTopRatedMoviesNotifier extends _i1.Mock
     implements _i3.TopRatedMoviesNotifier {
+  MockTopRatedMoviesNotifier() {
+    _i1.throwOnMissingStub(this);
+  }
+
   @override
   _i2.GetTopRatedMovies get getTopRatedMovies =>
       (super.noSuchMethod(Invocation.getter(#getTopRatedMovies),
