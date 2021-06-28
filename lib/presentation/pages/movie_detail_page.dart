@@ -99,10 +99,6 @@ class DetailContent extends StatelessWidget {
                               style: kHeading5,
                             ),
                             SizedBox(height: 16),
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Text('Watch Trailer'),
-                            ),
                             Text(
                               _showGenres(movie.genres),
                             ),
