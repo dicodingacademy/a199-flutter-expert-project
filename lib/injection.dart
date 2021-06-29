@@ -1,4 +1,3 @@
-import 'package:ditonton/common/mapper/movie_detail_mapper.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton/data/repositories/movie_repository_impl.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
@@ -70,7 +69,4 @@ void init() {
 
   // external
   locator.registerLazySingleton(() => http.Client());
-
-  // mapper
-  locator.registerFactory(() => MovieDetailMapper());
 }

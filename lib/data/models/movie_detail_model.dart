@@ -1,51 +1,53 @@
 import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:equatable/equatable.dart';
 
-class MovieDetailResponse {
+class MovieDetailResponse extends Equatable {
   MovieDetailResponse({
-    this.adult,
-    this.backdropPath,
-    this.budget,
-    this.genres,
-    this.homepage,
-    this.id,
-    this.imdbId,
-    this.originalLanguage,
-    this.originalTitle,
-    this.overview,
-    this.popularity,
-    this.posterPath,
-    this.releaseDate,
-    this.revenue,
-    this.runtime,
-    this.status,
-    this.tagline,
-    this.title,
-    this.video,
-    this.voteAverage,
-    this.voteCount,
+    required this.adult,
+    required this.backdropPath,
+    required this.budget,
+    required this.genres,
+    required this.homepage,
+    required this.id,
+    required this.imdbId,
+    required this.originalLanguage,
+    required this.originalTitle,
+    required this.overview,
+    required this.popularity,
+    required this.posterPath,
+    required this.releaseDate,
+    required this.revenue,
+    required this.runtime,
+    required this.status,
+    required this.tagline,
+    required this.title,
+    required this.video,
+    required this.voteAverage,
+    required this.voteCount,
   });
 
-  final bool? adult;
+  final bool adult;
   final String? backdropPath;
-  final int? budget;
-  final List<GenreModel>? genres;
-  final String? homepage;
-  final int? id;
+  final int budget;
+  final List<GenreModel> genres;
+  final String homepage;
+  final int id;
   final String? imdbId;
-  final String? originalLanguage;
-  final String? originalTitle;
-  final String? overview;
-  final double? popularity;
-  final String? posterPath;
-  final String? releaseDate;
-  final int? revenue;
-  final int? runtime;
-  final String? status;
-  final String? tagline;
-  final String? title;
-  final bool? video;
-  final double? voteAverage;
-  final int? voteCount;
+  final String originalLanguage;
+  final String originalTitle;
+  final String overview;
+  final double popularity;
+  final String posterPath;
+  final String releaseDate;
+  final int revenue;
+  final int runtime;
+  final String status;
+  final String tagline;
+  final String title;
+  final bool video;
+  final double voteAverage;
+  final int voteCount;
 
   factory MovieDetailResponse.fromJson(Map<String, dynamic> json) =>
       MovieDetailResponse(
@@ -77,8 +79,7 @@ class MovieDetailResponse {
         "adult": adult,
         "backdrop_path": backdropPath,
         "budget": budget,
-        "genres": List<dynamic>.from(
-            genres == null ? [] : genres!.map((x) => x.toJson())),
+        "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
         "homepage": homepage,
         "id": id,
         "imdb_id": imdbId,
@@ -97,4 +98,58 @@ class MovieDetailResponse {
         "vote_average": voteAverage,
         "vote_count": voteCount,
       };
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        adult,
+        backdropPath,
+        budget,
+        genres,
+        homepage,
+        id,
+        imdbId,
+        originalLanguage,
+        originalTitle,
+        overview,
+        popularity,
+        posterPath,
+        releaseDate,
+        revenue,
+        runtime,
+        status,
+        tagline,
+        title,
+        video,
+        voteAverage,
+        voteCount,
+      ];
+}
+
+extension Mapper on MovieDetailResponse {
+  MovieDetail toEntity() {
+    return MovieDetail(
+      adult: this.adult,
+      backdropPath: this.backdropPath,
+      budget: this.budget,
+      genres: this.genres,
+      homepage: this.homepage,
+      id: this.id,
+      imdbId: this.imdbId,
+      originalLanguage: this.originalLanguage,
+      originalTitle: this.originalTitle,
+      overview: this.overview,
+      popularity: this.popularity,
+      posterPath: this.posterPath,
+      releaseDate: this.releaseDate,
+      revenue: this.revenue,
+      runtime: this.runtime,
+      status: this.status,
+      tagline: this.tagline,
+      title: this.title,
+      video: this.video,
+      voteAverage: this.voteAverage,
+      voteCount: this.voteCount,
+    );
+  }
 }

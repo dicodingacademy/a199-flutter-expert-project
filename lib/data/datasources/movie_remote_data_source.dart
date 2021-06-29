@@ -1,19 +1,17 @@
 import 'dart:convert';
 
-import 'package:ditonton/common/mapper/movie_detail_mapper.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_model.dart';
-import 'package:ditonton/data/models/movie_response_model.dart';
+import 'package:ditonton/data/models/movie_response.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/common/exception.dart';
-import 'package:ditonton/injection.dart';
 import 'package:http/http.dart' as http;
 
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies();
   Future<List<MovieModel>> getPopularMovies();
   Future<List<MovieModel>> getTopRatedMovies();
-  Future<MovieDetail> getMovieDetail(int id);
+  Future<MovieDetailResponse> getMovieDetail(int id);
   Future<List<MovieModel>> getMovieRecommendations(int id);
   Future<List<MovieModel>> searchMovies(String query);
 }
@@ -23,7 +21,6 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   static const BASE_URL = 'https://api.themoviedb.org/3';
 
   final http.Client client;
-  final MovieDetailMapper mapper = locator();
 
   MovieRemoteDataSourceImpl({required this.client});
 
@@ -39,19 +36,13 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     }
   }
 
-  MovieDetail _mapMovieDetail(MovieDetailResponse response) {
-    return mapper.map(response);
-  }
-
   @override
-  Future<MovieDetail> getMovieDetail(int id) async {
+  Future<MovieDetailResponse> getMovieDetail(int id) async {
     final response =
         await client.get(Uri.parse('$BASE_URL/movie/$id?$API_KEY'));
 
     if (response.statusCode == 200) {
-      return _mapMovieDetail(
-          MovieDetailResponse.fromJson(json.decode(response.body)));
-      // return MovieDetailResponse.fromJson(json.decode(response.body));
+      return MovieDetailResponse.fromJson(json.decode(response.body));
     } else {
       throw ServerException();
     }
