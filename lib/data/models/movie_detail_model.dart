@@ -132,7 +132,7 @@ extension Mapper on MovieDetailResponse {
       adult: this.adult,
       backdropPath: this.backdropPath,
       budget: this.budget,
-      genres: this.genres,
+      genres: this.genres.map((genre) => genre.toEntity()).toList(),
       homepage: this.homepage,
       id: this.id,
       imdbId: this.imdbId,
