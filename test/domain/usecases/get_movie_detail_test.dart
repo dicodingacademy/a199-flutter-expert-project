@@ -17,7 +17,7 @@ void main() {
   });
 
   final tId = 1;
-  final tMovie = MovieDetail<Genre>(
+  final tMovie = MovieDetail(
     adult: false,
     backdropPath: 'backdropPath',
     budget: 100,
