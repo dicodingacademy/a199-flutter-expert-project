@@ -1,4 +1,5 @@
 import 'package:ditonton/domain/entities/genre.dart';
+import 'package:ditonton/domain/entities/movie.dart';
 import 'package:equatable/equatable.dart';
 
 class MovieDetail<T extends Genre> extends Equatable {
@@ -24,6 +25,7 @@ class MovieDetail<T extends Genre> extends Equatable {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
+    this.movieRecommendations,
   });
 
   final bool adult;
@@ -47,6 +49,7 @@ class MovieDetail<T extends Genre> extends Equatable {
   final bool video;
   final double voteAverage;
   final int voteCount;
+  final List<Movie>? movieRecommendations;
 
   @override
   List<Object?> get props => [
