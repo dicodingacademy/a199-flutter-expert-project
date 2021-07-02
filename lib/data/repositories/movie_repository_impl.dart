@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:ditonton/data/datasources/movie_local_data_source.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
+import 'package:ditonton/data/models/movie_detail_table.dart';
 import 'package:ditonton/data/models/movie_model.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
@@ -12,8 +14,12 @@ import 'package:ditonton/common/failure.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
   final MovieRemoteDataSource remoteDataSource;
+  final MovieLocalDataSource localDataSource;
 
-  MovieRepositoryImpl({required this.remoteDataSource});
+  MovieRepositoryImpl({
+    required this.remoteDataSource,
+    required this.localDataSource,
+  });
 
   @override
   Future<Either<Failure, List<Movie>>> getNowPlayingMovies() async {
@@ -88,8 +94,13 @@ class MovieRepositoryImpl implements MovieRepository {
   }
 
   @override
-  Future<Either<Failure, String>> saveWatchlist(MovieDetail movie) {
-    // TODO: implement saveWatchlist
-    throw UnimplementedError();
+  Future<Either<Failure, String>> saveWatchlist(MovieDetail movie) async {
+    try {
+      final result = await localDataSource
+          .insertWatchlist(MovieDetailTable.fromEntity(movie));
+      return Right(result);
+    } catch (e) {
+      throw e;
+    }
   }
 }

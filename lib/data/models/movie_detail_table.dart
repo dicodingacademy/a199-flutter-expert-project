@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:equatable/equatable.dart';
 
 class MovieDetailTable extends Equatable {
@@ -26,6 +27,21 @@ class MovieDetailTable extends Equatable {
     required this.voteAverage,
     required this.voteCount,
   });
+
+  factory MovieDetailTable.fromEntity(MovieDetail movieDetail) =>
+      MovieDetailTable(
+        adult: movieDetail.adult,
+        backdropPath: movieDetail.backdropPath,
+        id: movieDetail.id,
+        originalTitle: movieDetail.originalTitle,
+        overview: movieDetail.overview,
+        posterPath: movieDetail.posterPath,
+        releaseDate: movieDetail.releaseDate,
+        runtime: movieDetail.runtime,
+        title: movieDetail.title,
+        voteAverage: movieDetail.voteAverage,
+        voteCount: movieDetail.voteCount,
+      );
 
   Map<String, dynamic> toJson() => {
         "adult": adult,

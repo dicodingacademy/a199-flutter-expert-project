@@ -60,6 +60,7 @@ void init() {
   locator.registerLazySingleton<MovieRepository>(
     () => MovieRepositoryImpl(
       remoteDataSource: locator(),
+      localDataSource: locator(),
     ),
   );
 

@@ -7,21 +7,25 @@ import 'package:ditonton/data/models/movie_model.dart';
 import 'package:ditonton/data/repositories/movie_repository_impl.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MovieRepositoryImpl repository;
   late MockMovieRemoteDataSource mockRemoteDataSource;
+  late MockMovieLocalDataSource mockLocalDataSource;
 
   setUp(() {
     mockRemoteDataSource = MockMovieRemoteDataSource();
-    repository = MovieRepositoryImpl(remoteDataSource: mockRemoteDataSource);
+    mockLocalDataSource = MockMovieLocalDataSource();
+    repository = MovieRepositoryImpl(
+      remoteDataSource: mockRemoteDataSource,
+      localDataSource: mockLocalDataSource,
+    );
   });
 
   final tMovieModel = MovieModel(
@@ -335,6 +339,18 @@ void main() {
       // assert
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
+    });
+  });
+
+  group('save watchlist', () {
+    test('should return success message when saving successful', () async {
+      // arrange
+      when(mockLocalDataSource.insertWatchlist(testMovieDetailTable))
+          .thenAnswer((_) async => 'Added to Watchlist');
+      // act
+      final result = await repository.saveWatchlist(testMovieDetail);
+      // assert
+      expect(result, Right('Added to Watchlist'));
     });
   });
 }
