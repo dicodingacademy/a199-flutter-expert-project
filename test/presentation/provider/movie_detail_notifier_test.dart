@@ -11,6 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../dummy_data/dummy_objects.dart';
 import 'movie_detail_notifier_test.mocks.dart';
 
 @GenerateMocks([GetMovieDetail, GetMovieRecommendations])
@@ -33,29 +34,6 @@ void main() {
   });
 
   final tId = 1;
-  final tMovieDetail = MovieDetail(
-    adult: false,
-    backdropPath: 'backdropPath',
-    budget: 100,
-    genres: [Genre(id: 1, name: 'Action')],
-    homepage: "https://google.com",
-    id: 1,
-    imdbId: 'imdb1',
-    originalLanguage: 'en',
-    originalTitle: 'originalTitle',
-    overview: 'overview',
-    popularity: 1,
-    posterPath: 'posterPath',
-    releaseDate: 'releaseDate',
-    revenue: 12000,
-    runtime: 120,
-    status: 'Status',
-    tagline: 'Tagline',
-    title: 'title',
-    video: false,
-    voteAverage: 1,
-    voteCount: 1,
-  );
 
   final tMovie = Movie(
     adult: false,
@@ -76,7 +54,7 @@ void main() {
 
   void _arrangeUsecase() {
     when(mockGetMovieDetail.execute(tId))
-        .thenAnswer((_) async => Right(tMovieDetail));
+        .thenAnswer((_) async => Right(testMovieDetail));
     when(mockGetMovieRecommendations.execute(tId))
         .thenAnswer((_) async => Right(tMovies));
   }
@@ -109,7 +87,7 @@ void main() {
       await provider.fetchMovieDetail(tId);
       // assert
       expect(provider.movieState, RequestState.Loaded);
-      expect(provider.movie, tMovieDetail);
+      expect(provider.movie, testMovieDetail);
       expect(listenerCallCount, 3);
     });
 
@@ -150,7 +128,7 @@ void main() {
     test('should update error message when request in successful', () async {
       // arrange
       when(mockGetMovieDetail.execute(tId))
-          .thenAnswer((_) async => Right(tMovieDetail));
+          .thenAnswer((_) async => Right(testMovieDetail));
       when(mockGetMovieRecommendations.execute(tId))
           .thenAnswer((_) async => Left(ServerFailure('Failed')));
       // act

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
@@ -37,5 +38,9 @@ class DatabaseHelper {
         voteAverage REAL,
       )
     ''');
+  }
+
+  insertWatchlist(MovieDetail movie) {
+    _database.insert(_tblWatchlist, movie);
   }
 }
