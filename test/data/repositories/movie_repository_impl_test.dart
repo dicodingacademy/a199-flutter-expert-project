@@ -352,5 +352,15 @@ void main() {
       // assert
       expect(result, Right('Added to Watchlist'));
     });
+
+    test('should return DatabaseFailure when saving unsuccessful', () async {
+      // arrange
+      when(mockLocalDataSource.insertWatchlist(testMovieDetailTable))
+          .thenThrow(DatabaseException());
+      // act
+      final result = await repository.saveWatchlist(testMovieDetail);
+      // assert
+      expect(result, Left(DatabaseFailure('Failed to add watchlist')));
+    });
   });
 }
