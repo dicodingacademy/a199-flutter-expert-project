@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ditonton/data/models/movie_detail_table.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -40,7 +41,7 @@ class DatabaseHelper {
     ''');
   }
 
-  insertWatchlist(MovieDetail movie) {
-    _database.insert(_tblWatchlist, movie);
+  Future<int> insertWatchlist(MovieDetailTable movie) async {
+    return await _database.insert(_tblWatchlist, movie.toJson());
   }
 }
