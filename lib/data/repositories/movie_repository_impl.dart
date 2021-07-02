@@ -86,4 +86,10 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> saveWatchlist(MovieDetail movie) {
+    // TODO: implement saveWatchlist
+    throw UnimplementedError();
+  }
 }
