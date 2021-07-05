@@ -105,4 +105,10 @@ class MovieRepositoryImpl implements MovieRepository {
       throw e;
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> getWatchlistStatus(MovieDetail movie) {
+    // TODO: implement getWatchlistStatus
+    throw UnimplementedError();
+  }
 }

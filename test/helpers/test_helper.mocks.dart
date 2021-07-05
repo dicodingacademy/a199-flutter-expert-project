@@ -96,6 +96,13 @@ class MockMovieRepository extends _i1.Mock implements _i7.MovieRepository {
               returnValue: Future<_i2.Either<_i9.Failure, String>>.value(
                   _FakeEither<_i9.Failure, String>()))
           as _i8.Future<_i2.Either<_i9.Failure, String>>);
+  @override
+  _i8.Future<_i2.Either<_i9.Failure, bool>> getWatchlistStatus(
+          _i11.MovieDetail? movie) =>
+      (super.noSuchMethod(Invocation.method(#getWatchlistStatus, [movie]),
+              returnValue: Future<_i2.Either<_i9.Failure, bool>>.value(
+                  _FakeEither<_i9.Failure, bool>()))
+          as _i8.Future<_i2.Either<_i9.Failure, bool>>);
 }
 
 /// A class which mocks [MovieRemoteDataSource].
