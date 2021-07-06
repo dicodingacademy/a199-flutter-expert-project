@@ -9,6 +9,6 @@ class GetWatchListStatus {
   GetWatchListStatus(this.repository);
 
   Future<Either<Failure, bool>> execute(MovieDetail movie) async {
-    return repository.getWatchlistStatus(movie);
+    return repository.getWatchlistStatus(movie.id);
   }
 }

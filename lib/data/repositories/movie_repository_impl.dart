@@ -107,8 +107,8 @@ class MovieRepositoryImpl implements MovieRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> getWatchlistStatus(MovieDetail movie) {
-    // TODO: implement getWatchlistStatus
-    throw UnimplementedError();
+  Future<Either<Failure, bool>> getWatchlistStatus(int id) async {
+    final result = await localDataSource.getMovieById(id);
+    return Right(result != null);
   }
 }

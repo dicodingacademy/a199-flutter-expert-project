@@ -363,4 +363,16 @@ void main() {
       expect(result, Left(DatabaseFailure('Failed to add watchlist')));
     });
   });
+
+  group('get watchlist status', () {
+    test('should return watch status whether data is found', () async {
+      // arrange
+      final tId = 1;
+      when(mockLocalDataSource.getMovieById(tId)).thenAnswer((_) async => null);
+      // act
+      final result = await repository.getWatchlistStatus(tId);
+      // assert
+      expect(result, Right(false));
+    });
+  });
 }
