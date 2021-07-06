@@ -11,10 +11,12 @@ class DatabaseHelper {
 
   factory DatabaseHelper() => _databaseHelper ?? DatabaseHelper._instance();
 
-  late Database _database;
+  static Database? _database;
 
-  Future<Database> get database async {
-    _database = await _initDb();
+  Future<Database?> get database async {
+    if (_database == null) {
+      _database = await _initDb();
+    }
     return _database;
   }
 
@@ -35,17 +37,19 @@ class DatabaseHelper {
         title TEXT,
         overview TEXT,
         posterPath TEXT,
-        voteAverage REAL,
-      )
+        voteAverage REAL
+      );
     ''');
   }
 
   Future<int> insertWatchlist(MovieDetailTable movie) async {
-    return await _database.insert(_tblWatchlist, movie.toJson());
+    final db = await database;
+    return await db!.insert(_tblWatchlist, movie.toJson());
   }
 
   Future<Map<String, dynamic>?> getMovieById(int id) async {
-    final results = await _database.query(
+    final db = await database;
+    final results = await db!.query(
       _tblWatchlist,
       where: 'id = ?',
       whereArgs: [id],
