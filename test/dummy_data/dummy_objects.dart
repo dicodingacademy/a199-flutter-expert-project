@@ -30,3 +30,17 @@ final testMovieDetailTable = MovieDetailTable(
   voteAverage: 1,
   voteCount: 1,
 );
+
+final testMovieDetailMap = {
+  'adult': false,
+  'backdropPath': 'backdropPath',
+  'id': 1,
+  'originalTitle': 'originalTitle',
+  'overview': 'overview',
+  'posterPath': 'posterPath',
+  'releaseDate': 'releaseDate',
+  'runtime': 120,
+  'title': 'title',
+  'voteAverage': 1.0,
+  'voteCount': 1,
+};

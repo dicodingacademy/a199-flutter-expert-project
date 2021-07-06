@@ -44,4 +44,18 @@ class DatabaseHelper {
   Future<int> insertWatchlist(MovieDetailTable movie) async {
     return await _database.insert(_tblWatchlist, movie.toJson());
   }
+
+  Future<Map<String, dynamic>?> getMovieById(int id) async {
+    final results = await _database.query(
+      _tblWatchlist,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    if (results.isNotEmpty) {
+      return results.first;
+    } else {
+      return null;
+    }
+  }
 }

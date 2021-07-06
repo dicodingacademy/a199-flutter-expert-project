@@ -4,6 +4,7 @@ import 'package:ditonton/data/models/movie_detail_table.dart';
 
 abstract class MovieLocalDataSource {
   Future<String> insertWatchlist(MovieDetailTable movie);
+  Future<MovieDetailTable?> getMovieById(int id);
 }
 
 class MovieLocalDataSourceImpl implements MovieLocalDataSource {
@@ -18,6 +19,16 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
       return 'Added to Watchlist';
     } else {
       throw DatabaseException();
+    }
+  }
+
+  @override
+  Future<MovieDetailTable?> getMovieById(int id) async {
+    final result = await databaseHelper.getMovieById(id);
+    if (result != null) {
+      return MovieDetailTable.fromMap(result);
+    } else {
+      return null;
     }
   }
 }

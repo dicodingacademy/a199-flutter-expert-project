@@ -163,6 +163,11 @@ class MockMovieLocalDataSource extends _i1.Mock
   _i8.Future<String> insertWatchlist(_i15.MovieDetailTable? movie) =>
       (super.noSuchMethod(Invocation.method(#insertWatchlist, [movie]),
           returnValue: Future<String>.value('')) as _i8.Future<String>);
+  @override
+  _i8.Future<_i15.MovieDetailTable?> getMovieById(int? id) =>
+      (super.noSuchMethod(Invocation.method(#getMovieById, [id]),
+              returnValue: Future<_i15.MovieDetailTable?>.value())
+          as _i8.Future<_i15.MovieDetailTable?>);
 }
 
 /// A class which mocks [DatabaseHelper].
@@ -182,6 +187,11 @@ class MockDatabaseHelper extends _i1.Mock implements _i16.DatabaseHelper {
   _i8.Future<int> insertWatchlist(_i15.MovieDetailTable? movie) =>
       (super.noSuchMethod(Invocation.method(#insertWatchlist, [movie]),
           returnValue: Future<int>.value(0)) as _i8.Future<int>);
+  @override
+  _i8.Future<Map<String, dynamic>?> getMovieById(int? id) =>
+      (super.noSuchMethod(Invocation.method(#getMovieById, [id]),
+              returnValue: Future<Map<String, dynamic>?>.value())
+          as _i8.Future<Map<String, dynamic>?>);
 }
 
 /// A class which mocks [Client].

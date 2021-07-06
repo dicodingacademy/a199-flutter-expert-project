@@ -43,6 +43,21 @@ class MovieDetailTable extends Equatable {
         voteCount: movieDetail.voteCount,
       );
 
+  factory MovieDetailTable.fromMap(Map<String, dynamic> map) =>
+      MovieDetailTable(
+        adult: map['adult'],
+        backdropPath: map['backdropPath'],
+        id: map['id'],
+        originalTitle: map['originalTitle'],
+        overview: map['overview'],
+        posterPath: map['posterPath'],
+        releaseDate: map['releaseDate'],
+        runtime: map['runtime'],
+        title: map['title'],
+        voteAverage: map['voteAverage'],
+        voteCount: map['voteCount'],
+      );
+
   Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,
