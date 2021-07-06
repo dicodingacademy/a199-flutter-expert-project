@@ -17,7 +17,7 @@ void main() {
 
   test('should get watchlist status from repository', () async {
     // arrange
-    when(mockMovieRepository.getWatchlistStatus(1))
+    when(mockMovieRepository.isAddedToWatchlist(1))
         .thenAnswer((_) async => Right(true));
     // act
     final result = await usecase.execute(testMovieDetail);
