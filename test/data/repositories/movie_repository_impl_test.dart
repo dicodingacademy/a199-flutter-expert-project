@@ -372,7 +372,7 @@ void main() {
       // act
       final result = await repository.isAddedToWatchlist(tId);
       // assert
-      expect(result, Right(false));
+      expect(result, false);
     });
   });
 }
