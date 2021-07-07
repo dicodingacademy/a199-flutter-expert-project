@@ -356,7 +356,7 @@ void main() {
     test('should return DatabaseFailure when saving unsuccessful', () async {
       // arrange
       when(mockLocalDataSource.insertWatchlist(testMovieDetailTable))
-          .thenThrow(DatabaseException());
+          .thenThrow(DatabaseException('Failed to add watchlist'));
       // act
       final result = await repository.saveWatchlist(testMovieDetail);
       // assert

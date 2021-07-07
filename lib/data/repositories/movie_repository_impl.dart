@@ -99,8 +99,8 @@ class MovieRepositoryImpl implements MovieRepository {
       final result = await localDataSource
           .insertWatchlist(MovieDetailTable.fromEntity(movie));
       return Right(result);
-    } on DatabaseException {
-      return Left(DatabaseFailure('Failed to add watchlist'));
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
     } catch (e) {
       throw e;
     }
