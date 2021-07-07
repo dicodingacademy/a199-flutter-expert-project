@@ -24,9 +24,12 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<MovieDetailNotifier>(context, listen: false)
-            .fetchMovieDetail(widget.id));
+    Future.microtask(() {
+      Provider.of<MovieDetailNotifier>(context, listen: false)
+          .fetchMovieDetail(widget.id);
+      Provider.of<MovieDetailNotifier>(context, listen: false)
+          .loadWatchlistStatus(widget.id);
+    });
   }
 
   @override
@@ -41,7 +44,11 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
           } else if (provider.movieState == RequestState.Loaded) {
             final movie = provider.movie;
             return SafeArea(
-              child: DetailContent(movie, provider.movieRecommendations),
+              child: DetailContent(
+                movie,
+                provider.movieRecommendations,
+                provider.isAddedToWatchlist,
+              ),
             );
           } else {
             return Text(provider.message);
@@ -55,8 +62,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 class DetailContent extends StatelessWidget {
   final MovieDetail movie;
   final List<Movie> recommendations;
+  final bool isAddedWatchlist;
 
-  DetailContent(this.movie, this.recommendations);
+  DetailContent(this.movie, this.recommendations, this.isAddedWatchlist);
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +106,24 @@ class DetailContent extends StatelessWidget {
                               movie.title,
                               style: kHeading5,
                             ),
-                            SizedBox(height: 16),
+                            ElevatedButton(
+                              onPressed: () {
+                                if (!isAddedWatchlist) {
+                                  Provider.of<MovieDetailNotifier>(context,
+                                          listen: false)
+                                      .addWatchlist(movie);
+                                }
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  isAddedWatchlist
+                                      ? Icon(Icons.check)
+                                      : Icon(Icons.add),
+                                  Text('Watchlist'),
+                                ],
+                              ),
+                            ),
                             Text(
                               _showGenres(movie.genres),
                             ),

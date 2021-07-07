@@ -2,8 +2,7 @@ import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:equatable/equatable.dart';
 
 class MovieDetailTable extends Equatable {
-  final bool adult;
-  final String? backdropPath;
+  final int adult;
   final int id;
   final String originalTitle;
   final String overview;
@@ -16,7 +15,6 @@ class MovieDetailTable extends Equatable {
 
   MovieDetailTable({
     required this.adult,
-    required this.backdropPath,
     required this.id,
     required this.originalTitle,
     required this.overview,
@@ -30,8 +28,7 @@ class MovieDetailTable extends Equatable {
 
   factory MovieDetailTable.fromEntity(MovieDetail movieDetail) =>
       MovieDetailTable(
-        adult: movieDetail.adult,
-        backdropPath: movieDetail.backdropPath,
+        adult: movieDetail.adult ? 1 : 0,
         id: movieDetail.id,
         originalTitle: movieDetail.originalTitle,
         overview: movieDetail.overview,
@@ -46,7 +43,6 @@ class MovieDetailTable extends Equatable {
   factory MovieDetailTable.fromMap(Map<String, dynamic> map) =>
       MovieDetailTable(
         adult: map['adult'],
-        backdropPath: map['backdropPath'],
         id: map['id'],
         originalTitle: map['originalTitle'],
         overview: map['overview'],
@@ -60,12 +56,11 @@ class MovieDetailTable extends Equatable {
 
   Map<String, dynamic> toJson() => {
         "adult": adult,
-        "backdrop_path": backdropPath,
         "id": id,
-        "original_title": originalTitle,
+        "originalTitle": originalTitle,
         "overview": overview,
-        "poster_path": posterPath,
-        "release_date": releaseDate,
+        "posterPath": posterPath,
+        "releaseDate": releaseDate,
         "runtime": runtime,
         "title": title,
         "vote_average": voteAverage,
@@ -75,7 +70,6 @@ class MovieDetailTable extends Equatable {
   @override
   List<Object?> get props => [
         adult,
-        backdropPath,
         id,
         originalTitle,
         overview,
