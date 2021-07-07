@@ -18,8 +18,7 @@ final testMovieDetail = MovieDetail(
 );
 
 final testMovieDetailTable = MovieDetailTable(
-  adult: false,
-  backdropPath: 'backdropPath',
+  adult: 0,
   id: 1,
   originalTitle: 'originalTitle',
   overview: 'overview',
@@ -32,7 +31,7 @@ final testMovieDetailTable = MovieDetailTable(
 );
 
 final testMovieDetailMap = {
-  'adult': false,
+  'adult': 0,
   'backdropPath': 'backdropPath',
   'id': 1,
   'originalTitle': 'originalTitle',
