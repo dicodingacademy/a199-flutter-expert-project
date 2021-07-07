@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/datasources/movie_local_data_source.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -31,7 +33,7 @@ void main() {
         () async {
       // arrange
       when(mockDatabaseHelper.insertWatchlist(testMovieDetailTable))
-          .thenAnswer((_) async => 0);
+          .thenThrow(Exception());
       // act
       final call = dataSource.insertWatchlist(testMovieDetailTable);
       // assert

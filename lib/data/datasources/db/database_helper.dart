@@ -34,10 +34,15 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE  $_tblWatchlist (
         id INTEGER PRIMARY KEY,
+        adult INTEGER,
         title TEXT,
+        originalTitle TEXT,
         overview TEXT,
         posterPath TEXT,
-        voteAverage REAL
+        releaseDate TEXT,
+        runtime INTEGER,
+        voteAverage REAL,
+        voteCount INTEGER
       );
     ''');
   }

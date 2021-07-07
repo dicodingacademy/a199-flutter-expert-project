@@ -1,6 +1,7 @@
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/datasources/db/database_helper.dart';
 import 'package:ditonton/data/models/movie_detail_table.dart';
+import 'package:flutter/cupertino.dart';
 
 abstract class MovieLocalDataSource {
   Future<String> insertWatchlist(MovieDetailTable movie);
@@ -14,11 +15,11 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
 
   @override
   Future<String> insertWatchlist(MovieDetailTable movie) async {
-    final result = await databaseHelper.insertWatchlist(movie);
-    if (result > 0) {
+    try {
+      await databaseHelper.insertWatchlist(movie);
       return 'Added to Watchlist';
-    } else {
-      throw DatabaseException();
+    } catch (e) {
+      throw DatabaseException(e.toString());
     }
   }
 
