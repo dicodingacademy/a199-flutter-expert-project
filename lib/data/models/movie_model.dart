@@ -64,25 +64,6 @@ class MovieModel extends Equatable {
         "vote_count": voteCount,
       };
 
-  @override
-  List<Object?> get props => [
-        adult,
-        backdropPath,
-        genreIds,
-        id,
-        originalTitle,
-        overview,
-        popularity,
-        posterPath,
-        releaseDate,
-        title,
-        video,
-        voteAverage,
-        voteCount,
-      ];
-}
-
-extension MovieExtension on MovieModel {
   Movie toEntity() {
     return Movie(
       adult: this.adult,
@@ -100,4 +81,21 @@ extension MovieExtension on MovieModel {
       voteCount: this.voteCount,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        adult,
+        backdropPath,
+        genreIds,
+        id,
+        originalTitle,
+        overview,
+        popularity,
+        posterPath,
+        releaseDate,
+        title,
+        video,
+        voteAverage,
+        voteCount,
+      ];
 }
