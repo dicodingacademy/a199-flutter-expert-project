@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
-import 'package:ditonton/data/models/movie_response_model.dart';
+import 'package:ditonton/data/models/movie_response.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
@@ -115,7 +115,7 @@ void main() {
 
   group('get movie detail', () {
     final tId = 1;
-    final tMovieDetail = MovieDetailModel.fromJson(
+    final tMovieDetail = MovieDetailResponse.fromJson(
         json.decode(readJson('dummy_data/movie_detail.json')));
 
     test('should return movie detail when the response code is 200', () async {

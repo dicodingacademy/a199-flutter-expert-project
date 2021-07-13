@@ -1,8 +1,9 @@
 import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:equatable/equatable.dart';
 
-class MovieDetailModel extends MovieDetail<GenreModel> {
-  MovieDetailModel({
+class MovieDetailResponse extends Equatable {
+  MovieDetailResponse({
     required this.adult,
     required this.backdropPath,
     required this.budget,
@@ -24,29 +25,7 @@ class MovieDetailModel extends MovieDetail<GenreModel> {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
-  }) : super(
-          adult: adult,
-          backdropPath: backdropPath,
-          budget: budget,
-          genres: genres,
-          homepage: homepage,
-          id: id,
-          imdbId: imdbId,
-          originalLanguage: originalLanguage,
-          originalTitle: originalTitle,
-          overview: overview,
-          popularity: popularity,
-          posterPath: posterPath,
-          releaseDate: releaseDate,
-          revenue: revenue,
-          runtime: runtime,
-          status: status,
-          tagline: tagline,
-          title: title,
-          video: video,
-          voteAverage: voteAverage,
-          voteCount: voteCount,
-        );
+  });
 
   final bool adult;
   final String? backdropPath;
@@ -70,8 +49,8 @@ class MovieDetailModel extends MovieDetail<GenreModel> {
   final double voteAverage;
   final int voteCount;
 
-  factory MovieDetailModel.fromJson(Map<String, dynamic> json) =>
-      MovieDetailModel(
+  factory MovieDetailResponse.fromJson(Map<String, dynamic> json) =>
+      MovieDetailResponse(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
         budget: json["budget"],
@@ -119,4 +98,56 @@ class MovieDetailModel extends MovieDetail<GenreModel> {
         "vote_average": voteAverage,
         "vote_count": voteCount,
       };
+
+  MovieDetail toEntity() {
+    return MovieDetail(
+      adult: this.adult,
+      backdropPath: this.backdropPath,
+      budget: this.budget,
+      genres: this.genres.map((genre) => genre.toEntity()).toList(),
+      homepage: this.homepage,
+      id: this.id,
+      imdbId: this.imdbId,
+      originalLanguage: this.originalLanguage,
+      originalTitle: this.originalTitle,
+      overview: this.overview,
+      popularity: this.popularity,
+      posterPath: this.posterPath,
+      releaseDate: this.releaseDate,
+      revenue: this.revenue,
+      runtime: this.runtime,
+      status: this.status,
+      tagline: this.tagline,
+      title: this.title,
+      video: this.video,
+      voteAverage: this.voteAverage,
+      voteCount: this.voteCount,
+    );
+  }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        adult,
+        backdropPath,
+        budget,
+        genres,
+        homepage,
+        id,
+        imdbId,
+        originalLanguage,
+        originalTitle,
+        overview,
+        popularity,
+        posterPath,
+        releaseDate,
+        revenue,
+        runtime,
+        status,
+        tagline,
+        title,
+        video,
+        voteAverage,
+        voteCount,
+      ];
 }
