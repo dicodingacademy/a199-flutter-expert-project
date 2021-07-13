@@ -107,11 +107,32 @@ class DetailContent extends StatelessWidget {
                               style: kHeading5,
                             ),
                             ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 if (!isAddedWatchlist) {
-                                  Provider.of<MovieDetailNotifier>(context,
+                                  await Provider.of<MovieDetailNotifier>(
+                                          context,
                                           listen: false)
                                       .addWatchlist(movie);
+
+                                  final message =
+                                      Provider.of<MovieDetailNotifier>(context,
+                                              listen: false)
+                                          .watchlistMessage;
+
+                                  if (message.isEmpty) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                            content:
+                                                Text('Added to Watchlist')));
+                                  } else {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            content: Text(message),
+                                          );
+                                        });
+                                  }
                                 }
                               },
                               child: Row(

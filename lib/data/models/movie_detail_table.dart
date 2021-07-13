@@ -63,8 +63,8 @@ class MovieDetailTable extends Equatable {
         "releaseDate": releaseDate,
         "runtime": runtime,
         "title": title,
-        "vote_average": voteAverage,
-        "vote_count": voteCount,
+        "voteAverage": voteAverage,
+        "voteCount": voteCount,
       };
 
   @override
