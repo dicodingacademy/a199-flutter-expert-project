@@ -183,7 +183,7 @@ void main() {
       // assert
       verify(mockGetWatchlistStatus.execute(testMovieDetail.id));
       expect(provider.isAddedToWatchlist, true);
-      expect(provider.watchlistMessage, 'Added to Watchlist');
+      expect(provider.watchlistMessage, '');
       expect(listenerCallCount, 1);
     });
 
@@ -191,6 +191,8 @@ void main() {
       // arrange
       when(mockSaveWatchlist.execute(testMovieDetail))
           .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+      when(mockGetWatchlistStatus.execute(testMovieDetail.id))
+          .thenAnswer((_) async => false);
       // act
       await provider.addWatchlist(testMovieDetail);
       // assert
