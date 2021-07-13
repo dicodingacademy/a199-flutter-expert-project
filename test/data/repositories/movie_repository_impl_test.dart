@@ -224,7 +224,7 @@ void main() {
       final result = await repository.getMovieDetail(tId);
       // assert
       verify(mockRemoteDataSource.getMovieDetail(tId));
-      expect(result, equals(Right(tMovieModel)));
+      expect(result, equals(Right(testMovieDetail)));
     });
 
     test(
