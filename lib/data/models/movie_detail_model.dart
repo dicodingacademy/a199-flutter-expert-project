@@ -99,34 +99,6 @@ class MovieDetailResponse extends Equatable {
         "vote_count": voteCount,
       };
 
-  @override
-  // TODO: implement props
-  List<Object?> get props => [
-        adult,
-        backdropPath,
-        budget,
-        genres,
-        homepage,
-        id,
-        imdbId,
-        originalLanguage,
-        originalTitle,
-        overview,
-        popularity,
-        posterPath,
-        releaseDate,
-        revenue,
-        runtime,
-        status,
-        tagline,
-        title,
-        video,
-        voteAverage,
-        voteCount,
-      ];
-}
-
-extension Mapper on MovieDetailResponse {
   MovieDetail toEntity() {
     return MovieDetail(
       adult: this.adult,
@@ -152,4 +124,30 @@ extension Mapper on MovieDetailResponse {
       voteCount: this.voteCount,
     );
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        adult,
+        backdropPath,
+        budget,
+        genres,
+        homepage,
+        id,
+        imdbId,
+        originalLanguage,
+        originalTitle,
+        overview,
+        popularity,
+        posterPath,
+        releaseDate,
+        revenue,
+        runtime,
+        status,
+        tagline,
+        title,
+        video,
+        voteAverage,
+        voteCount,
+      ];
 }

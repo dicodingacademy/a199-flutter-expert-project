@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
-import 'package:ditonton/data/models/movie_model.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
-import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
