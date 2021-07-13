@@ -1,10 +1,11 @@
 import 'package:ditonton/domain/entities/genre.dart';
+import 'package:equatable/equatable.dart';
 
-class GenreModel extends Genre {
+class GenreModel extends Equatable {
   GenreModel({
     required this.id,
     required this.name,
-  }) : super(id: id, name: name);
+  });
 
   final int id;
   final String name;
@@ -18,4 +19,13 @@ class GenreModel extends Genre {
         "id": id,
         "name": name,
       };
+
+  @override
+  List<Object?> get props => [id, name];
+}
+
+extension Mapper on GenreModel {
+  Genre toEntity() {
+    return Genre(id: this.id, name: this.name);
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:equatable/equatable.dart';
 
-class MovieModel extends Movie {
+class MovieModel extends Equatable {
   MovieModel({
     required this.adult,
     required this.backdropPath,
@@ -15,21 +16,7 @@ class MovieModel extends Movie {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
-  }) : super(
-          adult: adult,
-          backdropPath: backdropPath,
-          genreIds: genreIds,
-          id: id,
-          originalTitle: originalTitle,
-          overview: overview,
-          popularity: popularity,
-          posterPath: posterPath,
-          releaseDate: releaseDate,
-          title: title,
-          video: video,
-          voteAverage: voteAverage,
-          voteCount: voteCount,
-        );
+  });
 
   final bool adult;
   final String? backdropPath;
@@ -76,4 +63,41 @@ class MovieModel extends Movie {
         "vote_average": voteAverage,
         "vote_count": voteCount,
       };
+
+  @override
+  List<Object?> get props => [
+        adult,
+        backdropPath,
+        genreIds,
+        id,
+        originalTitle,
+        overview,
+        popularity,
+        posterPath,
+        releaseDate,
+        title,
+        video,
+        voteAverage,
+        voteCount,
+      ];
+}
+
+extension MovieExtension on MovieModel {
+  Movie toEntity() {
+    return Movie(
+      adult: this.adult,
+      backdropPath: this.backdropPath,
+      genreIds: this.genreIds,
+      id: this.id,
+      originalTitle: this.originalTitle,
+      overview: this.overview,
+      popularity: this.popularity,
+      posterPath: this.posterPath,
+      releaseDate: this.releaseDate,
+      title: this.title,
+      video: this.video,
+      voteAverage: this.voteAverage,
+      voteCount: this.voteCount,
+    );
+  }
 }
