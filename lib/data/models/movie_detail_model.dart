@@ -99,6 +99,23 @@ class MovieDetailResponse extends Equatable {
         "vote_count": voteCount,
       };
 
+  MovieDetail toEntity() {
+    return MovieDetail(
+      adult: this.adult,
+      backdropPath: this.backdropPath,
+      genres: this.genres.map((genre) => genre.toEntity()).toList(),
+      id: this.id,
+      originalTitle: this.originalTitle,
+      overview: this.overview,
+      posterPath: this.posterPath,
+      releaseDate: this.releaseDate,
+      runtime: this.runtime,
+      title: this.title,
+      voteAverage: this.voteAverage,
+      voteCount: this.voteCount,
+    );
+  }
+
   @override
   // TODO: implement props
   List<Object?> get props => [
@@ -124,23 +141,4 @@ class MovieDetailResponse extends Equatable {
         voteAverage,
         voteCount,
       ];
-}
-
-extension Mapper on MovieDetailResponse {
-  MovieDetail toEntity() {
-    return MovieDetail(
-      adult: this.adult,
-      backdropPath: this.backdropPath,
-      genres: this.genres.map((genre) => genre.toEntity()).toList(),
-      id: this.id,
-      originalTitle: this.originalTitle,
-      overview: this.overview,
-      posterPath: this.posterPath,
-      releaseDate: this.releaseDate,
-      runtime: this.runtime,
-      title: this.title,
-      voteAverage: this.voteAverage,
-      voteCount: this.voteCount,
-    );
-  }
 }
