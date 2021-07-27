@@ -109,4 +109,10 @@ class MovieRepositoryImpl implements MovieRepository {
     final result = await localDataSource.getMovieById(id);
     return result != null;
   }
+
+  @override
+  Future<Either<Failure, List<Movie>>> getWatchlistMovie() {
+    // TODO: implement getWatchlistMovie
+    throw UnimplementedError();
+  }
 }
