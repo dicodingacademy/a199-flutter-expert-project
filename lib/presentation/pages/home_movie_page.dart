@@ -32,6 +32,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Icon(Icons.menu),
         title: Text('Ditonton'),
         actions: [
           IconButton(
@@ -41,35 +42,6 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             icon: Icon(Icons.search),
           )
         ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            UserAccountsDrawerHeader(
-              accountName: Text('Ditonton'),
-              accountEmail: Text('ditonton@dicoding.com'),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: kMikadoYellow,
-                child: Text(
-                  'D',
-                  style: TextStyle(fontSize: 24),
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.movie),
-              title: const Text('Movies'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.save_alt_sharp),
-              title: const Text('Watchlist'),
-              onTap: () {},
-            ),
-          ],
-        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
