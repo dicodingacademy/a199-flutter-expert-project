@@ -40,28 +40,26 @@ class _CustomDrawerState extends State<CustomDrawer>
 
           return Stack(
             children: [
-              SafeArea(
-                child: Container(
-                  child: Column(
-                    children: [
-                      UserAccountsDrawerHeader(
-                        currentAccountPicture: CircleAvatar(
-                          backgroundImage: NetworkImage(
-                              'https://d17ivq9b7rppb3.cloudfront.net/original/jobs/turut_berkontribusi_memajungan_dunia_it_di_indonesia_270619074639.jpeg'),
-                        ),
-                        accountName: Text('Ditonton'),
-                        accountEmail: Text('ditonton@dicoding.com'),
+              Container(
+                child: Column(
+                  children: [
+                    UserAccountsDrawerHeader(
+                      currentAccountPicture: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            'https://d17ivq9b7rppb3.cloudfront.net/original/jobs/turut_berkontribusi_memajungan_dunia_it_di_indonesia_270619074639.jpeg'),
                       ),
-                      ListTile(
-                        leading: Icon(Icons.movie),
-                        title: Text('Movies'),
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.save_alt),
-                        title: Text('Watchlist'),
-                      ),
-                    ],
-                  ),
+                      accountName: Text('Ditonton'),
+                      accountEmail: Text('ditonton@dicoding.com'),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.movie),
+                      title: Text('Movies'),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.save_alt),
+                      title: Text('Watchlist'),
+                    ),
+                  ],
                 ),
               ),
               Transform(
