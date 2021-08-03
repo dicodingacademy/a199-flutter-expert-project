@@ -52,22 +52,6 @@ class MyApp extends StatelessWidget {
         ),
         home: Material(
           child: CustomDrawer(
-            drawer: SafeArea(
-              child: Container(
-                child: Column(
-                  children: [
-                    ListTile(
-                      leading: Icon(Icons.movie),
-                      title: Text('Movies'),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.save_alt),
-                      title: Text('Watchlist'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
             content: HomeMoviePage(),
           ),
         ),

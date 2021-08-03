@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatefulWidget {
-  final Widget drawer;
   final Widget content;
 
   CustomDrawer({
-    required this.drawer,
     required this.content,
   });
 
@@ -42,7 +40,30 @@ class _CustomDrawerState extends State<CustomDrawer>
 
           return Stack(
             children: [
-              widget.drawer,
+              SafeArea(
+                child: Container(
+                  child: Column(
+                    children: [
+                      UserAccountsDrawerHeader(
+                        currentAccountPicture: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                              'https://d17ivq9b7rppb3.cloudfront.net/original/jobs/turut_berkontribusi_memajungan_dunia_it_di_indonesia_270619074639.jpeg'),
+                        ),
+                        accountName: Text('Ditonton'),
+                        accountEmail: Text('ditonton@dicoding.com'),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.movie),
+                        title: Text('Movies'),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.save_alt),
+                        title: Text('Watchlist'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               Transform(
                 transform: Matrix4.identity()
                   ..translate(slide)
