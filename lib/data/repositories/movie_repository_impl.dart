@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/network_info.dart';
+import 'package:ditonton/data/datasources/movie_local_data_source.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
@@ -11,23 +12,28 @@ import 'package:ditonton/common/failure.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
   final MovieRemoteDataSource remoteDataSource;
+  final MovieLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
 
   MovieRepositoryImpl({
     required this.remoteDataSource,
+    required this.localDataSource,
     required this.networkInfo,
   });
 
   @override
   Future<Either<Failure, List<Movie>>> getNowPlayingMovies() async {
-    networkInfo.isConnected;
-    try {
-      final result = await remoteDataSource.getNowPlayingMovies();
+    if (await networkInfo.isConnected) {
+      try {
+        final result = await remoteDataSource.getNowPlayingMovies();
+        localDataSource.cacheNowPlayingMovies(result);
+        return Right(result.map((model) => model.toEntity()).toList());
+      } on ServerException {
+        return Left(ServerFailure(''));
+      }
+    } else {
+      final result = await localDataSource.getCachedNowPlayingMovies();
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return Left(ServerFailure(''));
-    } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
 

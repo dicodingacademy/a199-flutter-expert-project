@@ -146,6 +146,12 @@ class MockMovieLocalDataSource extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#cacheNowPlayingMovies, [movies]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future.value()) as _i7.Future<void>);
+  @override
+  _i7.Future<List<_i12.MovieModel>> getCachedNowPlayingMovies() =>
+      (super.noSuchMethod(Invocation.method(#getCachedNowPlayingMovies, []),
+              returnValue:
+                  Future<List<_i12.MovieModel>>.value(<_i12.MovieModel>[]))
+          as _i7.Future<List<_i12.MovieModel>>);
 }
 
 /// A class which mocks [NetworkInfo].
