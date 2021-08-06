@@ -24,6 +24,31 @@ class _CustomDrawerState extends State<CustomDrawer>
     );
   }
 
+  Widget _buildDrawer() {
+    return Container(
+      child: Column(
+        children: [
+          UserAccountsDrawerHeader(
+            currentAccountPicture: CircleAvatar(
+              backgroundImage: NetworkImage(
+                  'https://d17ivq9b7rppb3.cloudfront.net/original/jobs/turut_berkontribusi_memajungan_dunia_it_di_indonesia_270619074639.jpeg'),
+            ),
+            accountName: Text('Ditonton'),
+            accountEmail: Text('ditonton@dicoding.com'),
+          ),
+          ListTile(
+            leading: Icon(Icons.movie),
+            title: Text('Movies'),
+          ),
+          ListTile(
+            leading: Icon(Icons.save_alt),
+            title: Text('Watchlist'),
+          ),
+        ],
+      ),
+    );
+  }
+
   void toggle() => _animationController.isDismissed
       ? _animationController.forward()
       : _animationController.reverse();
@@ -34,34 +59,13 @@ class _CustomDrawerState extends State<CustomDrawer>
       onTap: toggle,
       child: AnimatedBuilder(
         animation: _animationController,
-        builder: (context, _) {
+        builder: (context, child) {
           double slide = 255.0 * _animationController.value;
           double scale = 1 - (_animationController.value * 0.3);
 
           return Stack(
             children: [
-              Container(
-                child: Column(
-                  children: [
-                    UserAccountsDrawerHeader(
-                      currentAccountPicture: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            'https://d17ivq9b7rppb3.cloudfront.net/original/jobs/turut_berkontribusi_memajungan_dunia_it_di_indonesia_270619074639.jpeg'),
-                      ),
-                      accountName: Text('Ditonton'),
-                      accountEmail: Text('ditonton@dicoding.com'),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.movie),
-                      title: Text('Movies'),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.save_alt),
-                      title: Text('Watchlist'),
-                    ),
-                  ],
-                ),
-              ),
+              _buildDrawer(),
               Transform(
                 transform: Matrix4.identity()
                   ..translate(slide)
