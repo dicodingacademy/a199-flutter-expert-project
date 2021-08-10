@@ -44,6 +44,10 @@ class _CustomDrawerState extends State<CustomDrawer>
             leading: Icon(Icons.save_alt),
             title: Text('Watchlist'),
           ),
+          ListTile(
+            leading: Icon(Icons.info_outline),
+            title: Text('About'),
+          ),
         ],
       ),
     );
