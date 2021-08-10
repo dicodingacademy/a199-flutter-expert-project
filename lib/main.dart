@@ -9,6 +9,7 @@ import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:ditonton/presentation/widgets/custom_drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +50,11 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
-        home: HomeMoviePage(),
+        home: Material(
+          child: CustomDrawer(
+            content: HomeMoviePage(),
+          ),
+        ),
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case '/home':

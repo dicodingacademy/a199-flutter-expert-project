@@ -1,61 +1,50 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
 import 'package:ditonton/common/failure.dart';
+import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
+import 'package:ditonton/domain/usecases/save_watchlist.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../dummy_data/dummy_objects.dart';
 import 'movie_detail_notifier_test.mocks.dart';
 
-@GenerateMocks([GetMovieDetail, GetMovieRecommendations])
+@GenerateMocks([
+  GetMovieDetail,
+  GetMovieRecommendations,
+  GetWatchListStatus,
+  SaveWatchlist,
+])
 void main() {
   late MovieDetailNotifier provider;
   late MockGetMovieDetail mockGetMovieDetail;
   late MockGetMovieRecommendations mockGetMovieRecommendations;
+  late MockGetWatchListStatus mockGetWatchlistStatus;
+  late MockSaveWatchlist mockSaveWatchlist;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockGetMovieDetail = MockGetMovieDetail();
     mockGetMovieRecommendations = MockGetMovieRecommendations();
+    mockGetWatchlistStatus = MockGetWatchListStatus();
+    mockSaveWatchlist = MockSaveWatchlist();
     provider = MovieDetailNotifier(
       getMovieDetail: mockGetMovieDetail,
       getMovieRecommendations: mockGetMovieRecommendations,
+      getWatchListStatus: mockGetWatchlistStatus,
+      saveWatchlist: mockSaveWatchlist,
     )..addListener(() {
         listenerCallCount += 1;
       });
   });
 
   final tId = 1;
-  final tMovieDetail = MovieDetail(
-    adult: false,
-    backdropPath: 'backdropPath',
-    budget: 100,
-    genres: [Genre(id: 1, name: 'Action')],
-    homepage: "https://google.com",
-    id: 1,
-    imdbId: 'imdb1',
-    originalLanguage: 'en',
-    originalTitle: 'originalTitle',
-    overview: 'overview',
-    popularity: 1,
-    posterPath: 'posterPath',
-    releaseDate: 'releaseDate',
-    revenue: 12000,
-    runtime: 120,
-    status: 'Status',
-    tagline: 'Tagline',
-    title: 'title',
-    video: false,
-    voteAverage: 1,
-    voteCount: 1,
-  );
 
   final tMovie = Movie(
     adult: false,
@@ -76,7 +65,7 @@ void main() {
 
   void _arrangeUsecase() {
     when(mockGetMovieDetail.execute(tId))
-        .thenAnswer((_) async => Right(tMovieDetail));
+        .thenAnswer((_) async => Right(testMovieDetail));
     when(mockGetMovieRecommendations.execute(tId))
         .thenAnswer((_) async => Right(tMovies));
   }
@@ -109,7 +98,7 @@ void main() {
       await provider.fetchMovieDetail(tId);
       // assert
       expect(provider.movieState, RequestState.Loaded);
-      expect(provider.movie, tMovieDetail);
+      expect(provider.movie, testMovieDetail);
       expect(listenerCallCount, 3);
     });
 
@@ -150,7 +139,7 @@ void main() {
     test('should update error message when request in successful', () async {
       // arrange
       when(mockGetMovieDetail.execute(tId))
-          .thenAnswer((_) async => Right(tMovieDetail));
+          .thenAnswer((_) async => Right(testMovieDetail));
       when(mockGetMovieRecommendations.execute(tId))
           .thenAnswer((_) async => Left(ServerFailure('Failed')));
       // act
@@ -158,6 +147,57 @@ void main() {
       // assert
       expect(provider.recommendationState, RequestState.Error);
       expect(provider.message, 'Failed');
+    });
+  });
+
+  group('Watchlist', () {
+    test('should get the watchlist status', () async {
+      // arrange
+      when(mockGetWatchlistStatus.execute(1)).thenAnswer((_) async => true);
+      // act
+      await provider.loadWatchlistStatus(1);
+      // assert
+      expect(provider.isAddedToWatchlist, true);
+    });
+
+    test('should execute save watchlist status when function called', () async {
+      // arrange
+      when(mockSaveWatchlist.execute(testMovieDetail))
+          .thenAnswer((_) async => Right('Success'));
+      when(mockGetWatchlistStatus.execute(testMovieDetail.id))
+          .thenAnswer((_) async => true);
+      // act
+      await provider.addWatchlist(testMovieDetail);
+      // assert
+      verify(mockSaveWatchlist.execute(testMovieDetail));
+    });
+
+    test('should update watchlist status when add watchlist success', () async {
+      // arrange
+      when(mockSaveWatchlist.execute(testMovieDetail))
+          .thenAnswer((_) async => Right('Added to Watchlist'));
+      when(mockGetWatchlistStatus.execute(testMovieDetail.id))
+          .thenAnswer((_) async => true);
+      // act
+      await provider.addWatchlist(testMovieDetail);
+      // assert
+      verify(mockGetWatchlistStatus.execute(testMovieDetail.id));
+      expect(provider.isAddedToWatchlist, true);
+      expect(provider.watchlistMessage, '');
+      expect(listenerCallCount, 1);
+    });
+
+    test('should update watchlist message when add watchlist failed', () async {
+      // arrange
+      when(mockSaveWatchlist.execute(testMovieDetail))
+          .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+      when(mockGetWatchlistStatus.execute(testMovieDetail.id))
+          .thenAnswer((_) async => false);
+      // act
+      await provider.addWatchlist(testMovieDetail);
+      // assert
+      expect(provider.watchlistMessage, 'Failed');
+      expect(listenerCallCount, 1);
     });
   });
 
