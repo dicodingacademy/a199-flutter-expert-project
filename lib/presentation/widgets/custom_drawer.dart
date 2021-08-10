@@ -1,3 +1,4 @@
+import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -45,6 +46,10 @@ class _CustomDrawerState extends State<CustomDrawer>
             title: Text('Watchlist'),
           ),
           ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+              _animationController.reverse();
+            },
             leading: Icon(Icons.info_outline),
             title: Text('About'),
           ),
