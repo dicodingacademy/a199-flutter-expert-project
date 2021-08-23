@@ -12,10 +12,17 @@ dependencies:
     sdk: flutter
   equatable: ^2.0.3
   google_fonts: ^2.1.0
+  dartz: ^0.10.0
+  sqflite: ^2.0.0+3
+  cached_network_image: ^3.1.0
+  provider: ^6.0.0
+  flutter_rating_bar: ^4.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito: ^5.0.8
+  build_runner: ^2.0.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
