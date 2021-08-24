@@ -1,3 +1,4 @@
+import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -46,7 +47,7 @@ class _CustomDrawerState extends State<CustomDrawer>
           ),
           ListTile(
             onTap: () {
-              Navigator.pushNamed(context, '/about');
+              Navigator.pushNamed(context, ABOUT_ROUTE);
               _animationController.reverse();
             },
             leading: Icon(Icons.info_outline),
