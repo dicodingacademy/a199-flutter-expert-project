@@ -37,6 +37,13 @@ final testMovieDetail = MovieDetail(
   voteCount: 1,
 );
 
+final testWatchlistMovie = Movie.watchlist(
+  id: 1,
+  title: 'title',
+  posterPath: 'posterPath',
+  overview: 'overview',
+);
+
 final testMovieTable = MovieTable(
   id: 1,
   title: 'title',
@@ -44,16 +51,9 @@ final testMovieTable = MovieTable(
   overview: 'overview',
 );
 
-final testMovieDetailMap = {
-  'adult': 0,
-  'backdropPath': 'backdropPath',
+final testMovieMap = {
   'id': 1,
-  'originalTitle': 'originalTitle',
   'overview': 'overview',
   'posterPath': 'posterPath',
-  'releaseDate': 'releaseDate',
-  'runtime': 120,
   'title': 'title',
-  'voteAverage': 1.0,
-  'voteCount': 1,
 };

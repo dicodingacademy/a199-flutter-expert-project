@@ -45,7 +45,7 @@ void main() {
     test('should return Movie Detail Table when data is found', () async {
       // arrange
       when(mockDatabaseHelper.getMovieById(tId))
-          .thenAnswer((_) async => testMovieDetailMap);
+          .thenAnswer((_) async => testMovieMap);
       // act
       final result = await dataSource.getMovieById(tId);
       // assert
@@ -59,6 +59,18 @@ void main() {
       final result = await dataSource.getMovieById(tId);
       // assert
       expect(result, null);
+    });
+  });
+
+  group('get watchlist movies', () {
+    test('should return list of MovieTable from database', () async {
+      // arrange
+      when(mockDatabaseHelper.getWatchlistMovies())
+          .thenAnswer((_) async => [testMovieMap]);
+      // act
+      final result = await dataSource.getWatchlistMovies();
+      // assert
+      expect(result, [testMovieTable]);
     });
   });
 }
