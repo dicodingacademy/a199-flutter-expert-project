@@ -17,7 +17,7 @@ class WatchlistMovieNotifier extends ChangeNotifier {
 
   final GetWatchlistMovies getWatchlistMovies;
 
-  void fetchWatchlistMovies() async {
+  Future<void> fetchWatchlistMovies() async {
     _watchlistState = RequestState.Loading;
     notifyListeners();
 
