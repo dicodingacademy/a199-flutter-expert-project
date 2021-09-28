@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ditonton/data/models/movie_detail_table.dart';
+import 'package:ditonton/data/models/movie_table.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
@@ -34,20 +34,14 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE  $_tblWatchlist (
         id INTEGER PRIMARY KEY,
-        adult INTEGER,
         title TEXT,
-        originalTitle TEXT,
         overview TEXT,
         posterPath TEXT,
-        releaseDate TEXT,
-        runtime INTEGER,
-        voteAverage REAL,
-        voteCount INTEGER
       );
     ''');
   }
 
-  Future<int> insertWatchlist(MovieDetailTable movie) async {
+  Future<int> insertWatchlist(MovieTable movie) async {
     final db = await database;
     return await db!.insert(_tblWatchlist, movie.toJson());
   }
@@ -65,5 +59,12 @@ class DatabaseHelper {
     } else {
       return null;
     }
+  }
+
+  Future<List<Map<String, dynamic>>> getWatchlistMovies() async {
+    final db = await database;
+    final List<Map<String, dynamic>> results = await db!.query(_tblWatchlist);
+
+    return results;
   }
 }

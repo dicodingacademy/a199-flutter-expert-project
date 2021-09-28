@@ -37,8 +37,6 @@ class MovieListNotifier extends ChangeNotifier {
   final GetPopularMovies getPopularMovies;
   final GetTopRatedMovies getTopRatedMovies;
 
-  void setState(RequestState state) {}
-
   Future<void> fetchNowPlayingMovies() async {
     _nowPlayingState = RequestState.Loading;
     notifyListeners();

@@ -1,4 +1,4 @@
-import 'package:ditonton/data/models/movie_detail_table.dart';
+import 'package:ditonton/data/models/movie_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
@@ -37,29 +37,23 @@ final testMovieDetail = MovieDetail(
   voteCount: 1,
 );
 
-final testMovieDetailTable = MovieDetailTable(
-  adult: 0,
+final testWatchlistMovie = Movie.watchlist(
   id: 1,
-  originalTitle: 'originalTitle',
-  overview: 'overview',
-  posterPath: 'posterPath',
-  releaseDate: 'releaseDate',
-  runtime: 120,
   title: 'title',
-  voteAverage: 1,
-  voteCount: 1,
+  posterPath: 'posterPath',
+  overview: 'overview',
 );
 
-final testMovieDetailMap = {
-  'adult': 0,
-  'backdropPath': 'backdropPath',
+final testMovieTable = MovieTable(
+  id: 1,
+  title: 'title',
+  posterPath: 'posterPath',
+  overview: 'overview',
+);
+
+final testMovieMap = {
   'id': 1,
-  'originalTitle': 'originalTitle',
   'overview': 'overview',
   'posterPath': 'posterPath',
-  'releaseDate': 'releaseDate',
-  'runtime': 120,
   'title': 'title',
-  'voteAverage': 1.0,
-  'voteCount': 1,
 };

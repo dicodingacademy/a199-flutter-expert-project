@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_model.dart';
+import 'package:ditonton/data/models/movie_table.dart';
 import 'package:ditonton/data/repositories/movie_repository_impl.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
@@ -345,7 +346,7 @@ void main() {
   group('save watchlist', () {
     test('should return success message when saving successful', () async {
       // arrange
-      when(mockLocalDataSource.insertWatchlist(testMovieDetailTable))
+      when(mockLocalDataSource.insertWatchlist(testMovieTable))
           .thenAnswer((_) async => 'Added to Watchlist');
       // act
       final result = await repository.saveWatchlist(testMovieDetail);
@@ -355,7 +356,7 @@ void main() {
 
     test('should return DatabaseFailure when saving unsuccessful', () async {
       // arrange
-      when(mockLocalDataSource.insertWatchlist(testMovieDetailTable))
+      when(mockLocalDataSource.insertWatchlist(testMovieTable))
           .thenThrow(DatabaseException('Failed to add watchlist'));
       // act
       final result = await repository.saveWatchlist(testMovieDetail);
@@ -373,6 +374,19 @@ void main() {
       final result = await repository.isAddedToWatchlist(tId);
       // assert
       expect(result, false);
+    });
+  });
+
+  group('get watchlist movies', () {
+    test('should return list of Movies', () async {
+      // arrange
+      when(mockLocalDataSource.getWatchlistMovies())
+          .thenAnswer((_) async => [testMovieTable]);
+      // act
+      final result = await repository.getWatchlistMovies();
+      // assert
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, [testWatchlistMovie]);
     });
   });
 }
