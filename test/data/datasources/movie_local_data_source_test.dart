@@ -39,6 +39,30 @@ void main() {
     });
   });
 
+  group('remove watchlist', () {
+    test('should return success message when remove from database is success',
+        () async {
+      // arrange
+      when(mockDatabaseHelper.removeWatchlist(testMovieTable))
+          .thenAnswer((_) async => 1);
+      // act
+      final result = await dataSource.removeWatchlist(testMovieTable);
+      // assert
+      expect(result, 'Removed from Watchlist');
+    });
+
+    test('should throw DatabaseException when remove from database is failed',
+        () async {
+      // arrange
+      when(mockDatabaseHelper.removeWatchlist(testMovieTable))
+          .thenThrow(Exception());
+      // act
+      final call = dataSource.removeWatchlist(testMovieTable);
+      // assert
+      expect(() => call, throwsA(isA<DatabaseException>()));
+    });
+  });
+
   group('Get Movie Detail By Id', () {
     final tId = 1;
 
