@@ -1,3 +1,4 @@
+import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -43,6 +44,10 @@ class _CustomDrawerState extends State<CustomDrawer>
           ListTile(
             leading: Icon(Icons.save_alt),
             title: Text('Watchlist'),
+            onTap: () {
+              Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+              _animationController.reverse();
+            },
           ),
         ],
       ),
