@@ -113,26 +113,34 @@ class DetailContent extends StatelessWidget {
                                           context,
                                           listen: false)
                                       .addWatchlist(movie);
+                                } else {
+                                  await Provider.of<MovieDetailNotifier>(
+                                          context,
+                                          listen: false)
+                                      .removeFromWatchlist(movie);
+                                }
 
-                                  final message =
-                                      Provider.of<MovieDetailNotifier>(context,
-                                              listen: false)
-                                          .watchlistMessage;
+                                final message =
+                                    Provider.of<MovieDetailNotifier>(context,
+                                            listen: false)
+                                        .watchlistMessage;
 
-                                  if (message.isEmpty) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                            content:
-                                                Text('Added to Watchlist')));
-                                  } else {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            content: Text(message),
-                                          );
-                                        });
-                                  }
+                                if (message ==
+                                        MovieDetailNotifier
+                                            .watchlistAddSuccessMessage ||
+                                    message ==
+                                        MovieDetailNotifier
+                                            .watchlistRemoveSuccessMessage) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text(message)));
+                                } else {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          content: Text(message),
+                                        );
+                                      });
                                 }
                               },
                               child: Row(

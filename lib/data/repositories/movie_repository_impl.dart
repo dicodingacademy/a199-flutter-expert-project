@@ -105,6 +105,17 @@ class MovieRepositoryImpl implements MovieRepository {
   }
 
   @override
+  Future<Either<Failure, String>> removeWatchlist(MovieDetail movie) async {
+    try {
+      final result =
+          await localDataSource.removeWatchlist(MovieTable.fromEntity(movie));
+      return Right(result);
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
+    }
+  }
+
+  @override
   Future<bool> isAddedToWatchlist(int id) async {
     final result = await localDataSource.getMovieById(id);
     return result != null;
