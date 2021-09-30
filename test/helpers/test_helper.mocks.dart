@@ -14,6 +14,7 @@ import 'package:ditonton/data/datasources/movie_remote_data_source.dart'
     as _i11;
 import 'package:ditonton/data/models/movie_detail_model.dart' as _i3;
 import 'package:ditonton/data/models/movie_model.dart' as _i12;
+import 'package:ditonton/data/models/movie_table.dart' as _i14;
 import 'package:ditonton/domain/entities/movie.dart' as _i9;
 import 'package:ditonton/domain/entities/movie_detail.dart' as _i10;
 import 'package:ditonton/domain/repositories/movie_repository.dart' as _i6;
@@ -22,6 +23,7 @@ import 'package:http/src/client.dart' as _i15;
 import 'package:http/src/response.dart' as _i4;
 import 'package:http/src/streamed_response.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:sqflite_common/sqlite_api.dart' as _i16;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: comment_references
@@ -82,6 +84,30 @@ class MockMovieRepository extends _i1.Mock implements _i6.MovieRepository {
   _i7.Future<_i2.Either<_i8.Failure, List<_i9.Movie>>> searchMovies(
           String? query) =>
       (super.noSuchMethod(Invocation.method(#searchMovies, [query]),
+          returnValue: Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>.value(
+              _FakeEither<_i8.Failure, List<_i9.Movie>>())) as _i7
+          .Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>);
+  @override
+  _i7.Future<_i2.Either<_i8.Failure, String>> saveWatchlist(
+          _i10.MovieDetail? movie) =>
+      (super.noSuchMethod(Invocation.method(#saveWatchlist, [movie]),
+              returnValue: Future<_i2.Either<_i8.Failure, String>>.value(
+                  _FakeEither<_i8.Failure, String>()))
+          as _i7.Future<_i2.Either<_i8.Failure, String>>);
+  @override
+  _i7.Future<_i2.Either<_i8.Failure, String>> removeWatchlist(
+          _i10.MovieDetail? movie) =>
+      (super.noSuchMethod(Invocation.method(#removeWatchlist, [movie]),
+              returnValue: Future<_i2.Either<_i8.Failure, String>>.value(
+                  _FakeEither<_i8.Failure, String>()))
+          as _i7.Future<_i2.Either<_i8.Failure, String>>);
+  @override
+  _i7.Future<bool> isAddedToWatchlist(int? id) =>
+      (super.noSuchMethod(Invocation.method(#isAddedToWatchlist, [id]),
+          returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
+  @override
+  _i7.Future<_i2.Either<_i8.Failure, List<_i9.Movie>>> getWatchlistMovies() =>
+      (super.noSuchMethod(Invocation.method(#getWatchlistMovies, []),
           returnValue: Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>.value(
               _FakeEither<_i8.Failure, List<_i9.Movie>>())) as _i7
           .Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>);
