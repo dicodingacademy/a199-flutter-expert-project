@@ -27,14 +27,19 @@ class MovieRepositoryImpl implements MovieRepository {
     if (await networkInfo.isConnected) {
       try {
         final result = await remoteDataSource.getNowPlayingMovies();
-        localDataSource.cacheNowPlayingMovies(result);
+        localDataSource.cacheNowPlayingMovies(
+            result.map((movie) => MovieTable.fromDTO(movie)).toList());
         return Right(result.map((model) => model.toEntity()).toList());
       } on ServerException {
         return Left(ServerFailure(''));
       }
     } else {
-      final result = await localDataSource.getCachedNowPlayingMovies();
-      return Right(result.map((model) => model.toEntity()).toList());
+      try {
+        final result = await localDataSource.getCachedNowPlayingMovies();
+        return Right(result.map((model) => model.toEntity()).toList());
+      } on CacheException catch (e) {
+        return Left(CacheFailure(e.message));
+      }
     }
   }
 

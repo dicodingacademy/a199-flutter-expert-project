@@ -21,6 +21,7 @@ class DatabaseHelper {
   }
 
   static const String _tblWatchlist = 'watchlist';
+  static const String _tblCache = 'cache';
 
   Future<Database> _initDb() async {
     final path = await getDatabasesPath();
@@ -36,9 +37,50 @@ class DatabaseHelper {
         id INTEGER PRIMARY KEY,
         title TEXT,
         overview TEXT,
-        posterPath TEXT,
+        posterPath TEXT
       );
     ''');
+    await db.execute('''
+      CREATE TABLE  $_tblCache (
+        id INTEGER PRIMARY KEY,
+        title TEXT,
+        overview TEXT,
+        posterPath TEXT,
+        category TEXT
+      );
+    ''');
+  }
+
+  Future<void> insertCacheTransaction(
+      List<MovieTable> movies, String category) async {
+    final db = await database;
+    db!.transaction((txn) async {
+      for (final movie in movies) {
+        final movieJson = movie.toJson();
+        movieJson['category'] = category;
+        txn.insert(_tblCache, movieJson);
+      }
+    });
+  }
+
+  Future<List<Map<String, dynamic>>> getCacheMovies(String category) async {
+    final db = await database;
+    final List<Map<String, dynamic>> results = await db!.query(
+      _tblCache,
+      where: 'category = ?',
+      whereArgs: [category],
+    );
+
+    return results;
+  }
+
+  Future<int> clearCache(String category) async {
+    final db = await database;
+    return await db!.delete(
+      _tblCache,
+      where: 'category = ?',
+      whereArgs: [category],
+    );
   }
 
   Future<int> insertWatchlist(MovieTable movie) async {

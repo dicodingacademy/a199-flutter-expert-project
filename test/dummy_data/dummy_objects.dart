@@ -37,6 +37,30 @@ final testMovieDetail = MovieDetail(
   voteCount: 1,
 );
 
+final testMovieCache = MovieTable(
+  id: 557,
+  overview:
+      'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
+  posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
+  title: 'Spider-Man',
+);
+
+final testMovieCacheMap = {
+  'id': 557,
+  'overview':
+      'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
+  'posterPath': '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
+  'title': 'Spider-Man',
+};
+
+final testMovieFromCache = Movie.watchlist(
+  id: 557,
+  overview:
+      'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
+  posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
+  title: 'Spider-Man',
+);
+
 final testWatchlistMovie = Movie.watchlist(
   id: 1,
   title: 'title',

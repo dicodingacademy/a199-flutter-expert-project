@@ -110,7 +110,7 @@ void main() {
         await repository.getNowPlayingMovies();
         // assert
         verify(mockRemoteDataSource.getNowPlayingMovies());
-        verify(mockLocalDataSource.cacheNowPlayingMovies(tMovieModelList));
+        verify(mockLocalDataSource.cacheNowPlayingMovies([testMovieCache]));
       });
 
       test(
@@ -135,13 +135,24 @@ void main() {
       test('should return cached data when device is offline', () async {
         // arrange
         when(mockLocalDataSource.getCachedNowPlayingMovies())
-            .thenAnswer((_) async => tMovieModelList);
+            .thenAnswer((_) async => [testMovieCache]);
         // act
         final result = await repository.getNowPlayingMovies();
         // assert
         verify(mockLocalDataSource.getCachedNowPlayingMovies());
         final resultList = result.getOrElse(() => []);
-        expect(resultList, tMovieList);
+        expect(resultList, [testMovieFromCache]);
+      });
+
+      test('should return CacheFailure when app has no cache', () async {
+        // arrange
+        when(mockLocalDataSource.getCachedNowPlayingMovies())
+            .thenThrow(CacheException('No Cache'));
+        // act
+        final result = await repository.getNowPlayingMovies();
+        // assert
+        verify(mockLocalDataSource.getCachedNowPlayingMovies());
+        expect(result, Left(CacheFailure('No Cache')));
       });
     });
   });
