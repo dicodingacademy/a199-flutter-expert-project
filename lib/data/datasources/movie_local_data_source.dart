@@ -1,5 +1,6 @@
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/datasources/db/database_helper.dart';
+import 'package:ditonton/data/models/movie_model.dart';
 import 'package:ditonton/data/models/movie_table.dart';
 
 abstract class MovieLocalDataSource {
@@ -50,5 +51,17 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
   Future<List<MovieTable>> getWatchlistMovies() async {
     final result = await databaseHelper.getWatchlistMovies();
     return result.map((data) => MovieTable.fromMap(data)).toList();
+  }
+
+  @override
+  Future<void> cacheNowPlayingMovies(List<dynamic> movies) {
+    // TODO: implement cacheNowPlayingMovies
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<MovieModel>> getCachedNowPlayingMovies() {
+    // TODO: implement getCachedNowPlayingMovies
+    throw UnimplementedError();
   }
 }

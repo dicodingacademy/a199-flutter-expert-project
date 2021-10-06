@@ -38,6 +38,10 @@ dependencies:
   get_it: ^7.1.3
   sqflite: ^2.0.0+3
   path_provider: ^2.0.2
+  data_connection_checker:
+    git:
+      url: https://github.com/chornthorn/data_connection_checker.git
+      ref: master
 
 dev_dependencies:
   mockito: ^5.0.8

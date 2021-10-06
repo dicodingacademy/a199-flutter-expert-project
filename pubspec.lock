@@ -35,7 +35,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.6.1"
+    version: "2.8.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -119,7 +119,7 @@ packages:
       name: charcode
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "1.3.1"
   checked_yaml:
     dependency: transitive
     description:
@@ -190,6 +190,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.10.0-nullsafety.2"
+  data_connection_checker:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: "7c1f1e6dfab9a22cdd47285f7d43ec86d693ab33"
+      url: "https://github.com/chornthorn/data_connection_checker.git"
+    source: git
+    version: "0.3.4"
   equatable:
     dependency: "direct main"
     description:
@@ -360,7 +369,7 @@ packages:
       name: meta
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.3.0"
+    version: "1.7.0"
   mime:
     dependency: transitive
     description:
@@ -603,7 +612,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0"
+    version: "0.4.2"
   timing:
     dependency: transitive
     description:
