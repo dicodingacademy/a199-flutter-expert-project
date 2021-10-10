@@ -77,7 +77,7 @@ final testTv = Tv(
   popularity: 1.0,
 );
 
-final testTvList = [testMovie];
+final testTvList = [testTv];
 
 final testTvDetail = TvDetail(
   id: 2,
