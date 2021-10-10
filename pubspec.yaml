@@ -40,8 +40,8 @@ dependencies:
   path_provider: ^2.0.2
 
 dev_dependencies:
-  mockito: ^5.0.8
-  build_runner: ^2.0.4
+  mockito: ^5.0.16
+  build_runner: ^2.1.4
   flutter_test:
     sdk: flutter
 

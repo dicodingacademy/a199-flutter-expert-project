@@ -2,37 +2,41 @@ import 'dart:convert';
 
 import 'package:ditonton/data/models/movie_model.dart';
 import 'package:ditonton/data/models/movie_response.dart';
+import 'package:ditonton/data/models/tv_model.dart';
+import 'package:ditonton/data/models/tv_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../json_reader.dart';
 
 void main() {
-  final tMovieModel = MovieModel(
-    adult: false,
-    backdropPath: "/path.jpg",
-    genreIds: [1, 2, 3, 4],
+  final tTvModel = TvModel(
     id: 1,
-    originalTitle: "Original Title",
-    overview: "Overview",
-    popularity: 1.0,
-    posterPath: "/path.jpg",
-    releaseDate: "2020-05-05",
-    title: "Title",
-    video: false,
-    voteAverage: 1.0,
-    voteCount: 1,
+    name: 'Doraemon',
+    posterPath:
+        'https://image.tmdb.org/t/p/w500/dzBtMocZuJbjLOXvrl4zGYigDzh.jpg',
+    backdropPath:
+        'https://image.tmdb.org/t/p/w500/jyw8VKYEiM1UDzPB7NsisUgBeJ8.jpg',
+    overview: 'Doraemon is a movie about a robot who is a hero to humans.',
+    voteAverage: 8.5,
+    voteCount: 1000,
+    popularity: 8.5,
+    firstAirDate: '2019-01-01',
+    genreIds: [28, 12, 16, 35, 10751],
+    originCountry: ['JP'],
+    originalLanguage: 'ja',
+    originalName: 'ドラえもん',
   );
-  final tMovieResponseModel =
-      MovieResponse(movieList: <MovieModel>[tMovieModel]);
+
+  final tTvResnposeModel = TvResponse(tvList: <TvModel>[tTvModel]);
   group('fromJson', () {
     test('should return a valid model from JSON', () async {
       // arrange
       final Map<String, dynamic> jsonMap =
-          json.decode(readJson('dummy_data/now_playing.json'));
+          json.decode(readJson('dummy_data/now_playing_tv.json'));
       // act
-      final result = MovieResponse.fromJson(jsonMap);
+      final result = TvResponse.fromJson(jsonMap);
       // assert
-      expect(result, tMovieResponseModel);
+      expect(result, tTvResnposeModel);
     });
   });
 
@@ -41,24 +45,27 @@ void main() {
       // arrange
 
       // act
-      final result = tMovieResponseModel.toJson();
+      final result = tTvResnposeModel.toJson();
       // assert
       final expectedJsonMap = {
         "results": [
           {
-            "adult": false,
-            "backdrop_path": "/path.jpg",
-            "genre_ids": [1, 2, 3, 4],
             "id": 1,
-            "original_title": "Original Title",
-            "overview": "Overview",
-            "popularity": 1.0,
-            "poster_path": "/path.jpg",
-            "release_date": "2020-05-05",
-            "title": "Title",
-            "video": false,
-            "vote_average": 1.0,
-            "vote_count": 1
+            "name": "Doraemon",
+            "poster_path":
+                "https://image.tmdb.org/t/p/w500/dzBtMocZuJbjLOXvrl4zGYigDzh.jpg",
+            "backdrop_path":
+                "https://image.tmdb.org/t/p/w500/jyw8VKYEiM1UDzPB7NsisUgBeJ8.jpg",
+            "overview":
+                "Doraemon is a movie about a robot who is a hero to humans.",
+            "vote_average": 8.5,
+            "vote_count": 1000,
+            "popularity": 8.5,
+            "first_air_date": "2019-01-01",
+            "genre_ids": [28, 12, 16, 35, 10751],
+            "origin_country": ["JP"],
+            "original_language": "ja",
+            "original_name": "ドラえもん"
           }
         ],
       };
