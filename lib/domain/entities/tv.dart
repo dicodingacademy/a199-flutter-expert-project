@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class Tv extends Equatable {
   Tv({
     required this.posterPath,
@@ -17,19 +18,26 @@ class Tv extends Equatable {
     required this.originalName,
   });
 
-  late final String? posterPath;
-  late final double popularity;
-  late final int id;
-  late final String? backdropPath;
-  late final double voteAverage;
-  late final String overview;
-  late final String firstAirDate;
-  late final List<String> originCountry;
-  late final List<int> genreIds;
-  late final String originalLanguage;
-  late final int voteCount;
-  late final String name;
-  late final String originalName;
+  Tv.watchlist({
+    required this.id,
+    required this.overview,
+    required this.posterPath,
+    required this.name,
+  });
+
+  String? posterPath;
+  double? popularity;
+  int? id;
+  String? backdropPath;
+  double? voteAverage;
+  String? overview;
+  String? firstAirDate;
+  List<String>? originCountry;
+  List<int>? genreIds;
+  String? originalLanguage;
+  int? voteCount;
+  String? name;
+  String? originalName;
 
   @override
   List<Object?> get props => [
