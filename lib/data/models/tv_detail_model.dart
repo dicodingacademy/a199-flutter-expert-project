@@ -1,4 +1,5 @@
 import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/data/models/season_model.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:equatable/equatable.dart';
 
@@ -8,6 +9,7 @@ class TvDetailModel extends Equatable {
     required this.episodeRunTime,
     required this.firstAirDate,
     required this.genres,
+    required this.seasons,
     required this.homepage,
     required this.id,
     required this.inProduction,
@@ -33,6 +35,7 @@ class TvDetailModel extends Equatable {
   late final List<int> episodeRunTime;
   late final String firstAirDate;
   late final List<GenreModel> genres;
+  late final List<SeasonModel> seasons;
   late final String homepage;
   late final int id;
   late final bool inProduction;
@@ -59,6 +62,8 @@ class TvDetailModel extends Equatable {
     firstAirDate = json['first_air_date'];
     genres =
         List.from(json['genres']).map((e) => GenreModel.fromJson(e)).toList();
+    seasons =
+        List.from(json['seasons']).map((e) => SeasonModel.fromJson(e)).toList();
     homepage = json['homepage'];
     id = json['id'];
     inProduction = json['in_production'];
@@ -86,6 +91,7 @@ class TvDetailModel extends Equatable {
     _data['episode_run_time'] = episodeRunTime;
     _data['first_air_date'] = firstAirDate;
     _data['genres'] = genres.map((e) => e.toJson()).toList();
+    _data['seasons'] = seasons.map((e) => e.toJson()).toList();
     _data['homepage'] = homepage;
     _data['id'] = id;
     _data['in_production'] = inProduction;
@@ -115,6 +121,7 @@ class TvDetailModel extends Equatable {
       episodeRunTime: episodeRunTime,
       firstAirDate: firstAirDate,
       genres: genres.map((e) => e.toEntity()).toList(),
+      seasons: seasons.map((e) => e.toEntity()).toList(),
       homepage: homepage,
       id: id,
       inProduction: inProduction,
@@ -143,6 +150,7 @@ class TvDetailModel extends Equatable {
         episodeRunTime,
         firstAirDate,
         genres,
+        seasons,
         homepage,
         id,
         inProduction,

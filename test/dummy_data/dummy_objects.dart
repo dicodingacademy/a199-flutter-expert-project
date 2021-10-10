@@ -2,6 +2,7 @@ import 'package:ditonton/data/models/watchlist_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:ditonton/domain/entities/season.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 
@@ -95,6 +96,17 @@ final testTvDetail = TvDetail(
   languages: ['test'],
   episodeRunTime: [1],
   genres: [Genre(id: 1, name: 'test')],
+  seasons: [
+    Season(
+      airDate: 'test',
+      episodeCount: 1,
+      id: 1,
+      name: 'test',
+      overview: 'test',
+      posterPath: 'test',
+      seasonNumber: 1,
+    )
+  ],
   homepage: 'test',
   inProduction: true,
   lastAirDate: 'test',

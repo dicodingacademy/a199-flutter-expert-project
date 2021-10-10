@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/data/models/season_model.dart';
 import 'package:ditonton/data/models/tv_detail_model.dart';
 import 'package:ditonton/data/models/tv_model.dart';
 import 'package:ditonton/data/repositories/tv_repository_impl.dart';
@@ -205,6 +206,17 @@ void main() {
       languages: ['test'],
       episodeRunTime: [1],
       genres: [GenreModel(id: 1, name: 'test')],
+      seasons: [
+        SeasonModel(
+          airDate: 'test',
+          episodeCount: 1,
+          id: 1,
+          name: 'test',
+          overview: 'test',
+          posterPath: 'test',
+          seasonNumber: 1,
+        )
+      ],
       homepage: 'test',
       inProduction: true,
       lastAirDate: 'test',
