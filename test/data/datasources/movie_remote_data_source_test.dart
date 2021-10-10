@@ -12,7 +12,7 @@ import '../../json_reader.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
+  const API_KEY = 'api_key=f2ef948b07787aa3f36a84f19766056d';
   const BASE_URL = 'https://api.themoviedb.org/3';
 
   late MovieRemoteDataSourceImpl dataSource;
