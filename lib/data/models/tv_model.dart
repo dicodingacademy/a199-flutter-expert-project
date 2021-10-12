@@ -22,7 +22,7 @@ class TvModel extends Equatable {
   late final double popularity;
   late final int id;
   late final String? backdropPath;
-  late final double voteAverage;
+  late final num voteAverage;
   late final String overview;
   late final String firstAirDate;
   late final List<String> originCountry;

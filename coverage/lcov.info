@@ -971,7 +971,7 @@ DA:1,15
 LF:1
 LH:1
 end_of_record
-SF:lib\presentation\pages\popular_movies_page.dart
+SF:lib\presentation\pages\movie\popular_movies_page.dart
 DA:10,1
 DA:11,1
 DA:15,1
@@ -1063,7 +1063,7 @@ DA:25,0
 LF:6
 LH:3
 end_of_record
-SF:lib\presentation\pages\movie_detail_page.dart
+SF:lib\presentation\pages\movie\movie_detail_page.dart
 DA:17,1
 DA:19,1
 DA:20,1
@@ -1260,7 +1260,7 @@ DA:115,1
 LF:51
 LH:49
 end_of_record
-SF:lib\presentation\pages\top_rated_movies_page.dart
+SF:lib\presentation\pages\movie\top_rated_movies_page.dart
 DA:10,1
 DA:11,1
 DA:15,1
