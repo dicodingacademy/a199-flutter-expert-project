@@ -34,7 +34,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
     return Scaffold(
       drawer: AppDrawer(),
       appBar: AppBar(
-        title: Text('Ditonton'),
+        title: Text('Tv Shows'),
         actions: [
           IconButton(
             onPressed: () {
