@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../tv_list_notifier_test.mocks.dart';
+import './tv_list_notifier_test.mocks.dart';
 
 @GenerateMocks([GetNowPlayingTvs, GetPopularTvs, GetTopRatedTvs])
 void main() {
@@ -52,7 +52,7 @@ void main() {
 
   final tTvList = <Tv>[tTv];
 
-  group('now playing movies', () {
+  group('now playing tvs', () {
     test('initialState should be Empty', () {
       expect(provider.nowPlayingState, equals(RequestState.Empty));
     });
@@ -77,7 +77,7 @@ void main() {
       expect(provider.nowPlayingState, RequestState.Loading);
     });
 
-    test('should change movies when data is gotten successfully', () async {
+    test('should change tvs when data is gotten successfully', () async {
       // arrange
       when(mockGetNowPlayingTvs.execute())
           .thenAnswer((_) async => Right(tTvList));
@@ -102,7 +102,7 @@ void main() {
     });
   });
 
-  group('popular movies', () {
+  group('popular tvs', () {
     test('should change state to loading when usecase is called', () async {
       // arrange
       when(mockGetPopularTvs.execute()).thenAnswer((_) async => Right(tTvList));
@@ -113,8 +113,7 @@ void main() {
       // verify(provider.setState(RequestState.Loading));
     });
 
-    test('should change movies data when data is gotten successfully',
-        () async {
+    test('should change tvs data when data is gotten successfully', () async {
       // arrange
       when(mockGetPopularTvs.execute()).thenAnswer((_) async => Right(tTvList));
       // act
@@ -138,7 +137,7 @@ void main() {
     });
   });
 
-  group('top rated movies', () {
+  group('top rated tvs', () {
     test('should change state to loading when usecase is called', () async {
       // arrange
       when(mockGetTopRatedTvs.execute())
@@ -149,8 +148,7 @@ void main() {
       expect(provider.topRatedTvsState, RequestState.Loading);
     });
 
-    test('should change movies data when data is gotten successfully',
-        () async {
+    test('should change tvs data when data is gotten successfully', () async {
       // arrange
       when(mockGetTopRatedTvs.execute())
           .thenAnswer((_) async => Right(tTvList));
