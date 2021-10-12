@@ -5,12 +5,12 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/usecases/tv/get_now_playing_tvs.dart';
 import 'package:ditonton/domain/usecases/tv/get_popular_tvs.dart';
 import 'package:ditonton/domain/usecases/tv/get_top_rated_tvs.dart';
-import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_list_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'tv_list_notifier_test.mocks.dart';
+import '../tv_list_notifier_test.mocks.dart';
 
 @GenerateMocks([GetNowPlayingTvs, GetPopularTvs, GetTopRatedTvs])
 void main() {

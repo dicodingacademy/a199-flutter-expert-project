@@ -26,12 +26,12 @@ import 'package:ditonton/domain/usecases/tv/watchlist/get_tv_watchlist_status.da
 import 'package:ditonton/domain/usecases/tv/watchlist/get_watchlist_tvs.dart';
 import 'package:ditonton/domain/usecases/tv/watchlist/remove_tv_watchlist.dart';
 import 'package:ditonton/domain/usecases/tv/watchlist/save_tv_watchlist.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
-import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:ditonton/presentation/provider/movie/movie_detail_notifier.dart';
+import 'package:ditonton/presentation/provider/movie/movie_list_notifier.dart';
+import 'package:ditonton/presentation/provider/movie/movie_search_notifier.dart';
+import 'package:ditonton/presentation/provider/movie/popular_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/movie/top_rated_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/movie/watchlist_movie_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 

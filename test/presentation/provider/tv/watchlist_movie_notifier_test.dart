@@ -2,13 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/usecases/movie/watchlist/get_watchlist_movies.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:ditonton/presentation/provider/movie/watchlist_movie_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../dummy_data/dummy_objects.dart';
-import 'watchlist_movie_notifier_test.mocks.dart';
+import '../../../dummy_data/dummy_objects.dart';
+import '../watchlist_movie_notifier_test.mocks.dart';
 
 @GenerateMocks([GetWatchlistMovies])
 void main() {
