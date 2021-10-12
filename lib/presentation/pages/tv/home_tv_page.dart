@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/presentation/pages/tv/popular_tvs_page.dart';
+import 'package:ditonton/presentation/pages/tv/top_rated_tvs_page.dart';
 import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv/tv_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/app_drawer.dart';
@@ -64,40 +66,40 @@ class _HomeTvPageState extends State<HomeTvPage> {
                   return Text('Failed');
                 }
               }),
-              // _buildSubHeading(
-              //   title: 'Popular',
-              //   onTap: () =>
-              //       Navigator.pushNamed(context, PopularTvsPage.ROUTE_NAME),
-              // ),
-              // Consumer<TvListNotifier>(builder: (context, data, child) {
-              //   final state = data.popularTvsState;
-              //   if (state == RequestState.Loading) {
-              //     return Center(
-              //       child: CircularProgressIndicator(),
-              //     );
-              //   } else if (state == RequestState.Loaded) {
-              //     return TvList(data.popularTvs);
-              //   } else {
-              //     return Text('Failed');
-              //   }
-              // }),
-              // _buildSubHeading(
-              //   title: 'Top Rated',
-              //   onTap: () =>
-              //       Navigator.pushNamed(context, TopRatedTvsPage.ROUTE_NAME),
-              // ),
-              // Consumer<TvListNotifier>(builder: (context, data, child) {
-              //   final state = data.topRatedTvsState;
-              //   if (state == RequestState.Loading) {
-              //     return Center(
-              //       child: CircularProgressIndicator(),
-              //     );
-              //   } else if (state == RequestState.Loaded) {
-              //     return TvList(data.topRatedTvs);
-              //   } else {
-              //     return Text('Failed');
-              //   }
-              // }),
+              _buildSubHeading(
+                title: 'Popular',
+                onTap: () =>
+                    Navigator.pushNamed(context, PopularTvsPage.ROUTE_NAME),
+              ),
+              Consumer<TvListNotifier>(builder: (context, data, child) {
+                final state = data.popularTvsState;
+                if (state == RequestState.Loading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state == RequestState.Loaded) {
+                  return TvList(data.popularTvs);
+                } else {
+                  return Text('Failed');
+                }
+              }),
+              _buildSubHeading(
+                title: 'Top Rated',
+                onTap: () =>
+                    Navigator.pushNamed(context, TopRatedTvsPage.ROUTE_NAME),
+              ),
+              Consumer<TvListNotifier>(builder: (context, data, child) {
+                final state = data.topRatedTvsState;
+                if (state == RequestState.Loading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state == RequestState.Loaded) {
+                  return TvList(data.topRatedTvs);
+                } else {
+                  return Text('Failed');
+                }
+              }),
             ],
           ),
         ),
