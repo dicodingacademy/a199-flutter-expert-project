@@ -32,7 +32,7 @@ class TvDetail extends Equatable {
 
   late final String? backdropPath;
   late final List<int> episodeRunTime;
-  late final String firstAirDate;
+  late final String? firstAirDate;
   late final List<Genre> genres;
   late final List<Season> seasons;
   late final String homepage;

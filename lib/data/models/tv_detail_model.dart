@@ -33,7 +33,7 @@ class TvDetailModel extends Equatable {
 
   late final String? backdropPath;
   late final List<int> episodeRunTime;
-  late final String firstAirDate;
+  late final String? firstAirDate;
   late final List<GenreModel> genres;
   late final List<SeasonModel> seasons;
   late final String homepage;

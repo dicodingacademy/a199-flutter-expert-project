@@ -12,12 +12,12 @@ class SeasonModel extends Equatable {
     required this.seasonNumber,
   });
 
-  late final String airDate;
+  late final String? airDate;
   late final int episodeCount;
   late final int id;
   late final String name;
   late final String overview;
-  late final String posterPath;
+  late final String? posterPath;
   late final int seasonNumber;
 
   SeasonModel.fromJson(Map<String, dynamic> json) {

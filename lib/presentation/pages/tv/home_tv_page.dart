@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/presentation/pages/movie/search_page.dart';
+import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv/tv_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/app_drawer.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,7 +36,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              // Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
             },
             icon: Icon(Icons.search),
           )
@@ -128,9 +128,9 @@ class _HomeTvPageState extends State<HomeTvPage> {
 }
 
 class TvList extends StatelessWidget {
-  final List<Tv> movies;
+  final List<Tv> tvs;
 
-  TvList(this.movies);
+  TvList(this.tvs);
 
   @override
   Widget build(BuildContext context) {
@@ -139,21 +139,21 @@ class TvList extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          final movie = movies[index];
+          final tv = tvs[index];
           return Container(
             padding: const EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
-                // Navigator.pushNamed(
-                //   context,
-                //   TvDetailPage.ROUTE_NAME,
-                //   arguments: movie.id,
-                // );
+                Navigator.pushNamed(
+                  context,
+                  TvDetailPage.ROUTE_NAME,
+                  arguments: tv.id,
+                );
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                  imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),
                   ),
@@ -163,7 +163,7 @@ class TvList extends StatelessWidget {
             ),
           );
         },
-        itemCount: movies.length,
+        itemCount: tvs.length,
       ),
     );
   }

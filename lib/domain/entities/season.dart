@@ -11,12 +11,12 @@ class Season extends Equatable {
     required this.seasonNumber,
   });
 
-  final String airDate;
+  final String? airDate;
   final int episodeCount;
   final int id;
   final String name;
   final String overview;
-  final String posterPath;
+  final String? posterPath;
   final int seasonNumber;
 
   @override

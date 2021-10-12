@@ -22,7 +22,7 @@ void main() {
   setUp(() {
     mockRemoteDataSource = MockMovieRemoteDataSource();
     mockLocalDataSource = MockWatchlistLocalDataSource();
-    
+
     repository = MovieRepositoryImpl(
       remoteDataSource: mockRemoteDataSource,
       localDataSource: mockLocalDataSource,
