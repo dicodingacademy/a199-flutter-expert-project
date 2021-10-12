@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/episode.dart';
 import 'package:equatable/equatable.dart';
 
 class EpisodeModel extends Equatable {
@@ -51,6 +52,21 @@ class EpisodeModel extends Equatable {
     _data['vote_average'] = voteAverage;
     _data['vote_count'] = voteCount;
     return _data;
+  }
+
+  Episode toEntity() {
+    return Episode(
+      airDate: airDate,
+      episodeNumber: episodeNumber,
+      id: id,
+      name: name,
+      overview: overview,
+      productionCode: productionCode,
+      seasonNumber: seasonNumber,
+      stillPath: stillPath,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
+    );
   }
 
   @override

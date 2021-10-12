@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
+import 'package:ditonton/data/models/episode_model.dart';
 import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/data/models/season_detail_model.dart';
 import 'package:ditonton/data/models/season_model.dart';
 import 'package:ditonton/data/models/tv_detail_model.dart';
 import 'package:ditonton/data/models/tv_model.dart';
@@ -350,6 +352,49 @@ void main() {
       // assert
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
+    });
+  });
+
+  group('get season detail', () {
+    final tvId = 1;
+    final seasonNumber = 1;
+
+    final tEpisodeModel = EpisodeModel(
+      airDate: '2011-04-17',
+      episodeNumber: 1,
+      id: 1,
+      name: 'Winter Is Coming',
+      overview:
+          'Jon Arryn, the Hand of the King, is dead. King Robert Baratheon plans to ask his oldest friend, Eddard Stark, to take Jon\'s place. Across the sea, Viserys Targaryen plans to wed his sister to a nomadic warlord in exchange for an army.',
+      seasonNumber: seasonNumber,
+      stillPath: '/bxVxZiskqu5S8ypuO6jL9JrVLuz.jpg',
+      productionCode: '',
+      voteAverage: 9.1,
+      voteCount: 1803,
+    );
+
+    final tSeasonDetail = SeasonDetailModel(
+      airDate: '2011-04-17',
+      episodes: [tEpisodeModel],
+      id: 1,
+      name: 'Season 1',
+      overview: '',
+      posterPath: '/bxVxZiskqu5S8ypuO6jL9JrVLuz.jpg',
+      seasonNumber: seasonNumber,
+    );
+
+    test('should return Tvs season detail', () async {
+      // arrange
+      when(mockRemoteDataSource.getTvSeasonDetail(tvId, seasonNumber))
+          .thenAnswer((_) async => tSeasonDetail);
+      // act
+      final result = await repository.getTvSeasonDetail(tvId, seasonNumber);
+      // assert
+
+      result.fold(
+        (l) => expect(l, isNull),
+        (r) => expect(r, equals(tSeasonDetail.toEntity())),
+      );
     });
   });
 

@@ -14,7 +14,7 @@ abstract class TvRemoteDataSource {
   Future<TvDetailModel> getTvDetail(int id);
   Future<List<TvModel>> getTvRecommendations(int id);
   Future<List<TvModel>> searchTvs(String query);
-  Future<SeasonDetail> getTvSeasonDetail(int id, int seasonNumber);
+  Future<SeasonDetailModel> getTvSeasonDetail(int id, int seasonNumber);
 }
 
 class TvRemoteDataSourceImpl implements TvRemoteDataSource {
@@ -97,12 +97,12 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
   }
 
   @override
-  Future<SeasonDetail> getTvSeasonDetail(int id, int seasonNumber) async {
+  Future<SeasonDetailModel> getTvSeasonDetail(int id, int seasonNumber) async {
     final response = await client
         .get(Uri.parse('$BASE_URL/tv/$id/season/$seasonNumber?$API_KEY'));
 
     if (response.statusCode == 200) {
-      return SeasonDetail.fromJson(json.decode(response.body));
+      return SeasonDetailModel.fromJson(json.decode(response.body));
     } else {
       throw ServerException();
     }

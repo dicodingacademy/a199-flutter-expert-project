@@ -1,8 +1,9 @@
 import 'package:ditonton/data/models/episode_model.dart';
+import 'package:ditonton/domain/entities/season_detail.dart';
 import 'package:equatable/equatable.dart';
 
-class SeasonDetail extends Equatable {
-  SeasonDetail({
+class SeasonDetailModel extends Equatable {
+  SeasonDetailModel({
     required this.airDate,
     required this.episodes,
     required this.name,
@@ -20,7 +21,7 @@ class SeasonDetail extends Equatable {
   late final String? posterPath;
   late final int seasonNumber;
 
-  SeasonDetail.fromJson(Map<String, dynamic> json) {
+  SeasonDetailModel.fromJson(Map<String, dynamic> json) {
     airDate = json['air_date'];
     episodes = List.from(json['episodes'])
         .map((e) => EpisodeModel.fromJson(e))
@@ -42,6 +43,18 @@ class SeasonDetail extends Equatable {
     _data['poster_path'] = posterPath;
     _data['season_number'] = seasonNumber;
     return _data;
+  }
+
+  SeasonDetail toEntity() {
+    return SeasonDetail(
+      airDate: airDate,
+      episodes: episodes.map((e) => e.toEntity()).toList(),
+      name: name,
+      overview: overview,
+      id: id,
+      posterPath: posterPath,
+      seasonNumber: seasonNumber,
+    );
   }
 
   @override

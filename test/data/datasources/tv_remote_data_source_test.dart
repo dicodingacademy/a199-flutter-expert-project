@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:ditonton/data/datasources/tv_remote_data_source.dart';
 import 'package:ditonton/common/exception.dart';
+import 'package:ditonton/data/models/episode_model.dart';
+import 'package:ditonton/data/models/season_detail_model.dart';
 import 'package:ditonton/data/models/tv_detail_model.dart';
 import 'package:ditonton/data/models/tv_response.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -32,7 +34,7 @@ void main() {
     test('should return list of Tv Model when the response code is 200',
         () async {
       // arrange
-      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY')))
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/on_the_air?$API_KEY')))
           .thenAnswer(
         (_) async => http.Response(
             readJson('dummy_data/now_playing_tv.json'), 200,
@@ -51,7 +53,7 @@ void main() {
         'should throw a ServerException when the response code is 404 or other',
         () async {
       // arrange
-      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY')))
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/on_the_air?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
       final call = dataSource.getNowPlayingTvs();
@@ -207,6 +209,59 @@ void main() {
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
       final call = dataSource.searchTvs(tQuery);
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
+    });
+  });
+
+  group('get tv season detail', () {
+    final tvId = 1;
+    final seasonNumber = 1;
+
+    final tEpisodeModel = EpisodeModel(
+      airDate: '2011-04-17',
+      episodeNumber: 1,
+      id: 1,
+      name: 'Winter Is Coming',
+      overview:
+          'Jon Arryn, the Hand of the King, is dead. King Robert Baratheon plans to ask his oldest friend, Eddard Stark, to take Jon\'s place. Across the sea, Viserys Targaryen plans to wed his sister to a nomadic warlord in exchange for an army.',
+      seasonNumber: seasonNumber,
+      stillPath: '/bxVxZiskqu5S8ypuO6jL9JrVLuz.jpg',
+      productionCode: '',
+      voteAverage: 9.1,
+      voteCount: 1803,
+    );
+
+    final tSeasonDetail = SeasonDetailModel(
+      airDate: '2011-04-17',
+      episodes: [tEpisodeModel],
+      id: 1,
+      name: 'Season 1',
+      overview: '',
+      posterPath: '/bxVxZiskqu5S8ypuO6jL9JrVLuz.jpg',
+      seasonNumber: seasonNumber,
+    );
+
+    test('should get tv season detail', () async {
+      // arrange
+      when(mockHttpClient.get(
+              Uri.parse('$BASE_URL/tv/$tvId/season/$seasonNumber?$API_KEY')))
+          .thenAnswer((_) async =>
+              http.Response(readJson('dummy_data/season_detail.json'), 200));
+      // act
+      final result = await dataSource.getTvSeasonDetail(tvId, seasonNumber);
+      // assert
+      expect(result, equals(tSeasonDetail));
+    });
+
+    test('should throw Server Exception when the response code is 404 or other',
+        () async {
+      // arrange
+      when(mockHttpClient.get(
+              Uri.parse('$BASE_URL/tv/$tvId/season/$seasonNumber?$API_KEY')))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
+      // act
+      final call = dataSource.getTvSeasonDetail(tvId, seasonNumber);
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });
