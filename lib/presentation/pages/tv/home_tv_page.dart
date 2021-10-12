@@ -5,6 +5,7 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/presentation/pages/tv/popular_tvs_page.dart';
 import 'package:ditonton/presentation/pages/tv/top_rated_tvs_page.dart';
 import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
+import 'package:ditonton/presentation/pages/tv/tv_search_page.dart';
 import 'package:ditonton/presentation/provider/tv/tv_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/app_drawer.dart';
 import 'package:flutter/cupertino.dart';
@@ -38,7 +39,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
         actions: [
           IconButton(
             onPressed: () {
-              // Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              Navigator.pushNamed(context, TvSearchPage.ROUTE_NAME);
             },
             icon: Icon(Icons.search),
           )
