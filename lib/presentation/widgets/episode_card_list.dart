@@ -22,7 +22,9 @@ class EpisodeCard extends StatelessWidget {
                   'https://image.tmdb.org/t/p/w500${episode.stillPath}',
                 ),
                 colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.4), BlendMode.dstATop),
+                  Colors.black.withOpacity(0.4),
+                  BlendMode.dstATop,
+                ),
                 fit: BoxFit.cover,
               )
             : null,

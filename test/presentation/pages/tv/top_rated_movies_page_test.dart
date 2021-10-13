@@ -1,25 +1,27 @@
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/presentation/pages/tv/top_rated_tvs_page.dart';
-import 'package:ditonton/presentation/provider/tv/top_rated_tvs_notifier.dart';
+import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/presentation/pages/movie/top_rated_movies_page.dart';
+import 'package:ditonton/presentation/provider/movie/top_rated_movies_notifier.dart';
+import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
-import 'top_rated_tvs_page_test.mocks.dart';
+import '../../../dummy_data/dummy_objects.dart';
+import 'top_rated_movies_page_test.mocks.dart';
 
-@GenerateMocks([TopRatedTvsNotifier])
+@GenerateMocks([TopRatedMoviesNotifier])
 void main() {
-  late MockTopRatedTvsNotifier mockNotifier;
+  late MockTopRatedMoviesNotifier mockNotifier;
 
   setUp(() {
-    mockNotifier = MockTopRatedTvsNotifier();
+    mockNotifier = MockTopRatedMoviesNotifier();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TopRatedTvsNotifier>.value(
+    return ChangeNotifierProvider<TopRatedMoviesNotifier>.value(
       value: mockNotifier,
       child: MaterialApp(
         home: body,
@@ -34,7 +36,7 @@ void main() {
     final progressFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
 
-    await tester.pumpWidget(_makeTestableWidget(TopRatedTvsPage()));
+    await tester.pumpWidget(_makeTestableWidget(TopRatedMoviesPage()));
 
     expect(centerFinder, findsOneWidget);
     expect(progressFinder, findsOneWidget);
@@ -43,13 +45,14 @@ void main() {
   testWidgets('Page should display when data is loaded',
       (WidgetTester tester) async {
     when(mockNotifier.state).thenReturn(RequestState.Loaded);
-    when(mockNotifier.tvs).thenReturn(<Tv>[]);
+    when(mockNotifier.movies).thenReturn(<Movie>[testMovie]);
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(_makeTestableWidget(TopRatedTvsPage()));
+    await tester.pumpWidget(_makeTestableWidget(TopRatedMoviesPage()));
 
     expect(listViewFinder, findsOneWidget);
+    expect(find.byType(MovieCard), findsOneWidget);
   });
 
   testWidgets('Page should display text with message when Error',
@@ -59,7 +62,7 @@ void main() {
 
     final textFinder = find.byKey(Key('error_message'));
 
-    await tester.pumpWidget(_makeTestableWidget(TopRatedTvsPage()));
+    await tester.pumpWidget(_makeTestableWidget(TopRatedMoviesPage()));
 
     expect(textFinder, findsOneWidget);
   });

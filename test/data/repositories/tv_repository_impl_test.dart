@@ -234,7 +234,7 @@ void main() {
         () async {
       // arrange
       when(mockRemoteDataSource.getTvDetail(tId))
-          .thenAnswer((_) async => tTvDetail);
+          .thenAnswer((_) async => TvDetailModel.fromJson(tTvDetail.toJson()));
       // act
       final result = await repository.getTvDetail(tId);
       // assert
@@ -386,15 +386,38 @@ void main() {
     test('should return Tvs season detail', () async {
       // arrange
       when(mockRemoteDataSource.getTvSeasonDetail(tvId, seasonNumber))
-          .thenAnswer((_) async => tSeasonDetail);
+          .thenAnswer(
+              (_) async => SeasonDetailModel.fromJson(tSeasonDetail.toJson()));
       // act
       final result = await repository.getTvSeasonDetail(tvId, seasonNumber);
       // assert
+      expect(result, Right(tSeasonDetail.toEntity()));
+    });
 
-      result.fold(
-        (l) => expect(l, isNull),
-        (r) => expect(r, equals(tSeasonDetail.toEntity())),
-      );
+    test(
+        'should return Server Failure when the call to remote data source is unsuccessful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTvSeasonDetail(tvId, seasonNumber))
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.getTvSeasonDetail(tvId, seasonNumber);
+      // assert
+      verify(mockRemoteDataSource.getTvSeasonDetail(tvId, seasonNumber));
+      expect(result, equals(Left(ServerFailure(''))));
+    });
+
+    test(
+        'should return ConnectionFailure when device is not connected to the internet',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTvSeasonDetail(tvId, seasonNumber))
+          .thenThrow(SocketException('Failed to connect to the network'));
+      // act
+      final result = await repository.getTvSeasonDetail(tvId, seasonNumber);
+      // assert
+      expect(
+          result, Left(ConnectionFailure('Failed to connect to the network')));
     });
   });
 

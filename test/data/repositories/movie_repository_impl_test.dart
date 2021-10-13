@@ -220,7 +220,8 @@ void main() {
         () async {
       // arrange
       when(mockRemoteDataSource.getMovieDetail(tId))
-          .thenAnswer((_) async => tMovieResponse);
+          .thenAnswer(
+          (_) async => MovieDetailResponse.fromJson(tMovieResponse.toJson()));
       // act
       final result = await repository.getMovieDetail(tId);
       // assert

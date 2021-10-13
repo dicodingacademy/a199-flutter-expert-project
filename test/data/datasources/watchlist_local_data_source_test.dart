@@ -99,4 +99,17 @@ void main() {
       expect(result, [testMovieTable]);
     });
   });
+
+  group('get watchlist tvs', () {
+    test('should return list of TvTable from database', () async {
+      // arrange
+      when(mockDatabaseHelper.getWatchlistTvs())
+          .thenAnswer((_) async => [testTvMap]);
+      // act
+      final result = await dataSource.getWatchlistTvs();
+      // assert
+      expect(result, [testTvTable]);
+      expect(result.first.toJson(), isA<Map<String, dynamic>>());
+    });
+  });
 }
