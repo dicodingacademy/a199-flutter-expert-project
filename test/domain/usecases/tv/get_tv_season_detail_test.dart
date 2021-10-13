@@ -1,19 +1,19 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/data/models/episode_model.dart';
 import 'package:ditonton/data/models/season_detail_model.dart';
-import 'package:ditonton/domain/usecases/tv/get_tv_session_detail.dart';
+import 'package:ditonton/domain/usecases/tv/get_tv_season_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetTvSessionDetail usecase;
+  late GetTvSeasonDetail usecase;
   late MockTvRepository mockTvRepository;
 
   setUp(() {
     mockTvRepository = MockTvRepository();
-    usecase = GetTvSessionDetail(mockTvRepository);
+    usecase = GetTvSeasonDetail(mockTvRepository);
   });
 
   final tId = 1;

@@ -22,7 +22,7 @@ class EpisodeModel extends Equatable {
   late final String overview;
   late final String productionCode;
   late final int seasonNumber;
-  late final String stillPath;
+  late final String? stillPath;
   late final double? voteAverage;
   late final int voteCount;
 

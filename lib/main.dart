@@ -11,6 +11,7 @@ import 'package:ditonton/presentation/pages/tv/popular_tvs_page.dart';
 import 'package:ditonton/presentation/pages/tv/top_rated_tvs_page.dart';
 import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv/tv_search_page.dart';
+import 'package:ditonton/presentation/pages/tv/tv_season_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv/watchlist_tvs_page.dart';
 import 'package:ditonton/presentation/provider/movie/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie/movie_list_notifier.dart';
@@ -23,6 +24,7 @@ import 'package:ditonton/presentation/provider/tv/top_rated_tvs_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_list_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_search_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_session_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/watchlist_tv_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +78,9 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<PopularTvsNotifier>(),
         ),
         ChangeNotifierProvider(
+          create: (_) => di.locator<TvSeasonDetailNotifier>(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvNotifier>(),
         ),
       ],
@@ -124,6 +129,14 @@ class MyApp extends StatelessWidget {
               );
             case TvSearchPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => TvSearchPage());
+            case TvSeasonDetailPage.ROUTE_NAME:
+              final id = (settings.arguments! as Map)['id'];
+              final seasonNumber = (settings.arguments! as Map)['seasonNumber'];
+
+              return MaterialPageRoute(
+                builder: (_) =>
+                    TvSeasonDetailPage(id: id, seasonNumber: seasonNumber),
+              );
             case WatchlistTvsPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => WatchlistTvsPage());
 
