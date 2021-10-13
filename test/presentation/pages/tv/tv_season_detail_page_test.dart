@@ -71,4 +71,27 @@ void main() {
     expect(
         find.byType(EpisodeCard), findsNWidgets(tSeasonDetail.episodes.length));
   });
+
+  testWidgets('Should display loading when loading', (tester) async {
+    when(mockNotifier.state).thenReturn(RequestState.Loading);
+
+    await tester.pumpWidget(_makeTestableWidget(TvSeasonDetailPage(
+      id: tvId,
+      seasonNumber: seasonNumber,
+    )));
+
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  });
+
+  testWidgets('Should display error when error', (tester) async {
+    when(mockNotifier.state).thenReturn(RequestState.Error);
+    when(mockNotifier.message).thenReturn("Error");
+
+    await tester.pumpWidget(_makeTestableWidget(TvSeasonDetailPage(
+      id: tvId,
+      seasonNumber: seasonNumber,
+    )));
+
+    expect(find.text("Error"), findsOneWidget);
+  });
 }
