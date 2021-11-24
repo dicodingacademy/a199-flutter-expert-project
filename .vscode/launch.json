@@ -1,0 +1,58 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "a199-flutter-expert-project",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "a199-flutter-expert-project (profile mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "core",
+      "cwd": "modules\\core",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "core (profile mode)",
+      "cwd": "modules\\core",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "movie",
+      "cwd": "modules\\movie",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "movie (profile mode)",
+      "cwd": "modules\\movie",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "tv",
+      "cwd": "modules\\tv",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "tv (profile mode)",
+      "cwd": "modules\\tv",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    }
+  ]
+}

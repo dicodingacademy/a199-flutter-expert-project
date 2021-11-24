@@ -21,12 +21,12 @@ export './domain/usecases/get_popular_movies.dart';
 export './domain/usecases/get_top_rated_movies.dart';
 export './domain/usecases/search_movies.dart';
 
-export './presentation/provider/movie_detail_notifier.dart';
-export './presentation/provider/movie_list_notifier.dart';
-export './presentation/provider/movie_search_notifier.dart';
-export './presentation/provider/popular_movies_notifier.dart';
-export './presentation/provider/top_rated_movies_notifier.dart';
-export './presentation/provider/watchlist_movie_notifier.dart';
+export './presentation/cubit/list/movie_list_cubit.dart';
+export './presentation/cubit/detail/movie_detail_cubit.dart';
+export './presentation/cubit/search/movie_search_cubit.dart';
+export './presentation/cubit/popular/movie_popular_cubit.dart';
+export './presentation/cubit/top_rated/movie_top_rated_cubit.dart';
+export './presentation/cubit/watchlist/movie_watchlist_cubit.dart';
 
 export './presentation/pages/home_movie_page.dart';
 export './presentation/pages/movie_detail_page.dart';
