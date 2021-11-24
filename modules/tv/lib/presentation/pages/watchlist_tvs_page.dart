@@ -1,8 +1,9 @@
 import 'package:core/common/state_enum.dart';
-import 'package:tv/presentation/provider/watchlist_tv_notifier.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tv/tv.dart';
 
 class WatchlistTvsPage extends StatefulWidget {
   @override
@@ -13,9 +14,8 @@ class _WatchlistTvsPageState extends State<WatchlistTvsPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<WatchlistTvNotifier>(context, listen: false)
-            .fetchWatchlistTvs());
+    Future.microtask(() => Provider.of<TvWatchlistCubit>(context, listen: false)
+        .fetchWatchlistTvs());
   }
 
   @override
@@ -26,8 +26,8 @@ class _WatchlistTvsPageState extends State<WatchlistTvsPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<WatchlistTvNotifier>(
-          builder: (context, data, child) {
+        child: BlocBuilder<TvWatchlistCubit, TvWatchlistState>(
+          builder: (context, data) {
             if (data.watchlistState == RequestState.Loading) {
               return Center(
                 child: CircularProgressIndicator(),

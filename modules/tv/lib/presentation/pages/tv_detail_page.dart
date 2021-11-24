@@ -1,11 +1,9 @@
+import 'package:tv/tv.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/common/constants.dart';
 import 'package:core/common/routes.dart';
 import 'package:core/domain/entities/genre.dart';
-import 'package:tv/domain/entities/tv.dart';
-import 'package:tv/domain/entities/tv_detail.dart';
-import 'package:tv/presentation/pages/tv_season_detail_page.dart';
-import 'package:tv/presentation/provider/tv_detail_notifier.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core/common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -25,9 +23,9 @@ class _TvDetailPageState extends State<TvDetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<TvDetailNotifier>(context, listen: false)
+      Provider.of<TvDetailCubit>(context, listen: false)
           .fetchTvDetail(widget.id);
-      Provider.of<TvDetailNotifier>(context, listen: false)
+      Provider.of<TvDetailCubit>(context, listen: false)
           .loadWatchlistStatus(widget.id);
     });
   }
@@ -35,23 +33,23 @@ class _TvDetailPageState extends State<TvDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<TvDetailNotifier>(
-        builder: (context, provider, child) {
-          if (provider.tvState == RequestState.Loading) {
+      body: BlocBuilder<TvDetailCubit, TvDetailState>(
+        builder: (context, state) {
+          if (state.tvState == RequestState.Loading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (provider.tvState == RequestState.Loaded) {
-            final tv = provider.tv;
+          } else if (state.tvState == RequestState.Loaded) {
+            final tv = state.tv!;
             return SafeArea(
               child: DetailContent(
                 tv,
-                provider.tvRecommendations,
-                provider.isAddedToWatchlist,
+                state.tvRecommendations,
+                state.isAddedToWatchlist,
               ),
             );
           } else {
-            return Text(provider.message);
+            return Text(state.message);
           }
         },
       ),
@@ -109,25 +107,26 @@ class DetailContent extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () async {
                                 if (!isAddedWatchlist) {
-                                  await Provider.of<TvDetailNotifier>(context,
+                                  await Provider.of<TvDetailCubit>(context,
                                           listen: false)
                                       .addWatchlist(tv);
                                 } else {
-                                  await Provider.of<TvDetailNotifier>(context,
+                                  await Provider.of<TvDetailCubit>(context,
                                           listen: false)
                                       .removeFromWatchlist(tv);
                                 }
 
-                                final message = Provider.of<TvDetailNotifier>(
+                                final message = Provider.of<TvDetailCubit>(
                                         context,
                                         listen: false)
+                                    .state
                                     .watchlistMessage;
 
                                 if (message ==
-                                        TvDetailNotifier
+                                        TvDetailCubit
                                             .watchlistAddSuccessMessage ||
                                     message ==
-                                        TvDetailNotifier
+                                        TvDetailCubit
                                             .watchlistRemoveSuccessMessage) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(content: Text(message)));
@@ -316,9 +315,9 @@ class DetailContent extends StatelessWidget {
     );
   }
 
-  Consumer<TvDetailNotifier> _buildRecommendations() {
-    return Consumer<TvDetailNotifier>(
-      builder: (context, data, child) {
+  BlocBuilder<TvDetailCubit, TvDetailState> _buildRecommendations() {
+    return BlocBuilder<TvDetailCubit, TvDetailState>(
+      builder: (context, data) {
         if (data.recommendationState == RequestState.Loading) {
           return Center(
             child: CircularProgressIndicator(),

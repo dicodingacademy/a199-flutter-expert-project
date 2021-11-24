@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/common/constants.dart';
 import 'package:core/common/state_enum.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv/domain/entities/season_detail.dart';
-import 'package:tv/presentation/provider/tv_session_detail_notifier.dart';
+import 'package:tv/tv.dart';
 import 'package:tv/presentation/widgets/episode_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +26,7 @@ class _TvSeasonDetailPageState extends State<TvSeasonDetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<TvSeasonDetailNotifier>(context, listen: false)
+      Provider.of<TvSeasonDetailCubit>(context, listen: false)
           .fetchTvSeasonDetail(widget.id, widget.seasonNumber);
     });
   }
@@ -34,8 +35,8 @@ class _TvSeasonDetailPageState extends State<TvSeasonDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Consumer<TvSeasonDetailNotifier>(
-          builder: (context, data, child) {
+        child: BlocBuilder<TvSeasonDetailCubit, TvSeasonDetailState>(
+          builder: (context, data) {
             switch (data.state) {
               case RequestState.Empty:
                 return Text(data.message);
@@ -44,7 +45,7 @@ class _TvSeasonDetailPageState extends State<TvSeasonDetailPage> {
                   child: CircularProgressIndicator(),
                 );
               case RequestState.Loaded:
-                return SeasonEpisodes(seasonDetail: data.seasonDetail);
+                return SeasonEpisodes(seasonDetail: data.seasonDetail!);
               case RequestState.Error:
                 return Text(data.message);
             }

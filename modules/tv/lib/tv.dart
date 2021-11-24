@@ -22,13 +22,13 @@ export './domain/usecases/get_top_rated_tvs.dart';
 export './domain/usecases/get_tv_season_detail.dart';
 export './domain/usecases/search_tvs.dart';
 
-export './presentation/provider/tv_detail_notifier.dart';
-export './presentation/provider/tv_list_notifier.dart';
-export './presentation/provider/tv_search_notifier.dart';
-export './presentation/provider/tv_session_detail_notifier.dart';
-export './presentation/provider/popular_tvs_notifier.dart';
-export './presentation/provider/top_rated_tvs_notifier.dart';
-export './presentation/provider/watchlist_tv_notifier.dart';
+export './presentation/cubit/detail/tv_detail_cubit.dart';
+export './presentation/cubit/list/tv_list_cubit.dart';
+export './presentation/cubit/search/tv_search_cubit.dart';
+export './presentation/cubit/season_detail/tv_season_detail_cubit.dart';
+export './presentation/cubit/popular/tv_popular_cubit.dart';
+export './presentation/cubit/top_rated/tv_top_rated_cubit.dart';
+export './presentation/cubit/watchlist/tv_watchlist_cubit.dart';
 
 export './presentation/pages/home_tv_page.dart';
 export './presentation/pages/tv_detail_page.dart';

@@ -48,14 +48,14 @@ void init() {
 
   // tvs provider
   locator.registerFactory(
-    () => TvListNotifier(
+    () => TvListCubit(
       getNowPlayingTvs: locator(),
       getPopularTvs: locator(),
       getTopRatedTvs: locator(),
     ),
   );
   locator.registerFactory(
-    () => TvDetailNotifier(
+    () => TvDetailCubit(
       getTvDetail: locator(),
       getTvRecommendations: locator(),
       getWatchListStatus: locator(),
@@ -64,27 +64,27 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => TvSearchNotifier(
+    () => TvSearchCubit(
       searchTvs: locator(),
     ),
   );
   locator.registerFactory(
-    () => PopularTvsNotifier(
+    () => TvPopularCubit(
       locator(),
     ),
   );
   locator.registerFactory(
-    () => TopRatedTvsNotifier(
+    () => TvTopRatedCubit(
       getTopRatedTvs: locator(),
     ),
   );
   locator.registerFactory(
-    () => TvSeasonDetailNotifier(
+    () => TvSeasonDetailCubit(
       getTvSeasonDetail: locator(),
     ),
   );
   locator.registerFactory(
-    () => WatchlistTvNotifier(
+    () => TvWatchlistCubit(
       getWatchlistTvs: locator(),
     ),
   );

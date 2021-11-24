@@ -1,15 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv/domain/entities/tv.dart';
-import 'package:tv/presentation/pages/popular_tvs_page.dart';
-import 'package:tv/presentation/pages/top_rated_tvs_page.dart';
-import 'package:tv/presentation/pages/tv_detail_page.dart';
-import 'package:tv/presentation/pages/tv_search_page.dart';
-import 'package:tv/presentation/provider/tv_list_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:tv/tv.dart';
 
 class HomeTvPage extends StatefulWidget {
   @override
@@ -20,7 +17,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => Provider.of<TvListNotifier>(context, listen: false)
+    Future.microtask(() => Provider.of<TvListCubit>(context, listen: false)
       ..fetchNowPlayingTvs()
       ..fetchPopularTvs()
       ..fetchTopRatedTvs());
@@ -51,7 +48,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
                 'Now Playing',
                 style: kHeading6,
               ),
-              Consumer<TvListNotifier>(builder: (context, data, child) {
+              BlocBuilder<TvListCubit, TvListState>(builder: (context, data) {
                 final state = data.nowPlayingState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -67,7 +64,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
                 title: 'Popular',
                 onTap: () => Navigator.pushNamed(context, TV_POPULAR_ROUTE),
               ),
-              Consumer<TvListNotifier>(builder: (context, data, child) {
+              BlocBuilder<TvListCubit, TvListState>(builder: (context, data) {
                 final state = data.popularTvsState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -83,7 +80,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
                 title: 'Top Rated',
                 onTap: () => Navigator.pushNamed(context, TV_TOP_RATED_ROUTE),
               ),
-              Consumer<TvListNotifier>(builder: (context, data, child) {
+              BlocBuilder<TvListCubit, TvListState>(builder: (context, data) {
                 final state = data.topRatedTvsState;
                 if (state == RequestState.Loading) {
                   return Center(

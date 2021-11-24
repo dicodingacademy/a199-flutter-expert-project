@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
-import 'package:tv/presentation/provider/tv_search_notifier.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tv/tv.dart';
 import 'package:tv/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,7 @@ class TvSearchPage extends StatelessWidget {
           children: [
             TextField(
               onSubmitted: (query) {
-                Provider.of<TvSearchNotifier>(context, listen: false)
+                Provider.of<TvSearchCubit>(context, listen: false)
                     .fetchTvSearch(query);
               },
               decoration: InputDecoration(
@@ -33,8 +34,8 @@ class TvSearchPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<TvSearchNotifier>(
-              builder: (context, data, child) {
+            BlocBuilder<TvSearchCubit, TvSearchState>(
+              builder: (context, data) {
                 if (data.state == RequestState.Loading) {
                   return Center(
                     child: CircularProgressIndicator(),
