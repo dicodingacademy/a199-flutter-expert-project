@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:ditonton/common/ssl_pinning.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,9 @@ import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:tv/tv.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SSLPinning.init();
   di.init();
   runApp(MyApp());
 }

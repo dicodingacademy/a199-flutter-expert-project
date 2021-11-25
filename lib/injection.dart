@@ -1,6 +1,6 @@
 import 'package:core/data/datasources/db/database_helper.dart';
 import 'package:core/data/datasources/watchlist_local_data_source.dart';
-import 'package:http/http.dart' as http;
+import 'package:ditonton/common/ssl_pinning.dart';
 import 'package:get_it/get_it.dart';
 import 'package:movie/movie.dart';
 import 'package:tv/tv.dart';
@@ -140,5 +140,5 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton(() => SSLPinning.client);
 }
