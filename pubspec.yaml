@@ -27,6 +27,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   dartz: ^0.10.0-nullsafety.2
   equatable: ^2.0.2
+  firebase_analytics: ^8.3.4
+  firebase_core: ^1.10.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.0
