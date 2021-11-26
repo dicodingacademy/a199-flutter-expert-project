@@ -1,0 +1,24 @@
+{
+  "air_date": "2011-04-17",
+  "episodes": [
+    {
+      "air_date": "2011-04-17",
+      "episode_number": 1,
+      "id": 1,
+      "name": "Winter Is Coming",
+      "overview":
+          "Jon Arryn, the Hand of the King, is dead. King Robert Baratheon plans to ask his oldest friend, Eddard Stark, to take Jon's place. Across the sea, Viserys Targaryen plans to wed his sister to a nomadic warlord in exchange for an army.",
+      "production_code": "",
+      "season_number": 1,
+      "show_id": 1,
+      "still_path": "/bxVxZiskqu5S8ypuO6jL9JrVLuz.jpg",
+      "vote_average": 9.1,
+      "vote_count": 1803
+    }
+  ],
+  "id": 1,
+  "name": "Season 1",
+  "overview": "",
+  "poster_path": "/bxVxZiskqu5S8ypuO6jL9JrVLuz.jpg",
+  "season_number": 1
+}
