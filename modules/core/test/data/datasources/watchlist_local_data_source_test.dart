@@ -1,11 +1,14 @@
-import 'package:ditonton/common/exception.dart';
-import 'package:ditonton/data/datasources/watchlist_local_data_source.dart';
+import 'package:core/common/exception.dart';
+import 'package:core/data/datasources/db/database_helper.dart';
+import 'package:core/data/datasources/watchlist_local_data_source.dart';
+import 'package:core/data/models/watchlist_table.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../dummy_data/dummy_objects.dart';
-import '../../helpers/test_helper.mocks.dart';
+import 'watchlist_local_data_source_test.mocks.dart';
 
+@GenerateMocks([DatabaseHelper])
 void main() {
   late WatchlistLocalDataSourceImpl dataSource;
   late MockDatabaseHelper mockDatabaseHelper;
@@ -15,6 +18,34 @@ void main() {
     dataSource =
         WatchlistLocalDataSourceImpl(databaseHelper: mockDatabaseHelper);
   });
+
+  final testMovieTable = WatchlistTable(
+    id: 1,
+    title: 'title',
+    posterPath: 'posterPath',
+    overview: 'overview',
+  );
+
+  final testMovieMap = {
+    'id': 1,
+    'overview': 'overview',
+    'posterPath': 'posterPath',
+    'title': 'title',
+  };
+
+  final testTvTable = WatchlistTable(
+    id: 2,
+    title: 'test',
+    posterPath: 'test',
+    overview: 'test',
+  );
+
+  final testTvMap = {
+    'id': 2,
+    'overview': 'test',
+    'posterPath': 'test',
+    'title': 'test',
+  };
 
   group('save watchlist', () {
     test('should return success message when insert to database is success',
