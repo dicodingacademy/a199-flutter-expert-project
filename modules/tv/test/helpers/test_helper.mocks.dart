@@ -201,8 +201,8 @@ class MockWatchlistLocalDataSource extends _i1.Mock
               returnValue: Future<_i15.WatchlistTable?>.value())
           as _i7.Future<_i15.WatchlistTable?>);
   @override
-  _i7.Future<List<_i15.WatchlistTable>> getWatchlistMovies() =>
-      (super.noSuchMethod(Invocation.method(#getWatchlistMovies, []),
+  _i7.Future<List<_i15.WatchlistTable>> getWatchlistTvList() =>
+      (super.noSuchMethod(Invocation.method(#getWatchlistTvList, []),
               returnValue: Future<List<_i15.WatchlistTable>>.value(
                   <_i15.WatchlistTable>[]))
           as _i7.Future<List<_i15.WatchlistTable>>);
@@ -243,8 +243,8 @@ class MockDatabaseHelper extends _i1.Mock implements _i16.DatabaseHelper {
               returnValue: Future<Map<String, dynamic>?>.value())
           as _i7.Future<Map<String, dynamic>?>);
   @override
-  _i7.Future<List<Map<String, dynamic>>> getWatchlistMovies() =>
-      (super.noSuchMethod(Invocation.method(#getWatchlistMovies, []),
+  _i7.Future<List<Map<String, dynamic>>> getWatchlistTvList() =>
+      (super.noSuchMethod(Invocation.method(#getWatchlistTvList, []),
               returnValue: Future<List<Map<String, dynamic>>>.value(
                   <Map<String, dynamic>>[]))
           as _i7.Future<List<Map<String, dynamic>>>);

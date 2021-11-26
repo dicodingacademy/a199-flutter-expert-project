@@ -14,7 +14,7 @@ class TvSeasonDetailCubit extends Cubit<TvSeasonDetailState> {
     required this.getTvSeasonDetail,
   }) : super(TvSeasonDetailState.initial());
 
-  void fetchTvSeasonDetail(int id, int seasonNumber) async {
+  Future<void> fetchTvSeasonDetail(int id, int seasonNumber) async {
     emit(state.copyWith(state: RequestState.Loading));
 
     final detailResult = await getTvSeasonDetail.execute(id, seasonNumber);

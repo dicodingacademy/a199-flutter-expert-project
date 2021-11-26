@@ -29,7 +29,7 @@ class _WatchlistTvsPageState extends State<WatchlistTvsPage> {
         child: BlocBuilder<TvWatchlistCubit, TvWatchlistState>(
           builder: (context, data) {
             if (data.watchlistState == RequestState.Loading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (data.watchlistState == RequestState.Loaded) {
@@ -42,7 +42,7 @@ class _WatchlistTvsPageState extends State<WatchlistTvsPage> {
               );
             } else {
               return Center(
-                key: Key('error_message'),
+                key: const Key('error_message'),
                 child: Text(data.message),
               );
             }

@@ -75,7 +75,6 @@ class DetailContent extends StatelessWidget {
           placeholder: (context, url) => Center(
             child: CircularProgressIndicator(),
           ),
-          errorWidget: (context, url, error) => Icon(Icons.error),
         ),
         Container(
           margin: const EdgeInsets.only(top: 48 + 8),
@@ -239,14 +238,11 @@ class DetailContent extends StatelessWidget {
             padding: const EdgeInsets.all(4.0),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  TV_SEASON_DETAIL_ROUTE,
-                  arguments: {
-                    'id': tv.id,
-                    'seasonNumber': season.seasonNumber,
-                  },
-                );
+                Navigator.pushNamed(context, TV_SEASON_DETAIL_ROUTE,
+                    arguments: {
+                      'id': tv.id,
+                      'seasonNumber': season.seasonNumber
+                    });
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(

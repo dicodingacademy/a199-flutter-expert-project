@@ -21,7 +21,7 @@ void main() {
     originalName: 'ドラえもん',
   );
 
-  final tMovie = Tv(
+  final tTv = Tv(
     id: 1,
     name: 'Doraemon',
     posterPath:
@@ -42,6 +42,6 @@ void main() {
   test('should be a subclass of Tv entity', () async {
     final result = tTvModel.toEntity();
 
-    expect(result, tMovie);
+    expect(result, tTv);
   });
 }
