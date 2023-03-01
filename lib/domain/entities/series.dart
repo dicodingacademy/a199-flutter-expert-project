@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 class Series extends Equatable {
     Series({
       required this.backdropPath,
-      required this.firstAirDate,
       required this.genreIds,
       required this.id,
       required this.name,
@@ -25,7 +24,6 @@ class Series extends Equatable {
     });
 
     String? backdropPath;
-    DateTime? firstAirDate;
     List<int>? genreIds;
     int id;
     String? name;
@@ -41,7 +39,6 @@ class Series extends Equatable {
     @override
     List<Object?> get props => [
       backdropPath,
-      firstAirDate,
       genreIds,
       id,
       name,

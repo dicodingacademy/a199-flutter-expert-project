@@ -15,9 +15,9 @@ class SeriesDetailNotifier extends ChangeNotifier {
 
   final GetSeriesDetail getSeriesDetail;
   final GetSeriesRecommendations getSeriesRecommendations;
-  final GetWatchListStatus getWatchListStatus;
-  final SaveWatchlist saveWatchlist;
-  final RemoveWatchlist removeWatchlist;
+  final GetWatchListStatusSeries getWatchListStatus;
+  final SaveWatchlistSeries saveWatchlist;
+  final RemoveWatchlistSeries removeWatchlist;
 
   SeriesDetailNotifier({
     required this.getSeriesDetail,

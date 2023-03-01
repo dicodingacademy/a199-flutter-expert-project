@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:ditonton/data/models/movie_table.dart';
 import 'package:sqflite/sqflite.dart';
+import 'dart:developer';
 
 class DatabaseHelper {
   static DatabaseHelper? _databaseHelper;
@@ -20,7 +21,7 @@ class DatabaseHelper {
     return _database;
   }
 
-  static const String _tblWatchlist = 'watchlist';
+  static const String _tblWatchlist = 'movie_watchlist';
 
   Future<Database> _initDb() async {
     final path = await getDatabasesPath();
@@ -31,6 +32,7 @@ class DatabaseHelper {
   }
 
   void _onCreate(Database db, int version) async {
+    log('initBD movie');
     await db.execute('''
       CREATE TABLE  $_tblWatchlist (
         id INTEGER PRIMARY KEY,

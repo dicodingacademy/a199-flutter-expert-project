@@ -92,10 +92,10 @@ class SeriesRepositoryImpl implements SeriesRepository {
   }
 
   @override
-  Future<Either<Failure, String>> saveWatchlist(SeriesDetail movie) async {
+  Future<Either<Failure, String>> saveWatchlist(SeriesDetail series) async {
     try {
       final result =
-          await localDataSource.insertWatchlist(SeriesTable.fromEntity(movie));
+          await localDataSource.insertWatchlist(SeriesTable.fromEntity(series));
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
@@ -105,10 +105,10 @@ class SeriesRepositoryImpl implements SeriesRepository {
   }
 
   @override
-  Future<Either<Failure, String>> removeWatchlist(SeriesDetail movie) async {
+  Future<Either<Failure, String>> removeWatchlist(SeriesDetail series) async {
     try {
       final result =
-          await localDataSource.removeWatchlist(SeriesTable.fromEntity(movie));
+          await localDataSource.removeWatchlist(SeriesTable.fromEntity(series));
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
