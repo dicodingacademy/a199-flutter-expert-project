@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 
 class SeasonModel extends Equatable {
   SeasonModel({
-    required this.airDate,
     required this.episodeCount,
     required this.id,
     required this.name,
@@ -12,7 +11,6 @@ class SeasonModel extends Equatable {
     required this.seasonNumber,
   });
 
-  final DateTime airDate;
   final int episodeCount;
   final int id;
   final String name;
@@ -21,7 +19,6 @@ class SeasonModel extends Equatable {
   final int seasonNumber;
 
   factory SeasonModel.fromJson(Map<String, dynamic> json) => SeasonModel(
-    airDate: DateTime.parse(json["air_date"]),
     episodeCount: json["episode_count"],
     id: json["id"],
     name: json["name"],
@@ -31,7 +28,6 @@ class SeasonModel extends Equatable {
   );
 
   Map<String, dynamic> toJson() => {
-    "air_date": airDate.toIso8601String(),
     "episode_count": episodeCount,
     "id": id,
     "name": name,
@@ -42,7 +38,6 @@ class SeasonModel extends Equatable {
 
   Season toEntity() {
     return Season(
-      airDate: this.airDate,
       episodeCount: this.episodeCount,
       id: this.id,
       name: this.name,
@@ -54,7 +49,6 @@ class SeasonModel extends Equatable {
 
   @override
   List<Object?> get props => [
-    airDate,
     episodeCount,
     id,
     name,

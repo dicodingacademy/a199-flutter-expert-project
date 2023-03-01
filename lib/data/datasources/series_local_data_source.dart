@@ -1,5 +1,5 @@
 import 'package:ditonton/common/exception.dart';
-import 'package:ditonton/data/datasources/db/series_database_helper.dart';
+import 'package:ditonton/data/datasources/db/database_helper.dart';
 import 'package:ditonton/data/models/series_table.dart';
 
 abstract class SeriesLocalDataSource {
@@ -10,14 +10,14 @@ abstract class SeriesLocalDataSource {
 }
 
 class SeriesLocalDataSourceImpl implements SeriesLocalDataSource {
-  final SeriesDatabaseHelper databaseHelper;
+  final DatabaseHelper databaseHelper;
 
   SeriesLocalDataSourceImpl({required this.databaseHelper});
 
   @override
   Future<String> insertWatchlist(SeriesTable series) async {
     try {
-      await databaseHelper.insertWatchlist(series);
+      await databaseHelper.insertWatchlistSeries(series);
       return 'Added to Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());
@@ -27,7 +27,7 @@ class SeriesLocalDataSourceImpl implements SeriesLocalDataSource {
   @override
   Future<String> removeWatchlist(SeriesTable series) async {
     try {
-      await databaseHelper.removeWatchlist(series);
+      await databaseHelper.removeWatchlistSeries(series);
       return 'Removed from Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());
