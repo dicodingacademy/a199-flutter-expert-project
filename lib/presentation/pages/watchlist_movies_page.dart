@@ -63,6 +63,11 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
                     return Center(
                       child: CircularProgressIndicator(),
                     );
+                  } else if(data.watchlistMovies.isEmpty) {
+                    return Center(
+                      key: Key('empty_message'),
+                      child: Text('No movies in watchlist'),
+                    );
                   } else if (data.watchlistState == RequestState.Loaded) {
                     return ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
@@ -93,6 +98,11 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
                   if (data.watchlistState == RequestState.Loading) {
                     return Center(
                       child: CircularProgressIndicator(),
+                    );
+                  } else if(data.watchlistSeries.isEmpty) {
+                    return Center(
+                      key: Key('empty_message'),
+                      child: Text('No series in watchlist'),
                     );
                   } else if (data.watchlistState == RequestState.Loaded) {
                     return ListView.builder(

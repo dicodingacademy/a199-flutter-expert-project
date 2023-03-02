@@ -15,7 +15,7 @@ class WatchlistSeriesNotifier extends ChangeNotifier {
 
   WatchlistSeriesNotifier({required this.getWatchlistSeries});
 
-  final GetWatchlistSeries getWatchlistSeries;
+  late GetWatchlistSeries getWatchlistSeries;
 
   Future<void> fetchWatchlistSeries() async {
     _watchlistState = RequestState.Loading;
