@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-03-02 10:29:14</td>
+            <td class="headerValue">2023-03-02 16:50:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -65,22 +65,22 @@
 <a name="3"><span class="lineNum">       3 </span>            : abstract class Failure extends Equatable {</a>
 <a name="4"><span class="lineNum">       4 </span>            :   final String message;</a>
 <a name="5"><span class="lineNum">       5 </span>            : </a>
-<a name="6"><span class="lineNum">       6 </span><span class="lineCov">          7 :   Failure(this.message);</span></a>
+<a name="6"><span class="lineNum">       6 </span><span class="lineCov">         14 :   Failure(this.message);</span></a>
 <a name="7"><span class="lineNum">       7 </span>            : </a>
-<a name="8"><span class="lineNum">       8 </span><span class="lineCov">          1 :   @override</span></a>
-<a name="9"><span class="lineNum">       9 </span><span class="lineCov">          2 :   List&lt;Object&gt; get props =&gt; [message];</span></a>
+<a name="8"><span class="lineNum">       8 </span><span class="lineCov">          2 :   @override</span></a>
+<a name="9"><span class="lineNum">       9 </span><span class="lineCov">          4 :   List&lt;Object&gt; get props =&gt; [message];</span></a>
 <a name="10"><span class="lineNum">      10 </span>            : }</a>
 <a name="11"><span class="lineNum">      11 </span>            : </a>
 <a name="12"><span class="lineNum">      12 </span>            : class ServerFailure extends Failure {</a>
-<a name="13"><span class="lineNum">      13 </span><span class="lineCov">         12 :   ServerFailure(String message) : super(message);</span></a>
+<a name="13"><span class="lineNum">      13 </span><span class="lineCov">         24 :   ServerFailure(String message) : super(message);</span></a>
 <a name="14"><span class="lineNum">      14 </span>            : }</a>
 <a name="15"><span class="lineNum">      15 </span>            : </a>
 <a name="16"><span class="lineNum">      16 </span>            : class ConnectionFailure extends Failure {</a>
-<a name="17"><span class="lineNum">      17 </span><span class="lineCov">          2 :   ConnectionFailure(String message) : super(message);</span></a>
+<a name="17"><span class="lineNum">      17 </span><span class="lineCov">          4 :   ConnectionFailure(String message) : super(message);</span></a>
 <a name="18"><span class="lineNum">      18 </span>            : }</a>
 <a name="19"><span class="lineNum">      19 </span>            : </a>
 <a name="20"><span class="lineNum">      20 </span>            : class DatabaseFailure extends Failure {</a>
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">          6 :   DatabaseFailure(String message) : super(message);</span></a>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">         10 :   DatabaseFailure(String message) : super(message);</span></a>
 <a name="22"><span class="lineNum">      22 </span>            : }</a>
 </pre>
       </td>
