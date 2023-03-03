@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">54</td>
             <td class="headerCovTableEntry">58</td>
-            <td class="headerCovTableEntryHi">93.1 %</td>
+            <td class="headerCovTableEntry">58</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-03-02 16:50:33</td>
+            <td class="headerValue">2023-03-03 10:47:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -158,9 +158,9 @@
 <a name="96"><span class="lineNum">      96 </span>            :     try {</a>
 <a name="97"><span class="lineNum">      97 </span>            :       final result =</a>
 <a name="98"><span class="lineNum">      98 </span><span class="lineCov">          3 :           await localDataSource.insertWatchlist(SeriesTable.fromEntity(series));</span></a>
-<a name="99"><span class="lineNum">      99 </span><span class="lineNoCov">          0 :       return Right(result);</span></a>
+<a name="99"><span class="lineNum">      99 </span><span class="lineCov">          1 :       return Right(result);</span></a>
 <a name="100"><span class="lineNum">     100 </span><span class="lineCov">          1 :     } on DatabaseException catch (e) {</span></a>
-<a name="101"><span class="lineNum">     101 </span><span class="lineNoCov">          0 :       return Left(DatabaseFailure(e.message));</span></a>
+<a name="101"><span class="lineNum">     101 </span><span class="lineCov">          3 :       return Left(DatabaseFailure(e.message));</span></a>
 <a name="102"><span class="lineNum">     102 </span>            :     } catch (e) {</a>
 <a name="103"><span class="lineNum">     103 </span>            :       throw e;</a>
 <a name="104"><span class="lineNum">     104 </span>            :     }</a>
@@ -171,9 +171,9 @@
 <a name="109"><span class="lineNum">     109 </span>            :     try {</a>
 <a name="110"><span class="lineNum">     110 </span>            :       final result =</a>
 <a name="111"><span class="lineNum">     111 </span><span class="lineCov">          3 :           await localDataSource.removeWatchlist(SeriesTable.fromEntity(series));</span></a>
-<a name="112"><span class="lineNum">     112 </span><span class="lineNoCov">          0 :       return Right(result);</span></a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineCov">          1 :       return Right(result);</span></a>
 <a name="113"><span class="lineNum">     113 </span><span class="lineCov">          1 :     } on DatabaseException catch (e) {</span></a>
-<a name="114"><span class="lineNum">     114 </span><span class="lineNoCov">          0 :       return Left(DatabaseFailure(e.message));</span></a>
+<a name="114"><span class="lineNum">     114 </span><span class="lineCov">          3 :       return Left(DatabaseFailure(e.message));</span></a>
 <a name="115"><span class="lineNum">     115 </span>            :     }</a>
 <a name="116"><span class="lineNum">     116 </span>            :   }</a>
 <a name="117"><span class="lineNum">     117 </span>            : </a>

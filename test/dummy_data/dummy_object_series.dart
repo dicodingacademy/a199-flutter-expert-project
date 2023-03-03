@@ -48,8 +48,8 @@ final testSeriesDetail = SeriesDetail(
 
 final testWatchlistSeries = Series.watchlist(
   id: 100088,
-  name: 'title',
-  posterPath: 'posterPath',
+  name: 'The Last of Us',
+  posterPath: '/aUQKIpZZ31KWbpdHMCmaV76u78T.jpg',
   overview: 'Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.',
 );
 
@@ -61,8 +61,8 @@ final testSeriesTable = SeriesTable(
 );
 
 final testSeriesMap = {
-  'id': 1,
-  'overview': 'overview',
-  'posterPath': 'posterPath',
-  'title': 'title',
+  "id": 100088,
+  "overview": "Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.",
+  "posterPath": "/aUQKIpZZ31KWbpdHMCmaV76u78T.jpg",
+  "name": "The Last of Us",
 };

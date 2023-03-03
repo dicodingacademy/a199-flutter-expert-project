@@ -5,6 +5,7 @@ import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/data/models/season_model.dart';
 import 'package:ditonton/data/models/series_detail_model.dart';
 import 'package:ditonton/data/models/series_model.dart';
+import 'package:ditonton/data/models/series_table.dart';
 import 'package:ditonton/data/repositories/series_repository_impl.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
@@ -344,7 +345,7 @@ void main() {
   group('save watchlist', () {
     test('should return success message when saving successful', () async {
       // arrange
-      when(mockLocalDataSource.insertWatchlist(testSeriesTable))
+      when(mockLocalDataSource.insertWatchlist(SeriesTable.fromEntity(testSeriesDetail)))
           .thenAnswer((_) async => 'Added to Watchlist');
       // act
       final result = await repository.saveWatchlist(testSeriesDetail);
@@ -354,7 +355,7 @@ void main() {
 
     test('should return DatabaseFailure when saving unsuccessful', () async {
       // arrange
-      when(mockLocalDataSource.insertWatchlist(testSeriesTable))
+      when(mockLocalDataSource.insertWatchlist(SeriesTable.fromEntity(testSeriesDetail)))
           .thenThrow(DatabaseException('Failed to add watchlist'));
       // act
       final result = await repository.saveWatchlist(testSeriesDetail);
@@ -366,7 +367,7 @@ void main() {
   group('remove watchlist', () {
     test('should return success message when remove successful', () async {
       // arrange
-      when(mockLocalDataSource.removeWatchlist(testSeriesTable))
+      when(mockLocalDataSource.removeWatchlist(SeriesTable.fromEntity(testSeriesDetail)))
           .thenAnswer((_) async => 'Removed from watchlist');
       // act
       final result = await repository.removeWatchlist(testSeriesDetail);
@@ -376,7 +377,7 @@ void main() {
 
     test('should return DatabaseFailure when remove unsuccessful', () async {
       // arrange
-      when(mockLocalDataSource.removeWatchlist(testSeriesTable))
+      when(mockLocalDataSource.removeWatchlist(SeriesTable.fromEntity(testSeriesDetail)))
           .thenThrow(DatabaseException('Failed to remove watchlist'));
       // act
       final result = await repository.removeWatchlist(testSeriesDetail);

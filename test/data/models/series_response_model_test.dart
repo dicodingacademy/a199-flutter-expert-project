@@ -8,18 +8,18 @@ import '../../json_reader.dart';
 
 void main() {
   final tSeriesModel = SeriesModel(
-    backdropPath: '/path.jpg',
-    genreIds: [1, 2, 3],
-    id: 1,
-    name: 'originalTitle',
-    originCountry: ['originCountry'],
-    originalLanguage: 'originalLanguage',
-    originalName: 'originalName',
-    overview: 'overview',
-    popularity: 1,
-    posterPath: '/path.jpg',
-    voteAverage: 1,
-    voteCount: 1,
+    backdropPath: "/uDgy6hyPd82kOHh6I95FLtLnj6p.jpg",
+    genreIds: [18, 10759],
+    id: 100088,
+    name: "The Last of Us",
+    originCountry: ["US"],
+    originalLanguage: "en",
+    originalName: "The Last of Us",
+    overview: "Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.",
+    popularity: 4703.161,
+    posterPath: "/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg",
+    voteAverage: 8.8,
+    voteCount: 2179,
   );
   final tSeriesResponseModel =
       SeriesResponse(seriesList: <SeriesModel>[tSeriesModel]);
@@ -45,18 +45,23 @@ void main() {
       final expectedJsonMap = {
         "results": [
           {
-            'backdropPath': '/path.jpg',
-            'genreIds': [1, 2, 3],
-            'id': 1,
-            'name': 'originalTitle',
-            'originCountry': ['originCountry'],
-            'originalLanguage': 'originalLanguage',
-            'originalName': 'originalName',
-            'overview': 'overview',
-            'popularity': 1,
-            'posterPath': '/path.jpg',
-            'voteAverage': 1,
-            'voteCount': 1,
+            "backdrop_path": "/uDgy6hyPd82kOHh6I95FLtLnj6p.jpg",
+            "genre_ids": [
+                18,
+                10759
+            ],
+            "id": 100088,
+            "name": "The Last of Us",
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "The Last of Us",
+            "overview": "Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.",
+            "popularity": 4703.161,
+            "poster_path": "/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg",
+            "vote_average": 8.8,
+            "vote_count": 2179
           }
         ],
       };
