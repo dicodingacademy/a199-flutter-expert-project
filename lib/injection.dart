@@ -37,6 +37,7 @@ import 'package:ditonton/presentation/provider/series_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/series_list_notifier.dart';
 import 'package:ditonton/presentation/provider/series_search_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_series_notifier.dart';
+import 'package:ditonton/presentation/provider/now_playing_series_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_series_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_series_notifier.dart';
 import 'package:http/http.dart' as http;
@@ -103,6 +104,11 @@ void init() {
   locator.registerFactory(
     () => SeriesSearchNotifier(
       searchSeries: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => NowPlayingSeriesNotifier(
+      locator(),
     ),
   );
   locator.registerFactory(

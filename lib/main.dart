@@ -11,6 +11,7 @@ import 'package:ditonton/presentation/pages/series_detail_page.dart';
 import 'package:ditonton/presentation/pages/home_series_page.dart';
 import 'package:ditonton/presentation/pages/popular_series_page.dart';
 import 'package:ditonton/presentation/pages/search_series_page.dart';
+import 'package:ditonton/presentation/pages/now_playing_series_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_series_page.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
@@ -22,6 +23,7 @@ import 'package:ditonton/presentation/provider/series_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/series_list_notifier.dart';
 import 'package:ditonton/presentation/provider/series_search_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_series_notifier.dart';
+import 'package:ditonton/presentation/provider/now_playing_series_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_series_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_series_notifier.dart';
 import 'package:flutter/cupertino.dart';
@@ -68,6 +70,9 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<SeriesSearchNotifier>(),
         ),
         ChangeNotifierProvider(
+          create: (_) => di.locator<NowPlayingSeriesNotifier>(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => di.locator<TopRatedSeriesNotifier>(),
         ),
         ChangeNotifierProvider(
@@ -108,6 +113,8 @@ class MyApp extends StatelessWidget {
 
             case HomeSeriesPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => HomeSeriesPage());
+            case NowPlayingSeriesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => NowPlayingSeriesPage());
             case PopularSeriesPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => PopularSeriesPage());
             case TopRatedSeriesPage.ROUTE_NAME:
