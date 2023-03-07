@@ -41,6 +41,8 @@ dependencies:
   flutter_bloc: ^8.0.0
   bloc_test: ^9.0.0
   internet_connection_checker: ^1.0.0
+  firebase_core: ^2.4.0
+  firebase_crashlytics: ^3.0.6
 
 dev_dependencies:
   mockito: ^5.0.8
