@@ -40,6 +40,7 @@ dependencies:
   path_provider: ^2.0.2
   flutter_bloc: ^8.0.0
   bloc_test: ^9.0.0
+  internet_connection_checker: ^1.0.0
 
 dev_dependencies:
   mockito: ^5.0.8

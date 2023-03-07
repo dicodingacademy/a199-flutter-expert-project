@@ -13,19 +13,6 @@ import 'package:ditonton/presentation/pages/popular_series_page.dart';
 import 'package:ditonton/presentation/pages/search_series_page.dart';
 import 'package:ditonton/presentation/pages/now_playing_series_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_series_page.dart';
-// import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
-// import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-// import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
-// import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
-// import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
-// import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
-// import 'package:ditonton/presentation/provider/series_detail_notifier.dart';
-// import 'package:ditonton/presentation/provider/series_list_notifier.dart';
-// import 'package:ditonton/presentation/provider/series_search_notifier.dart';
-// import 'package:ditonton/presentation/provider/popular_series_notifier.dart';
-// import 'package:ditonton/presentation/provider/now_playing_series_notifier.dart';
-// import 'package:ditonton/presentation/provider/top_rated_series_notifier.dart';
-// import 'package:ditonton/presentation/provider/watchlist_series_notifier.dart';
 import 'package:ditonton/presentation/bloc/movie_detail/movie_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/search_movie/search_movie_bloc.dart';
 import 'package:ditonton/presentation/bloc/now_playing_movie/now_playing_movie_bloc.dart';
@@ -45,8 +32,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ditonton/common/ssl_pinning/ssl_pinning.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SSLPinning.init();
   di.init();
   runApp(MyApp());
 }
