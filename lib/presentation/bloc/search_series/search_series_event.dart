@@ -3,10 +3,10 @@ part of 'search_series_bloc.dart';
 
 abstract class SearchSeriesEvent extends Equatable{}
 
-class OnQueryTvChange extends SearchSeriesEvent{
+class OnQuerySeriesChange extends SearchSeriesEvent{
   final String query;
 
-  OnQueryTvChange(this.query);
+  OnQuerySeriesChange(this.query);
   @override
   List<Object?> get props => [query];
 

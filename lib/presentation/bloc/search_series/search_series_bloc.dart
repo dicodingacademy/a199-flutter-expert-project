@@ -13,10 +13,10 @@ class SearchSeriesBloc extends Bloc<SearchSeriesEvent, SearchSeriesState> {
   final SearchSeries _searchSeries;
 
   SearchSeriesBloc(this._searchSeries) : super(SearchSeriesInitial()) {
-    on<OnQueryTvChange>(_onQueryTvChange);
+    on<OnQuerySeriesChange>(_onQueryTvChange);
   }
 
-  FutureOr<void> _onQueryTvChange(OnQueryTvChange event, Emitter<SearchSeriesState> emit) async {
+  FutureOr<void> _onQueryTvChange(OnQuerySeriesChange event, Emitter<SearchSeriesState> emit) async {
     final query = event.query;
     emit(SearchSeriesEmpty());
     final result = await _searchSeries.execute(query);

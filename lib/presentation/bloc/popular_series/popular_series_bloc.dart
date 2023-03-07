@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:ditonton/domain/entities/series.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +17,6 @@ class PopularSeriesBloc extends Bloc<PopularSeriesEvent, PopularSeriesState> {
 
   FutureOr<void> _onPopularSeries(
       OnPopularSeries event, Emitter<PopularSeriesState> emit) async {
-    emit(PopularSeriesLoading());
     final result = await _getPopularSeries.execute();
 
     result.fold((failure) {

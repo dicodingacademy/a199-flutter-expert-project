@@ -27,7 +27,7 @@ class _SearchSeriesPageState extends State<SearchSeriesPage> {
           children: [
             TextField(
               onChanged: (query) {
-                context.read<SearchSeriesBloc>().add(OnQueryTvChange(query));
+                context.read<SearchSeriesBloc>().add(OnQuerySeriesChange(query));
               },
               decoration: InputDecoration(
                 hintText: 'Search title',
