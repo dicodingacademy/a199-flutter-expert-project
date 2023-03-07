@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/genre.dart';
-import 'package:ditonton/domain/entities/series.dart';
 import 'package:ditonton/domain/entities/series_detail.dart';
-import 'package:ditonton/presentation/provider/series_detail_notifier.dart';
-import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/bloc/series_detail/series_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/series_recommendation/series_recommendation_bloc.dart';
+import 'package:ditonton/presentation/bloc/series_watchlist/series_watchlist_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SeriesDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/series/detail';
@@ -24,54 +24,63 @@ class _SeriesDetailPageState extends State<SeriesDetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<SeriesDetailNotifier>(context, listen: false)
-          .fetchSeriesDetail(widget.id);
-      Provider.of<SeriesDetailNotifier>(context, listen: false)
-          .loadWatchlistStatus(widget.id);
+      context.read<SeriesDetailBloc>().add(OnSeriesDetail(widget.id));
+      context
+          .read<SeriesRecommendationBloc>()
+          .add(OnSeriesRecommendation(widget.id));
+      context.read<SeriesWatchListBloc>().add(SeriesWatchListStatus(widget.id));
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final isSeriesAddedToWatchList =
+        context.select<SeriesWatchListBloc, bool>((bloc) {
+      if (bloc.state is SeriesWatchListIsAdded) {
+        return (bloc.state as SeriesWatchListIsAdded).isAdded;
+      }
+      return false;
+    });
     return Scaffold(
-      body: Consumer<SeriesDetailNotifier>(
-        builder: (context, provider, child) {
-          if (provider.seriesState == RequestState.Loading) {
-            return Center(
+      body: BlocBuilder<SeriesDetailBloc, SeriesDetailState>(
+        builder: (context, state) {
+          if (state is SeriesDetailLoading) {
+            return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (provider.seriesState == RequestState.Loaded) {
-            final series = provider.series;
-            return SafeArea(
-              child: DetailContent(
-                series,
-                provider.seriesRecommendations,
-                provider.isAddedToWatchlist,
-              ),
-            );
+          } else if (state is SeriesDetailHasData) {
+            final series = state.result;
+            return DetailContent(
+                series: series, isAddedWatchlist: isSeriesAddedToWatchList);
           } else {
-            return Text(provider.message);
+            return const Center(
+              child: Text("Failed"),
+            );
           }
-        },
-      ),
+        }
+      )
     );
   }
 }
 
-class DetailContent extends StatelessWidget {
+class DetailContent extends StatefulWidget {
   final SeriesDetail series;
-  final List<Series> recommendations;
-  final bool isAddedWatchlist;
+  bool isAddedWatchlist;
 
-  DetailContent(this.series, this.recommendations, this.isAddedWatchlist);
+  DetailContent({super.key, required this.series, required this.isAddedWatchlist});
 
+  @override
+  State<DetailContent> createState() => _DetailContentState();
+}
+
+class _DetailContentState extends State<DetailContent> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: 'https://image.tmdb.org/t/p/w500${series.posterPath}',
+          imageUrl: 'https://image.tmdb.org/t/p/w500${widget.series.posterPath}',
           width: screenWidth,
           placeholder: (context, url) => Center(
             child: CircularProgressIndicator(),
@@ -102,36 +111,32 @@ class DetailContent extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              series.name,
+                              widget.series.name,
                               style: kHeading5,
                             ),
                             ElevatedButton(
                               onPressed: () async {
-                                if (!isAddedWatchlist) {
-                                  await Provider.of<SeriesDetailNotifier>(
-                                          context,
-                                          listen: false)
-                                      .addWatchlist(series);
+                                if (!widget.isAddedWatchlist) {
+                                  context
+                                    .read<SeriesWatchListBloc>()
+                                    .add(SeriesWatchListAdd(widget.series));
                                 } else {
-                                  await Provider.of<SeriesDetailNotifier>(
-                                          context,
-                                          listen: false)
-                                      .removeFromWatchlist(series);
+                                  context
+                                    .read<SeriesWatchListBloc>()
+                                    .add(SeriesWatchListRemove(widget.series));
                                 }
+                                final state = BlocProvider.of<SeriesWatchListBloc>(context).state;
+                                String message = '';
 
-                                final message =
-                                    Provider.of<SeriesDetailNotifier>(context,
-                                            listen: false)
-                                        .watchlistMessage;
-
-                                if (message ==
-                                        SeriesDetailNotifier
-                                            .watchlistAddSuccessMessage ||
-                                    message ==
-                                        SeriesDetailNotifier
-                                            .watchlistRemoveSuccessMessage) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(message)));
+                                if (state is SeriesWatchListIsAdded) {
+                                  final isAdded = state.isAdded;
+                                  message = isAdded == false ? "Added to wishlist" : "Removed from wishlist";
+                                } else {
+                                  message = !widget.isAddedWatchlist ? "Added to wishlist" : "Removed from wishlist";
+                                }
+                                if (message == "Added to wishlist" || message == "Removed from wishlist") {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(content: Text(message)));
                                 } else {
                                   showDialog(
                                       context: context,
@@ -141,11 +146,14 @@ class DetailContent extends StatelessWidget {
                                         );
                                       });
                                 }
+                                setState(() {
+                                  widget.isAddedWatchlist = !widget.isAddedWatchlist;
+                                });
                               },
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  isAddedWatchlist
+                                  widget.isAddedWatchlist
                                       ? Icon(Icons.check)
                                       : Icon(Icons.add),
                                   Text('Watchlist'),
@@ -153,18 +161,18 @@ class DetailContent extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              _showGenres(series.genres),
+                              _showGenres(widget.series.genres),
                             ),
                             Text(
-                              series.numberOfSeasons.toString() +
+                              widget.series.numberOfSeasons.toString() +
                                 ' Seasons, ' +
-                                series.numberOfEpisodes.toString() +
+                                widget.series.numberOfEpisodes.toString() +
                                 ' Episodes',
                             ),
                             Row(
                               children: [
                                 RatingBarIndicator(
-                                  rating: series.voteAverage / 2,
+                                  rating: widget.series.voteAverage / 2,
                                   itemCount: 5,
                                   itemBuilder: (context, index) => Icon(
                                     Icons.star,
@@ -172,7 +180,7 @@ class DetailContent extends StatelessWidget {
                                   ),
                                   itemSize: 24,
                                 ),
-                                Text('${series.voteAverage}')
+                                Text('${widget.series.voteAverage}')
                               ],
                             ),
                             SizedBox(height: 16),
@@ -181,69 +189,65 @@ class DetailContent extends StatelessWidget {
                               style: kHeading6,
                             ),
                             Text(
-                              series.overview,
+                              widget.series.overview,
                             ),
                             SizedBox(height: 16),
                             Text(
                               'Recommendations',
                               style: kHeading6,
                             ),
-                            Consumer<SeriesDetailNotifier>(
-                              builder: (context, data, child) {
-                                if (data.recommendationState ==
-                                    RequestState.Loading) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                } else if (data.recommendationState ==
-                                    RequestState.Error) {
-                                  return Text(data.message);
-                                } else if (data.recommendationState ==
-                                    RequestState.Loaded) {
-                                  return Container(
-                                    height: 150,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        final series = recommendations[index];
-                                        return Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: InkWell(
-                                            onTap: () {
-                                              Navigator.pushReplacementNamed(
-                                                context,
-                                                SeriesDetailPage.ROUTE_NAME,
-                                                arguments: series.id,
-                                              );
-                                            },
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(8),
-                                              ),
-                                              child: CachedNetworkImage(
-                                                imageUrl:
-                                                    'https://image.tmdb.org/t/p/w500${series.posterPath}',
-                                                placeholder: (context, url) =>
-                                                    Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Icon(Icons.error),
+                            BlocBuilder<SeriesRecommendationBloc, SeriesRecommendationState>(
+                              builder: (context, state) {
+                            if (state is SeriesRecommendationLoading) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else if (state is SeriesRecommendationHasData) {
+                              final movieRecommendation = state.result;
+                              return Container(
+                                margin: const EdgeInsets.only(top: 8),
+                                height: 150,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) {
+                                    final recommendation = movieRecommendation[index];
+                                    return Padding(
+                                      padding: const EdgeInsets.all(4),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.pushReplacementNamed(
+                                              context, SeriesDetailPage.ROUTE_NAME,
+                                              arguments: recommendation.id);
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              const BorderRadius.all(Radius.circular(8)),
+                                          child: CachedNetworkImage(
+                                            imageUrl:
+                                                "$BASE_IMAGE_URL${recommendation.posterPath}",
+                                            placeholder: (context, url) => const Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 8, horizontal: 12),
+                                              child: Center(
+                                                child: CircularProgressIndicator(),
                                               ),
                                             ),
+                                            errorWidget: (context, url, error) =>
+                                                const Icon(Icons.error),
                                           ),
-                                        );
-                                      },
-                                      itemCount: recommendations.length,
-                                    ),
-                                  );
-                                } else {
-                                  return Container();
-                                }
-                              },
-                            ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  itemCount: movieRecommendation.length,
+                                ),
+                              );
+                            } else if (state is SeriesRecommendationEmpty) {
+                              return const Text("-");
+                            } else {
+                              return const Text("Failed");
+                            }
+                          }),
                           ],
                         ),
                       ),
@@ -294,15 +298,4 @@ class DetailContent extends StatelessWidget {
 
     return result.substring(0, result.length - 2);
   }
-
-  // String _showDuration(int runtime) {
-  //   final int hours = runtime ~/ 60;
-  //   final int minutes = runtime % 60;
-
-  //   if (hours > 0) {
-  //     return '${hours}h ${minutes}m';
-  //   } else {
-  //     return '${minutes}m';
-  //   }
-  // }
 }

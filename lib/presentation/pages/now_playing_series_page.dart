@@ -1,8 +1,7 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/now_playing_series_notifier.dart';
+import 'package:ditonton/presentation/bloc/now_playing_series/now_playing_series_bloc.dart';
 import 'package:ditonton/presentation/widgets/series_card_list.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NowPlayingSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = '/series/now_playing';
@@ -16,8 +15,8 @@ class _NowPlayingSeriesPageState extends State<NowPlayingSeriesPage> {
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<NowPlayingSeriesNotifier>(context, listen: false)
-            .fetchNowPlayingSeries());
+        BlocProvider.of<NowPlayingSeriesBloc>(context, listen: false)
+            .add(OnNowPlayingSeries()));
   }
 
   @override
@@ -28,24 +27,27 @@ class _NowPlayingSeriesPageState extends State<NowPlayingSeriesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<NowPlayingSeriesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
-              return Center(
+        child: BlocBuilder<NowPlayingSeriesBloc, NowPlayingSeriesState>(
+          key: const Key('top_rated_movies'),
+          builder: (context, state) {
+            if (state is NowPlayingSeriesLoading) {
+              return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.Loaded) {
+            } else if (state is NowPlayingSeriesHasData) {
+              final movies = state.result;
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final series = data.series[index];
-                  return SeriesCard(series);
+                  final movie = movies[index];
+
+                  return SeriesCard(movie);
                 },
-                itemCount: data.series.length,
+                itemCount: movies.length,
               );
             } else {
               return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
+                key: const Key('error_message'),
+                child: Text((state as NowPlayingSeriesError).message),
               );
             }
           },

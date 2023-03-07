@@ -16,11 +16,11 @@ class NowPlayingMovieBloc
   NowPlayingMovieBloc(
     this._getNowPlayingMovies,
   ) : super(NowPlayingMovieEmpty()) {
-    on<OnNowPlayingMovieCalled>(_onNowPlayingMovieCalled);
+    on<OnNowPlayingMovie>(_onNowPlayingMovie);
   }
 
-  FutureOr<void> _onNowPlayingMovieCalled(
-      OnNowPlayingMovieCalled event, Emitter<NowPlayingMovieState> emit) async {
+  FutureOr<void> _onNowPlayingMovie(
+      OnNowPlayingMovie event, Emitter<NowPlayingMovieState> emit) async {
     emit(NowPlayingMovieLoading());
 
     final result = await _getNowPlayingMovies.execute();

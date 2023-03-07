@@ -1,8 +1,7 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/popular_series_notifier.dart';
+import 'package:ditonton/presentation/bloc/popular_series/popular_series_bloc.dart';
 import 'package:ditonton/presentation/widgets/series_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PopularSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = '/series/popular';
@@ -16,8 +15,8 @@ class _PopularSeriesPageState extends State<PopularSeriesPage> {
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<PopularSeriesNotifier>(context, listen: false)
-            .fetchPopularSeries());
+        BlocProvider.of<PopularSeriesBloc>(context, listen: false)
+            .add(OnPopularSeries()));
   }
 
   @override
@@ -28,24 +27,27 @@ class _PopularSeriesPageState extends State<PopularSeriesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularSeriesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
-              return Center(
+        child: BlocBuilder<PopularSeriesBloc, PopularSeriesState>(
+          key: const Key('top_rated_movies'),
+          builder: (context, state) {
+            if (state is PopularSeriesLoading) {
+              return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.Loaded) {
+            } else if (state is PopularSeriesHasData) {
+              final movies = state.result;
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final series = data.series[index];
-                  return SeriesCard(series);
+                  final movie = movies[index];
+
+                  return SeriesCard(movie);
                 },
-                itemCount: data.series.length,
+                itemCount: movies.length,
               );
             } else {
               return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
+                key: const Key('error_message'),
+                child: Text((state as PopularSeriesError).message),
               );
             }
           },
