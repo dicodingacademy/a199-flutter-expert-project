@@ -1,6 +1,7 @@
-import 'package:equatable/equatable.dart';
+import 'package:ditonton/domain/entities/base_item_entity.dart';
 
-class Movie extends Equatable {
+// ignore: must_be_immutable
+class Movie extends BaseItemEntity {
   Movie({
     required this.adult,
     required this.backdropPath,
@@ -15,14 +16,25 @@ class Movie extends Equatable {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
-  });
+  }) : super(
+          title: title ?? '',
+          overview: overview ?? '',
+          posterPath: posterPath ?? '',
+          id: id,
+          type: ItemType.movie,
+        );
 
   Movie.watchlist({
     required this.id,
-    required this.overview,
-    required this.posterPath,
-    required this.title,
-  });
+    this.overview,
+    this.posterPath,
+    this.title,
+  }) : super(
+            id: id,
+            overview: overview ?? '',
+            posterPath: posterPath ?? '',
+            title: title ?? '',
+            type: ItemType.movie);
 
   bool? adult;
   String? backdropPath;
