@@ -1,7 +1,7 @@
+import 'package:ditonton/domain/entities/base_item_detail.dart';
 import 'package:ditonton/domain/entities/genre.dart';
-import 'package:equatable/equatable.dart';
 
-class MovieDetail extends Equatable {
+class MovieDetail extends BaseItemDetail {
   MovieDetail({
     required this.adult,
     required this.backdropPath,
@@ -15,7 +15,15 @@ class MovieDetail extends Equatable {
     required this.title,
     required this.voteAverage,
     required this.voteCount,
-  });
+  }) : super(
+          title: title,
+          overview: overview,
+          posterPath: posterPath,
+          id: id,
+          genres: genres,
+          runtime: runtime,
+          voteAverage: voteAverage,
+        );
 
   final bool adult;
   final String? backdropPath;
@@ -31,9 +39,9 @@ class MovieDetail extends Equatable {
   final int voteCount;
 
   @override
-  List<Object?> get props => [
+  List<Object> get props => [
         adult,
-        backdropPath,
+        backdropPath ?? '',
         genres,
         id,
         originalTitle,
