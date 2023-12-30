@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
+import 'package:ditonton/domain/entities/base_item_entity.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 
 class BaseItemDetail extends Equatable {
@@ -11,6 +12,7 @@ class BaseItemDetail extends Equatable {
   final List<Genre> genres;
   final int runtime;
   final double voteAverage;
+  final ItemType category;
 
   BaseItemDetail({
     required this.title,
@@ -20,6 +22,7 @@ class BaseItemDetail extends Equatable {
     required this.genres,
     required this.runtime,
     required this.voteAverage,
+    required this.category,
   });
 
   @override
@@ -32,6 +35,10 @@ class BaseItemDetail extends Equatable {
       genres,
       runtime,
       voteAverage,
+      category,
     ];
   }
+
+  @override
+  bool get stringify => true;
 }

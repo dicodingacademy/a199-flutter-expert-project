@@ -1,4 +1,5 @@
 import 'package:ditonton/domain/entities/base_item_detail.dart';
+import 'package:ditonton/domain/entities/base_item_entity.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 
 class MovieDetail extends BaseItemDetail {
@@ -23,6 +24,7 @@ class MovieDetail extends BaseItemDetail {
           genres: genres,
           runtime: runtime,
           voteAverage: voteAverage,
+          category: ItemType.movie
         );
 
   final bool adult;

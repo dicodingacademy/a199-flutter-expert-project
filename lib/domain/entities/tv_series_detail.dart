@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ditonton/domain/entities/base_item_detail.dart';
+import 'package:ditonton/domain/entities/base_item_entity.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 
 class TvSeriesDetail extends BaseItemDetail {
@@ -41,6 +42,7 @@ class TvSeriesDetail extends BaseItemDetail {
           genres: genres,
           runtime: episodeRunTime ?? 0,
           voteAverage: voteAverage,
+          category: ItemType.tvSeries
         );
 
   TvSeriesDetail copyWith({
