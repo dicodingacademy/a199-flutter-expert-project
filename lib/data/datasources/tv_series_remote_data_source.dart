@@ -21,6 +21,8 @@ abstract class TvSeriesRemoteDataSource {
 
   // Untuk mengambil rekomendasi suatu TV Series
   Future<List<TvSeriesModel>> getTvSeriesRecommendation(int id);
+
+  Future<List<TvSeriesModel>> searchTvSeries(String query);
 }
 
 class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
@@ -30,7 +32,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   final http.Client client;
 
   TvSeriesRemoteDataSourceImpl({required this.client});
-  
+
   @override
   Future<List<TvSeriesModel>> getOnAirTvSeries() async {
     final response =
@@ -42,7 +44,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
       throw ServerException();
     }
   }
-  
+
   @override
   Future<List<TvSeriesModel>> getPopularTvSeries() async {
     final response =
@@ -54,7 +56,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
       throw ServerException();
     }
   }
-  
+
   @override
   Future<List<TvSeriesModel>> getTopRatedTvSeries() async {
     final response =
@@ -66,11 +68,10 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
       throw ServerException();
     }
   }
-  
+
   @override
   Future<TvSeriesDetailResponse> getTvSeriesDetail(int id) async {
-    final response =
-        await client.get(Uri.parse('$BASE_URL/tv/$id?$API_KEY'));
+    final response = await client.get(Uri.parse('$BASE_URL/tv/$id?$API_KEY'));
 
     if (response.statusCode == 200) {
       return TvSeriesDetailResponse.fromJson(json.decode(response.body));
@@ -83,6 +84,18 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   Future<List<TvSeriesModel>> getTvSeriesRecommendation(int id) async {
     final response = await client
         .get(Uri.parse('$BASE_URL/tv/$id/recommendations?$API_KEY'));
+
+    if (response.statusCode == 200) {
+      return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<TvSeriesModel>> searchTvSeries(String query) async {
+    final response = await client
+        .get(Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$query'));
 
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
