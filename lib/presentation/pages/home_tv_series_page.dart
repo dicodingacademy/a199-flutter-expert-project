@@ -2,26 +2,28 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/base_item_entity.dart';
 import 'package:ditonton/presentation/pages/popular_list_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/provider/tv_series_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeMoviePage extends StatefulWidget {
+class HomeTvSeriesPage extends StatefulWidget {
+  // static const ROUTE_NAME = '/home-tvseries';
+
   @override
-  _HomeMoviePageState createState() => _HomeMoviePageState();
+  _HomeTvSeriesPageState createState() => _HomeTvSeriesPageState();
 }
 
-class _HomeMoviePageState extends State<HomeMoviePage> {
+class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(
-        () => Provider.of<MovieListNotifier>(context, listen: false)
-          ..fetchNowPlayingMovies()
-          ..fetchPopularMovies()
-          ..fetchTopRatedMovies());
+        () => Provider.of<TvSeriesListNotifier>(context, listen: false)
+          ..fetchNowPlayingTvSeries()
+          ..fetchPopularTvSeries()
+          ..fetchTopRatedTvSeries());
   }
 
   @override
@@ -34,7 +36,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             'Now Playing',
             style: kHeading6,
           ),
-          Consumer<MovieListNotifier>(builder: (context, data, child) {
+          Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
             final state = data.nowPlayingState;
             if (state == RequestState.Loading) {
               return Center(
@@ -50,9 +52,9 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             title: 'Popular',
             onTap: () => Navigator.pushNamed(
                 context, PopularListPage.ROUTE_NAME,
-                arguments: ItemType.movie),
+                arguments: ItemType.tvSeries),
           ),
-          Consumer<MovieListNotifier>(builder: (context, data, child) {
+          Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
             final state = data.popularTsState;
             if (state == RequestState.Loading) {
               return Center(
@@ -68,9 +70,9 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             title: 'Top Rated',
             onTap: () => Navigator.pushNamed(
                 context, TopRatedListPage.ROUTE_NAME,
-                arguments: ItemType.movie),
+                arguments: ItemType.tvSeries),
           ),
-          Consumer<MovieListNotifier>(builder: (context, data, child) {
+          Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
             final state = data.topRatedTsState;
             if (state == RequestState.Loading) {
               return Center(
