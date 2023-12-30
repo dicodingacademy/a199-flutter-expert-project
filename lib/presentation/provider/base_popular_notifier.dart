@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/entities/base_item_entity.dart';
 import 'package:flutter/material.dart';
 
-class BasePopularNotifier<BaseItemEntity> extends ChangeNotifier {
-  var _list = <BaseItemEntity>[];
-  List<BaseItemEntity> get popularList => _list;
+class BasePopularNotifier<T extends BaseItemEntity> extends ChangeNotifier {
+  var _list = <T>[];
+  List<T> get popularList => _list;
 
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;
@@ -14,7 +15,7 @@ class BasePopularNotifier<BaseItemEntity> extends ChangeNotifier {
   String get message => _message;
 
   Future<void> onPopularMovieOrTvSeries({
-    required Future<Either<Failure, List<BaseItemEntity>>> result,
+    required Future<Either<Failure, List<T>>> result,
   }) async {
     _state = RequestState.Loading;
     notifyListeners();

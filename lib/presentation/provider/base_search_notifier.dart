@@ -1,19 +1,20 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/entities/base_item_entity.dart';
 import 'package:flutter/foundation.dart';
 
-class BaseSearchNotifier<BaseItemEntity> extends ChangeNotifier {
+class BaseSearchNotifier<T extends BaseItemEntity> extends ChangeNotifier {
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;
 
-  List<BaseItemEntity> _searchResult = [];
-  List<BaseItemEntity> get searchResult => _searchResult;
+  List<T> _searchResult = [];
+  List<T> get searchResult => _searchResult;
 
   String _message = '';
   String get message => _message;
 
-  Future<void> fetchMovieOrTvSeriesSearch(Future<Either<Failure, List<BaseItemEntity>>> execute) async {
+  Future<void> fetchMovieOrTvSeriesSearch(Future<Either<Failure, List<T>>> execute) async {
     _state = RequestState.Loading;
     notifyListeners();
 

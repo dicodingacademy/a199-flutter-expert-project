@@ -1,23 +1,24 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/entities/base_item_entity.dart';
 import 'package:flutter/material.dart';
 
-class HomeListNotifier<BaseItemEntity> extends ChangeNotifier {
-  var _onAirTList = <BaseItemEntity>[];
-  List<BaseItemEntity> get nowPlayingTs => _onAirTList;
+class HomeListNotifier<T extends BaseItemEntity> extends ChangeNotifier {
+  var _onAirTList = <T>[];
+  List<T> get nowPlayingTs => _onAirTList;
 
   RequestState _nowPlayingState = RequestState.Empty;
   RequestState get nowPlayingState => _nowPlayingState;
 
-  var _popularTList = <BaseItemEntity>[];
-  List<BaseItemEntity> get popularTs => _popularTList;
+  var _popularTList = <T>[];
+  List<T> get popularTs => _popularTList;
 
   RequestState _popularTsState = RequestState.Empty;
   RequestState get popularTsState => _popularTsState;
 
-  var _topRatedTList = <BaseItemEntity>[];
-  List<BaseItemEntity> get topRatedTs => _topRatedTList;
+  var _topRatedTList = <T>[];
+  List<T> get topRatedTs => _topRatedTList;
 
   RequestState _topRatedTsState = RequestState.Empty;
   RequestState get topRatedTsState => _topRatedTsState;
@@ -38,7 +39,7 @@ class HomeListNotifier<BaseItemEntity> extends ChangeNotifier {
   }
 
   Future<void> onPlayingMovieOrTvSeries({
-    required Future<Either<Failure, List<BaseItemEntity>>> result,
+    required Future<Either<Failure, List<T>>> result,
   }) async {
     _nowPlayingState = RequestState.Loading;
     notifyListeners();
@@ -59,7 +60,7 @@ class HomeListNotifier<BaseItemEntity> extends ChangeNotifier {
   }
 
   Future<void> onPopularMovieOrTvSeries({
-    required Future<Either<Failure, List<BaseItemEntity>>> result,
+    required Future<Either<Failure, List<T>>> result,
   }) async {
     _popularTsState = RequestState.Loading;
     notifyListeners();
@@ -80,7 +81,7 @@ class HomeListNotifier<BaseItemEntity> extends ChangeNotifier {
   }
 
   Future<void> onTopRatedMovieOrTvSeries({
-    required Future<Either<Failure, List<BaseItemEntity>>> result,
+    required Future<Either<Failure, List<T>>> result,
   }) async {
     _topRatedTsState = RequestState.Loading;
     notifyListeners();
