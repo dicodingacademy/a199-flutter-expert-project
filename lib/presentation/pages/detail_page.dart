@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/domain/entities/base_item_detail.dart';
+import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:ditonton/presentation/provider/tv_series_detail_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -34,8 +35,6 @@ class _DetailPageState extends State<DetailPage> {
       if (widget.baseItemEntity.type == ItemType.movie) {
         Provider.of<MovieDetailNotifier>(context, listen: false)
             .fetchMovieDetail(widget.baseItemEntity.id);
-        Provider.of<MovieDetailNotifier>(context, listen: false)
-            .loadWatchlistStatus(widget.baseItemEntity.id);
       } else {
         Provider.of<TvSeriesDetailNotifier>(context, listen: false)
             .fetchTvSeriesDetail(widget.baseItemEntity.id);
@@ -46,47 +45,48 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: widget.baseItemEntity.type == ItemType.movie
-            ? Consumer<MovieDetailNotifier>(
-                builder: (context, provider, child) {
-                  if (provider.movieState == RequestState.Loading) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (provider.movieState == RequestState.Loaded) {
-                    final movie = provider.movie;
-                    return SafeArea(
-                      child: DetailContent(
-                        movie,
-                        provider.movieRecommendations,
-                        provider.isAddedToWatchlist,
-                      ),
-                    );
-                  } else {
-                    return Text(provider.message);
-                  }
-                },
-              )
-            : Consumer<TvSeriesDetailNotifier>(
-                builder: (context, provider, child) {
-                  if (provider.state == RequestState.Loading) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (provider.state == RequestState.Loaded) {
-                    final tvSeries = provider.itemDetail;
-                    return SafeArea(
-                      child: DetailContent(
-                        tvSeries,
-                        provider.recommendations,
-                        provider.isAddedToWatchlist,
-                      ),
-                    );
-                  } else {
-                    return Text(provider.message);
-                  }
-                },
-              ));
+      body: widget.baseItemEntity.type == ItemType.movie
+          ? Consumer<MovieDetailNotifier>(
+              builder: (context, provider, child) {
+                if (provider.state == RequestState.Loading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (provider.state == RequestState.Loaded) {
+                  final movie = provider.itemDetail;
+                  return SafeArea(
+                    child: DetailContent(
+                      movie,
+                      provider.recommendations,
+                      provider.isAddedToWatchlist,
+                    ),
+                  );
+                } else {
+                  return Text(provider.message);
+                }
+              },
+            )
+          : Consumer<TvSeriesDetailNotifier>(
+              builder: (context, provider, child) {
+                if (provider.state == RequestState.Loading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (provider.state == RequestState.Loaded) {
+                  final tvSeries = provider.itemDetail;
+                  return SafeArea(
+                    child: DetailContent(
+                      tvSeries,
+                      provider.recommendations,
+                      provider.isAddedToWatchlist,
+                    ),
+                  );
+                } else {
+                  return Text(provider.message);
+                }
+              },
+            ),
+    );
   }
 }
 
@@ -145,15 +145,32 @@ class DetailContent extends StatelessWidget {
                                   final movieDetailNotifier =
                                       Provider.of<MovieDetailNotifier>(context,
                                           listen: false);
+                                  print('isAddedWatchlist : $isAddedWatchlist');
                                   if (!isAddedWatchlist) {
                                     await movieDetailNotifier
-                                        .addWatchlist(detail);
+                                        .addWatchlistMovies(detail);
                                   } else {
                                     await movieDetailNotifier
-                                        .removeFromWatchlist(detail);
+                                        .removeFromWatchlistMovies(detail);
                                   }
                                   message =
                                       movieDetailNotifier.watchlistMessage;
+                                }
+
+                                if (detail is TvSeriesDetail) {
+                                  final tvSeriesDetailNotifier =
+                                      Provider.of<TvSeriesDetailNotifier>(
+                                          context,
+                                          listen: false);
+                                  if (!isAddedWatchlist) {
+                                    await tvSeriesDetailNotifier
+                                        .addWatchlistTvSeries(detail);
+                                  } else {
+                                    await tvSeriesDetailNotifier
+                                        .removeFromWatchlistTvSeries(detail);
+                                  }
+                                  message =
+                                      tvSeriesDetailNotifier.watchlistMessage;
                                 }
 
                                 if (isSuccessOrRemoved(message)) {
@@ -228,7 +245,7 @@ class DetailContent extends StatelessWidget {
                                     return SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       child: RecommendationsItems(
-                                        listItem: data.movieRecommendations,
+                                        listItem: data.recommendations,
                                       ),
                                     );
                                   } else {

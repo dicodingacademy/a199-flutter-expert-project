@@ -4,13 +4,13 @@ import 'package:ditonton/domain/entities/tv_series_detail.dart';
 
 class TvSeriesDetailResponse {
     final bool adult;
-    final String backdropPath;
+    final String? backdropPath;
     final List<int> episodeRunTime;
-    final DateTime firstAirDate;
+    final DateTime? firstAirDate;
     final List<GenreModel> genres;
     final int id;
     final bool inProduction;
-    final DateTime lastAirDate;
+    final DateTime? lastAirDate;
     final TEpisodeToAir lastEpisodeToAir;
     final String name;
     final TEpisodeToAir? nextEpisodeToAir;
@@ -32,7 +32,7 @@ class TvSeriesDetailResponse {
         required this.firstAirDate,
         required this.genres,
         required this.id,
-        required this.inProduction,
+        this.inProduction = false,
         required this.lastAirDate,
         required this.lastEpisodeToAir,
         required this.name,
@@ -53,11 +53,11 @@ class TvSeriesDetailResponse {
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
         episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
-        firstAirDate: DateTime.parse(json["first_air_date"]),
+        firstAirDate: DateTime.tryParse(json["first_air_date"]),
         genres: List<GenreModel>.from(json["genres"].map((x) => GenreModel.fromJson(x))),
         id: json["id"],
         inProduction: json["in_production"],
-        lastAirDate: DateTime.parse(json["last_air_date"]),
+        lastAirDate: DateTime.tryParse(json["last_air_date"]),
         lastEpisodeToAir: TEpisodeToAir.fromJson(json["last_episode_to_air"]),
         name: json["name"],
         nextEpisodeToAir: json["next_episode_to_air"] != null ? TEpisodeToAir.fromJson(json["next_episode_to_air"]) : null,
@@ -77,11 +77,11 @@ class TvSeriesDetailResponse {
         "adult": adult,
         "backdrop_path": backdropPath,
         "episode_run_time": List<dynamic>.from(episodeRunTime.map((x) => x)),
-        "first_air_date": "${firstAirDate.year.toString().padLeft(4, '0')}-${firstAirDate.month.toString().padLeft(2, '0')}-${firstAirDate.day.toString().padLeft(2, '0')}",
+        "first_air_date": "${firstAirDate?.year.toString().padLeft(4, '0')}-${firstAirDate?.month.toString().padLeft(2, '0')}-${firstAirDate?.day.toString().padLeft(2, '0')}",
         "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
         "id": id,
         "in_production": inProduction,
-        "last_air_date": "${lastAirDate.year.toString().padLeft(4, '0')}-${lastAirDate.month.toString().padLeft(2, '0')}-${lastAirDate.day.toString().padLeft(2, '0')}",
+        "last_air_date": "${lastAirDate?.year.toString().padLeft(4, '0')}-${lastAirDate?.month.toString().padLeft(2, '0')}-${lastAirDate?.day.toString().padLeft(2, '0')}",
         "last_episode_to_air": lastEpisodeToAir.toJson(),
         "name": name,
         "next_episode_to_air": nextEpisodeToAir?.toJson(),
@@ -123,7 +123,7 @@ class TEpisodeToAir {
     final String overview;
     final double voteAverage;
     final int voteCount;
-    final DateTime airDate;
+    final DateTime? airDate;
     final int episodeNumber;
     final String episodeType;
     final String productionCode;
@@ -138,7 +138,7 @@ class TEpisodeToAir {
         required this.overview,
         required this.voteAverage,
         required this.voteCount,
-        required this.airDate,
+        this.airDate,
         required this.episodeNumber,
         required this.episodeType,
         required this.productionCode,
@@ -154,7 +154,7 @@ class TEpisodeToAir {
         overview: json["overview"],
         voteAverage: json["vote_average"],
         voteCount: json["vote_count"],
-        airDate: DateTime.parse(json["air_date"]),
+        airDate: DateTime.tryParse(json["air_date"]),
         episodeNumber: json["episode_number"],
         episodeType: json["episode_type"],
         productionCode: json["production_code"],
@@ -170,7 +170,7 @@ class TEpisodeToAir {
         "overview": overview,
         "vote_average": voteAverage,
         "vote_count": voteCount,
-        "air_date": "${airDate.year.toString().padLeft(4, '0')}-${airDate.month.toString().padLeft(2, '0')}-${airDate.day.toString().padLeft(2, '0')}",
+        "air_date": "${airDate?.year.toString().padLeft(4, '0')}-${airDate?.month.toString().padLeft(2, '0')}-${airDate?.day.toString().padLeft(2, '0')}",
         "episode_number": episodeNumber,
         "episode_type": episodeType,
         "production_code": productionCode,

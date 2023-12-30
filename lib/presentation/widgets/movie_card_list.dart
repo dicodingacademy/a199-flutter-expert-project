@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/presentation/pages/movie_detail_page.dart';
+import 'package:ditonton/domain/entities/base_item_entity.dart';
+import 'package:ditonton/presentation/pages/detail_page.dart';
 import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
-  final Movie movie;
+  final BaseItemEntity movie;
 
   MovieCard(this.movie);
 
@@ -17,8 +17,8 @@ class MovieCard extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            MovieDetailPage.ROUTE_NAME,
-            arguments: movie.id,
+            DetailPage.ROUTE_NAME,
+            arguments: movie,
           );
         },
         child: Stack(
