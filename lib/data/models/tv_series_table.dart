@@ -1,5 +1,4 @@
 import 'package:ditonton/data/models/base_table.dart';
-import 'package:ditonton/domain/entities/base_item_entity.dart';
 import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:ditonton/domain/entities/tv_series_detail.dart';
 
@@ -19,7 +18,7 @@ class TvSeriesTable extends BaseTable {
           title: title,
           posterPath: posterPath,
           overview: overview,
-          category: ItemType.tvSeries.toString(),
+          category: TvSeries.typeTvSeries.toString(),
         );
 
   factory TvSeriesTable.fromMap(Map<String, dynamic> map) => TvSeriesTable(

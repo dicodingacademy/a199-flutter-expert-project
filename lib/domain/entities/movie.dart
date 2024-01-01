@@ -2,6 +2,7 @@ import 'package:ditonton/domain/entities/base_item_entity.dart';
 
 // ignore: must_be_immutable
 class Movie extends BaseItemEntity {
+  static ItemType typeMovie = ItemType.tvSeries;
   Movie({
     required this.adult,
     required this.backdropPath,
@@ -21,7 +22,7 @@ class Movie extends BaseItemEntity {
           overview: overview ?? '',
           posterPath: posterPath ?? '',
           id: id,
-          type: ItemType.movie,
+          type: typeMovie,
         );
 
   Movie.watchlist({
@@ -34,7 +35,7 @@ class Movie extends BaseItemEntity {
             overview: overview ?? '',
             posterPath: posterPath ?? '',
             title: title ?? '',
-            type: ItemType.movie);
+            type: typeMovie);
 
   bool? adult;
   String? backdropPath;

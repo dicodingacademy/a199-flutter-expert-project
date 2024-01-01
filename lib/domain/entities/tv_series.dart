@@ -1,7 +1,10 @@
 import 'package:ditonton/domain/entities/base_item_entity.dart';
 
+
 // ignore: must_be_immutable
 class TvSeries extends BaseItemEntity {
+  static ItemType typeTvSeries = ItemType.tvSeries;
+
   bool? adult;
   String? backdropPath;
   List<int>? genreIds;
@@ -37,7 +40,7 @@ class TvSeries extends BaseItemEntity {
           overview: overview ?? '',
           posterPath: posterPath ?? '',
           id: id,
-          type: ItemType.tvSeries,
+          type: typeTvSeries,
         );
 
   TvSeries.watchlist({
@@ -50,7 +53,7 @@ class TvSeries extends BaseItemEntity {
             overview: overview ?? '',
             posterPath: posterPath ?? '',
             title: name ?? '',
-            type: ItemType.movie);
+            type: typeTvSeries);
 
   @override
   List<Object?> get props {

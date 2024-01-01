@@ -1,5 +1,4 @@
 import 'package:ditonton/data/models/base_table.dart';
-import 'package:ditonton/domain/entities/base_item_entity.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 
@@ -19,7 +18,7 @@ class MovieTable extends BaseTable {
           title: title,
           posterPath: posterPath,
           overview: overview,
-          category: ItemType.movie.toString(),
+          category: Movie.typeMovie.toString(),
         );
 
   factory MovieTable.fromMap(Map<String, dynamic> map) => MovieTable(
