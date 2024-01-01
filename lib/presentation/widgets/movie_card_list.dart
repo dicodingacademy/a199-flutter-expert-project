@@ -5,9 +5,9 @@ import 'package:ditonton/presentation/pages/detail_page.dart';
 import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
-  final BaseItemEntity movie;
+  final BaseItemEntity baseItem;
 
-  MovieCard(this.movie);
+  MovieCard(this.baseItem);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class MovieCard extends StatelessWidget {
           Navigator.pushNamed(
             context,
             DetailPage.ROUTE_NAME,
-            arguments: movie,
+            arguments: baseItem,
           );
         },
         child: Stack(
@@ -35,14 +35,14 @@ class MovieCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movie.title ?? '-',
+                      baseItem.title ?? '-',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
                     SizedBox(height: 16),
                     Text(
-                      movie.overview ?? '-',
+                      baseItem.overview ?? '-',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -57,7 +57,7 @@ class MovieCard extends StatelessWidget {
               ),
               child: ClipRRect(
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                  imageUrl: '$BASE_IMAGE_URL${baseItem.posterPath}',
                   width: 80,
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),
