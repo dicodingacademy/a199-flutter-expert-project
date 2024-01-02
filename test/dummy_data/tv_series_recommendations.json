@@ -1,0 +1,28 @@
+{
+    "page": 1,
+    "results": [      
+        {
+            "adult": false,
+            "backdrop_path": null,
+            "id": 2961,
+            "name": "It's All Relative",
+            "original_language": "en",
+            "original_name": "It's All Relative",
+            "overview": "Bobby's a bartender and the only son of gregarious, salt-of-the-earth Irish Catholic parents from Boston. His fiancée, Liz, is a toney Harvard student and she's Protestant (no, that's not the problem). Liz has two dads, not one, and they're a worldly pair of well-heeled gay men.",
+            "poster_path": "/wp2FV4YcfmFojT2MoVKt8sVpQHK.jpg",
+            "media_type": "tv",
+            "genre_ids": [
+            35
+            ],
+            "popularity": 170.923,
+            "first_air_date": "2003-10-01",
+            "vote_average": 5.8,
+            "vote_count": 5,
+            "origin_country": [
+            "US"
+            ]
+        }
+    ],
+    "total_pages": 2,
+    "total_results": 40
+  }

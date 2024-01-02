@@ -1,0 +1,164 @@
+{
+  "adult": false,
+  "backdrop_path": "/7v3bO3pNnyLHLlwETtmyQxKV2Ba.jpg",
+  "created_by": [],
+  "episode_run_time": [],
+  "first_air_date": "2015-12-08",
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 10766,
+      "name": "Soap"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "http://www.raiplay.it/programmi/ilparadisodellesignore/",
+  "id": 73362,
+  "in_production": true,
+  "languages": [
+    "it"
+  ],
+  "last_air_date": "2023-12-29",
+  "last_episode_to_air": {
+    "id": 4996513,
+    "name": "Episode 80",
+    "overview": "",
+    "vote_average": 0.0,
+    "vote_count": 0,
+    "air_date": "2023-12-29",
+    "episode_number": 80,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": null,
+    "season_number": 8,
+    "show_id": 73362,
+    "still_path": null
+  },
+  "name": "The Ladies' Paradise",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 533,
+      "logo_path": "/pLsnP0qF90P4QAXTKGPgDsftKDl.png",
+      "name": "Rai 1",
+      "origin_country": "IT"
+    }
+  ],
+  "number_of_episodes": 285,
+  "number_of_seasons": 8,
+  "origin_country": [
+    "IT"
+  ],
+  "original_language": "it",
+  "original_name": "Il paradiso delle signore",
+  "overview": "Follow Teresa Iorio, a young woman who leaves her rural Sicilian hometown for Milan to find work--and much more--at a newly opened department store: The Ladies' Paradise.",
+  "popularity": 380.213,
+  "poster_path": "/7k0D1feQhS59O2k8xkf5UR19LUi.jpg",
+  "production_companies": [],
+  "production_countries": [
+    {
+      "iso_3166_1": "IT",
+      "name": "Italy"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2015-12-08",
+      "episode_count": 20,
+      "id": 91554,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/quFwa1jrvmJvgiWqcFYjH94HCqo.jpg",
+      "season_number": 1,
+      "vote_average": 0.0
+    },
+    {
+      "air_date": "2017-09-11",
+      "episode_count": 20,
+      "id": 95608,
+      "name": "Season 2",
+      "overview": "",
+      "poster_path": "/4Y8lcVbz05OaiU4hJWnh28cj8ry.jpg",
+      "season_number": 2,
+      "vote_average": 0.0
+    },
+    {
+      "air_date": "2018-09-10",
+      "episode_count": 86,
+      "id": 135860,
+      "name": "Season 03",
+      "overview": "",
+      "poster_path": "/pLQ2InKzCjcYfLIYx2wdJuEabIi.jpg",
+      "season_number": 3,
+      "vote_average": 0.0
+    },
+    {
+      "air_date": "2019-10-14",
+      "episode_count": 46,
+      "id": 135861,
+      "name": "Season 4",
+      "overview": "",
+      "poster_path": "/fKAOVCspbu47o0wQRCr5FIRePeb.jpg",
+      "season_number": 4,
+      "vote_average": 0.0
+    },
+    {
+      "air_date": null,
+      "episode_count": 0,
+      "id": 352120,
+      "name": "Season 5",
+      "overview": "",
+      "poster_path": "/fKAOVCspbu47o0wQRCr5FIRePeb.jpg",
+      "season_number": 5,
+      "vote_average": 0.0
+    },
+    {
+      "air_date": null,
+      "episode_count": 0,
+      "id": 355805,
+      "name": "Season 6",
+      "overview": "",
+      "poster_path": "/twYOYZbgM9HDeXnjKTgbrNKsGgS.jpg",
+      "season_number": 6,
+      "vote_average": 0.0
+    },
+    {
+      "air_date": "2022-09-12",
+      "episode_count": 33,
+      "id": 355806,
+      "name": "Season 7",
+      "overview": "",
+      "poster_path": "/upHslxII7JpSy0vk151IJ6g4F32.jpg",
+      "season_number": 7,
+      "vote_average": 0.0
+    },
+    {
+      "air_date": "2023-09-11",
+      "episode_count": 80,
+      "id": 359496,
+      "name": "Season 8",
+      "overview": "",
+      "poster_path": "/1XKjPCtprWqjKhTiyYORVwgWePA.jpg",
+      "season_number": 8,
+      "vote_average": 0.0
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "Italian",
+      "iso_639_1": "it",
+      "name": "Italiano"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "",
+  "type": "Scripted",
+  "vote_average": 7.625,
+  "vote_count": 12
+}

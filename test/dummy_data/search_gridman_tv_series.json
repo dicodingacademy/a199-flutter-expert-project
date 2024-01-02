@@ -1,0 +1,29 @@
+{
+  "page": 1,
+  "results": [
+      {
+        "adult": false,
+        "backdrop_path": "/daqQkmsrwwO3W8RV5hsmMaGU0bx.jpg",
+        "genre_ids": [
+          16,
+          10759,
+          10765
+        ],
+        "id": 82895,
+        "origin_country": [
+          "JP"
+        ],
+        "original_language": "ja",
+        "original_name": "SSSS.GRIDMAN",
+        "overview": "Tsuburaya Pro, Takara and Trigger joint venture and direct sequel to the 1993 tokusatsu series 'Denkou Choujin Gridman'.Yuta Hibiki can't remember who he is, and now he's seeing and hearing things that others don't! A voice from an old computer tells him to remember his calling, and he sees a massive, unmoving creature in the distance.",
+        "popularity": 219.727,
+        "poster_path": "/4l9EA3CCn9BQi95Rj2xlj5PSZB.jpg",
+        "first_air_date": "2018-10-07",
+        "name": "SSSS.GRIDMAN",
+        "vote_average": 7.3,
+        "vote_count": 74
+      }
+  ],
+  "total_pages": 8089,
+  "total_results": 161764
+}
