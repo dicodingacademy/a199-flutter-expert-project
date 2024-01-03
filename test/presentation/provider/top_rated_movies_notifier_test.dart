@@ -62,7 +62,7 @@ void main() {
     await notifier.fetchTopRatedMovies();
     // assert
     expect(notifier.state, RequestState.Loaded);
-    expect(notifier.movies, tMovieList);
+    expect(notifier.baseTopRatedList, tMovieList);
     expect(listenerCallCount, 2);
   });
 
