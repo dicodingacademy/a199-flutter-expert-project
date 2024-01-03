@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:ditonton/domain/entities/base_item_entity.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 
-class BaseItemDetail extends Equatable {
+abstract class BaseItemDetail extends Equatable {
   final String title;
   final String overview;
   final String posterPath;

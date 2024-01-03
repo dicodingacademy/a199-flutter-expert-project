@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 
 enum ItemType { tvSeries, movie }
 
-class BaseItemEntity extends Equatable {
+abstract class BaseItemEntity extends Equatable {
   final String? title;
   final String? overview;
   final String? posterPath;
