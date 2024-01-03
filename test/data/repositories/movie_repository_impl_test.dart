@@ -194,7 +194,7 @@ void main() {
       adult: false,
       backdropPath: 'backdropPath',
       budget: 100,
-      genres: [GenreModel(id: 1, name: 'Action')],
+      genres: [GenreModel(id: 1, name: 'Action'), GenreModel(id:2, name:'Comedy'), GenreModel(id: 3, name: 'Romance')],
       homepage: "https://google.com",
       id: 1,
       imdbId: 'imdb1',
