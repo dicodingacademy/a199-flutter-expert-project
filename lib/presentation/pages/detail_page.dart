@@ -145,7 +145,7 @@ class DetailContent extends StatelessWidget {
                                   final movieDetailNotifier =
                                       Provider.of<MovieDetailNotifier>(context,
                                           listen: false);
-                                  print('isAddedWatchlist : $isAddedWatchlist');
+
                                   if (!isAddedWatchlist) {
                                     await movieDetailNotifier
                                         .addWatchlistMovies(detail);

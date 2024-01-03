@@ -23,11 +23,16 @@ class BaseDetailNotifier<BaseItemDetail, BaseItemEntitiy> extends ChangeNotifier
   String _message = '';
   String get message => _message;
 
+  String _recommendationMessage = '';
+  String get recommendationMessage => _recommendationMessage;
+
   bool _isAddedtoWatchlist = false;
   bool get isAddedToWatchlist => _isAddedtoWatchlist;
 
   Future<void> fetchMovieOrTvSeriesDetail({required Future<Either<Failure, BaseItemDetail>> detailResult,required Future<Either<Failure, List<BaseItemEntitiy>>> recommendationResult}) async {
     _state = RequestState.Loading;
+    _recommendationState = RequestState.Loading;
+    
     notifyListeners();
     final varDetailResult = await detailResult;
     final varRecommendationResult = await recommendationResult;
@@ -38,13 +43,12 @@ class BaseDetailNotifier<BaseItemDetail, BaseItemEntitiy> extends ChangeNotifier
         notifyListeners();
       },
       (movie) {
-        _recommendationState = RequestState.Loading;
         _detail = movie;
         notifyListeners();
         varRecommendationResult.fold(
           (failure) {
             _recommendationState = RequestState.Error;
-            _message = failure.message;
+            _recommendationMessage = failure.message;
           },
           (movies) {
             _recommendationState = RequestState.Loaded;
