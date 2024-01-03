@@ -12,6 +12,7 @@ import 'package:mockito/mockito.dart';
 
 import 'movie_list_notifier_test.mocks.dart';
 
+
 @GenerateMocks([GetNowPlayingMovies, GetPopularMovies, GetTopRatedMovies])
 void main() {
   late MovieListNotifier provider;
@@ -84,7 +85,7 @@ void main() {
       await provider.fetchNowPlayingMovies();
       // assert
       expect(provider.nowPlayingState, RequestState.Loaded);
-      expect(provider.nowPlayingMovies, tMovieList);
+      expect(provider.nowPlayingTs, tMovieList);
       expect(listenerCallCount, 2);
     });
 
@@ -109,7 +110,7 @@ void main() {
       // act
       provider.fetchPopularMovies();
       // assert
-      expect(provider.popularMoviesState, RequestState.Loading);
+      expect(provider.popularTsState, RequestState.Loading);
       // verify(provider.setState(RequestState.Loading));
     });
 
@@ -121,8 +122,8 @@ void main() {
       // act
       await provider.fetchPopularMovies();
       // assert
-      expect(provider.popularMoviesState, RequestState.Loaded);
-      expect(provider.popularMovies, tMovieList);
+      expect(provider.popularTsState, RequestState.Loaded);
+      expect(provider.popularTs, tMovieList);
       expect(listenerCallCount, 2);
     });
 
@@ -133,7 +134,7 @@ void main() {
       // act
       await provider.fetchPopularMovies();
       // assert
-      expect(provider.popularMoviesState, RequestState.Error);
+      expect(provider.popularTsState, RequestState.Error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });
@@ -147,7 +148,7 @@ void main() {
       // act
       provider.fetchTopRatedMovies();
       // assert
-      expect(provider.topRatedMoviesState, RequestState.Loading);
+      expect(provider.topRatedTsState, RequestState.Loading);
     });
 
     test('should change movies data when data is gotten successfully',
@@ -158,8 +159,8 @@ void main() {
       // act
       await provider.fetchTopRatedMovies();
       // assert
-      expect(provider.topRatedMoviesState, RequestState.Loaded);
-      expect(provider.topRatedMovies, tMovieList);
+      expect(provider.topRatedTsState, RequestState.Loaded);
+      expect(provider.topRatedTs, tMovieList);
       expect(listenerCallCount, 2);
     });
 
@@ -170,7 +171,7 @@ void main() {
       // act
       await provider.fetchTopRatedMovies();
       // assert
-      expect(provider.topRatedMoviesState, RequestState.Error);
+      expect(provider.topRatedTsState, RequestState.Error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });
