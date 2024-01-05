@@ -2,12 +2,15 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/domain/entities/base_item_entity.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
+import 'package:ditonton/presentation/pages/home_list_page.dart';
 import 'package:ditonton/presentation/pages/home_page.dart';
 import 'package:ditonton/presentation/pages/detail_page.dart';
 import 'package:ditonton/presentation/pages/popular_list_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_page.dart';
+import 'package:ditonton/presentation/provider/home_movie_list_notifier.dart';
+import 'package:ditonton/presentation/provider/home_tv_series_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
@@ -71,6 +74,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesSearchNotifier>(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<HomeMovieListNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<HomeTvSeriesListNotifier>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -90,6 +99,14 @@ class MyApp extends StatelessWidget {
               final itemType = settings.arguments as ItemType;
               return CupertinoPageRoute(
                 builder: (_) => PopularListPage(
+                  itemType: itemType,
+                ),
+                settings: settings,
+              );
+            case HomeListPage.ROUTE_NAME:
+              final itemType = settings.arguments as ItemType;
+              return CupertinoPageRoute(
+                builder: (_) => HomeListPage(
                   itemType: itemType,
                 ),
                 settings: settings,
