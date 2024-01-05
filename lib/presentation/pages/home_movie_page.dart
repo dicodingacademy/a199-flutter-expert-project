@@ -1,5 +1,6 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/base_item_entity.dart';
+import 'package:ditonton/presentation/pages/home_list_page.dart';
 import 'package:ditonton/presentation/pages/popular_list_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
@@ -30,9 +31,11 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Now Playing',
-            style: kHeading6,
+          _buildSubHeading(
+            title: 'Now Playing',
+            onTap: () => Navigator.pushNamed(
+                context, HomeListPage.ROUTE_NAME,
+                arguments: ItemType.movie),
           ),
           Consumer<MovieListNotifier>(builder: (context, data, child) {
             final state = data.nowPlayingState;
