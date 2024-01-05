@@ -18,14 +18,6 @@ abstract class BaseItemEntity extends Equatable {
     required this.type,
   });
 
-  BaseItemEntity.watchlist({
-    required this.id,
-    required this.overview,
-    required this.posterPath,
-    required this.title,
-    required this.type,
-  });
-
   @override
   List<Object?> get props {
     return [

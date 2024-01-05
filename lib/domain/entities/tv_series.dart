@@ -72,6 +72,7 @@ class TvSeries extends BaseItemEntity {
       name,
       voteAverage,
       voteCount,
+      this.type,
     ];
   }
 }

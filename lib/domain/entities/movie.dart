@@ -52,6 +52,9 @@ class Movie extends BaseItemEntity {
   int? voteCount;
 
   @override
+  bool get stringify => true;
+
+  @override
   List<Object?> get props => [
         adult,
         backdropPath,
@@ -66,5 +69,6 @@ class Movie extends BaseItemEntity {
         video,
         voteAverage,
         voteCount,
+        this.type,
       ];
 }

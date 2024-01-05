@@ -50,8 +50,10 @@ class MovieDetail extends BaseItemDetail {
         overview,
         posterPath,
         releaseDate,
+        runtime,
         title,
         voteAverage,
         voteCount,
+        this.category,
       ];
 }
