@@ -18,7 +18,7 @@ Jika kamu menerapkan modular pada project, Anda dapat memanfaatkan berkas `test.
         sudo apt-get update -qq -y
         sudo apt-get install lcov -y
         ```
-    
+
     - Bagi pengguna **Mac**, jalankan perintah berikut pada terminal.
         ```
         brew install lcov
@@ -30,11 +30,11 @@ Jika kamu menerapkan modular pada project, Anda dapat memanfaatkan berkas `test.
             choco install lcov
             ```
         - Kemudian cek **Environtment Variabel** pada kolom **System variabels** terdapat variabel GENTHTML dan LCOV_HOME. Jika tidak tersedia, Anda bisa menambahkan variabel baru dengan nilai seperti berikut.
-            | Variable | Value|
-            | ----------- | ----------- |
-            | GENTHTML | C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml |
-            | LCOV_HOME | C:\ProgramData\chocolatey\lib\lcov\tools |
-        
+          | Variable | Value|
+          | ----------- | ----------- |
+          | GENTHTML | C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml |
+          | LCOV_HOME | C:\ProgramData\chocolatey\lib\lcov\tools |
+
 2. Untuk mempermudah proses verifikasi testing, jalankan perintah berikut.
     ```
     git init
@@ -43,10 +43,10 @@ Jika kamu menerapkan modular pada project, Anda dapat memanfaatkan berkas `test.
     ```
     test.sh
     ```
-    atau
+   atau
     ```
     ./test.sh
     ```
-    Proses ini akan men-*generate* berkas `lcov.info` dan folder `coverage` terkait dengan laporan coverage.
+   Proses ini akan men-*generate* berkas `lcov.info` dan folder `coverage` terkait dengan laporan coverage.
 4. Tunggu proses testing selesai hingga muncul web terkait laporan coverage.
 
