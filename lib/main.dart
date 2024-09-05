@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget {
           primaryColor: kRichBlack,
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
+          drawerTheme: kDrawerTheme,
         ),
         home: Material(
           child: CustomDrawer(

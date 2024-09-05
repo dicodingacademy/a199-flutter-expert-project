@@ -23,24 +23,25 @@ final TextStyle kBodyText = GoogleFonts.poppins(
 
 // text theme
 final kTextTheme = TextTheme(
-  headline5: kHeading5,
-  headline6: kHeading6,
-  subtitle1: kSubtitle,
-  bodyText2: kBodyText,
+  headlineMedium: kHeading5,
+  headlineSmall: kHeading6,
+  labelMedium: kSubtitle,
+  bodyMedium: kBodyText,
+);
+
+final kDrawerTheme = DrawerThemeData(
+  backgroundColor: Colors.grey.shade700,
 );
 
 const kColorScheme = ColorScheme(
   primary: kMikadoYellow,
-  primaryContainer: kMikadoYellow,
   secondary: kPrussianBlue,
   secondaryContainer: kPrussianBlue,
   surface: kRichBlack,
-  background: kRichBlack,
   error: Colors.red,
   onPrimary: kRichBlack,
   onSecondary: Colors.white,
   onSurface: Colors.white,
-  onBackground: Colors.white,
   onError: Colors.white,
   brightness: Brightness.dark,
 );
