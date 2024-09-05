@@ -3,16 +3,16 @@ import 'package:equatable/equatable.dart';
 import '../../domain/entities/movie_detail.dart';
 
 class MovieDetailTable extends Equatable {
-  final int adult;
+  final int? adult;
   final int id;
-  final String originalTitle;
+  final String? originalTitle;
   final String overview;
   final String posterPath;
-  final String releaseDate;
-  final int runtime;
+  final String? releaseDate;
+  final int? runtime;
   final String title;
-  final double voteAverage;
-  final int voteCount;
+  final double? voteAverage;
+  final int? voteCount;
 
   MovieDetailTable({
     required this.adult,

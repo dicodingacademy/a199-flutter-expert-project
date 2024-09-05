@@ -7,18 +7,19 @@ const Color kMikadoYellow = Color(0xFFffc300);
 const Color kDavysGrey = Color(0xFF4B5358);
 const Color kGrey = Color(0xFF303030);
 
+final kDrawerTheme = DrawerThemeData(
+  backgroundColor: Colors.grey.shade700,
+);
+
 const kColorScheme = ColorScheme(
   primary: kMikadoYellow,
-  primaryVariant: kMikadoYellow,
   secondary: kPrussianBlue,
-  secondaryVariant: kPrussianBlue,
+  secondaryContainer: kPrussianBlue,
   surface: kRichBlack,
-  background: kRichBlack,
   error: Colors.red,
   onPrimary: kRichBlack,
   onSecondary: Colors.white,
   onSurface: Colors.white,
-  onBackground: Colors.white,
   onError: Colors.white,
   brightness: Brightness.dark,
 );
