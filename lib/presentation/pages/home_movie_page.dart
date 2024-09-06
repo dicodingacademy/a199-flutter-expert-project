@@ -37,9 +37,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/circle-g.png'),
+                backgroundColor: Colors.grey.shade900,
               ),
               accountName: Text('Ditonton'),
               accountEmail: Text('ditonton@dicoding.com'),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade900,
+              ),
             ),
             ListTile(
               leading: Icon(Icons.movie),
